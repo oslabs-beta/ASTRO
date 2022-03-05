@@ -13,11 +13,13 @@ app.use(cors());
 app.use(cookieParser());
 
 // const userRouter = require('./routers/userRouter.js');
-// const awsRouter = require('./routers/aws.js');
+const awsRouter = require('./routers/aws.js');
 
 // app.get('/', (req, res) => {
 //   res.status(200).sendFile(path.join(__dirname, '../src/index.html'));
 // })
+
+app.use('/aws', awsRouter);
 
 app.use('*', (req, res) => {
   res.status(404).json({ err: 'endpoint requested is not found' });

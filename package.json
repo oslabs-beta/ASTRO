@@ -39,6 +39,7 @@
     "webpack-hot-middleware": "^2.25.1"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.53.0",
     "@aws-sdk/client-lambda": "^3.53.0",
     "@babel/core": "^7.17.5",
     "@babel/plugin-transform-runtime": "^7.17.0",
