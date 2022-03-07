@@ -8,11 +8,12 @@ const {
 //***********************Begin************************ */
 
 const getFunctions = async (req, res, next) => {
-    console.log('triggered getFunc middleware')
+
     const lambdaClient = new LambdaClient({
       region: req.body.region,
       credentials: req.body.credentials,
     });
+    console.log('lambda client', lambdaClient);
   
     const lamParams = { FunctionVersion: 'ALL' };
     let funcNames = [];
@@ -22,6 +23,7 @@ const getFunctions = async (req, res, next) => {
       );
       funcNames = functions.Functions.map((el) => el.FunctionName);
       res.locals.functions = funcNames;
+
       return next();
     } catch (err) {
       console.error('Error in Lambda List Functions: ', err);
