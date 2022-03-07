@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production node server/server.js",
+    "start": "NODE_ENV=production nodemon server/server.js",
     "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack-dev-server",
     "build": "NODE_ENV=development webpack"
   },
@@ -59,6 +59,7 @@
     "express-session": "^1.17.2",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
+    "moment": "^2.29.1",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "react": "^17.0.2",
