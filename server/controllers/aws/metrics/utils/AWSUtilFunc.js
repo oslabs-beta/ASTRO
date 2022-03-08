@@ -1,28 +1,32 @@
-//The following assumes that User Inputs the time timeRange (either in min, hours, days)
+//The following assumes that User inputs the time timeRange (either in min, hours, days)
 const moment = require('moment');
-//input time range period for aggregating the metrics
-//for e.g. if the time range selected on the front end is minutes, metrics from CloudWatch would be
-// aggregated by 1 minute (60 seconds)
+
+/*
+input time range period for aggregating the metrics
+
+e.g. if the time range selected on the frontend is minutes, metrics from CloudWatch will be 
+aggregated by 1 minute (60 seconds)
+*/
 
 const timeRangePeriod = {
-  minutes: 60, //60 seconds
-  hours: 300, //300 secs
+  minutes: 60, // 60 seconds
+  hours: 300, // 300 secs
   days: 3600, // 1 hour
 };
 
-//rouding parameters for defining the EndTime
+// routing parameters for defining the EndTime
 
-const timeRoundMultiplier = {
-  minutes: 5, //the EndTime time stamps will be rounded to nearest 5 minutes
-  hours: 15, //rounded to nearest 15 minutes
+const roundTimeMultiplier = {
+  minutes: 5, // the EndTime time stamps will be rounded to nearest 5 minutes
+  hours: 15, // rounded to nearest 15 minutes
   days: 60, // rounded to nearest hour
 };
 
-//to compute the startTime
+// routing parameters to compute the startTime
 
 const timeRangeMultiplier = {
-  minutes: 60, //the EndTime time stamps will be rounded to nearest 5 minutes
-  hours: 3600, //rounded to nearest 15 minutes
+  minutes: 60, // the EndTime time stamps will be rounded to nearest 5 minutes
+  hours: 3600, // rounded to nearest 15 minutes
   days: 86400, // rounded to nearest hour
 };
 
@@ -34,11 +38,13 @@ AWSUtilFunc.prepCwMetricQueryLambdaAllFunc = (
   metricName,
   metricStat
 ) => {
-  const timeRound = timeRoundMultiplier[timeRangeUnits];
-  //define the End and Start times in UNIX time Stamp format for getMetricsData method
-  //Rounded off to nearest timeRoundMultiplier
+  // roundTimeMultiplier rounds off the time to the nearest unit
+  const roundTime = roundTimeMultiplier[timeRangeUnits];
+
+  // define the End and Start times in UNIX time Stamp format for getMetricsData method
   const EndTime =
-    Math.round(new Date().getTime() / 1000 / 60 / timeRound) * 60 * timeRound; //current time in Unix TimeStamp
+    Math.round(new Date().getTime() / 1000 / 60 / roundTime) * 60 * roundTime; //current time in Unix TimeStamp
+  
   const StartTime =
     EndTime - timeRangeNum * timeRangeMultiplier[timeRangeUnits];
 
@@ -84,11 +90,11 @@ AWSUtilFunc.prepCwMetricQueryLambdaByFunc = (
   metricStat,
   funcNames
 ) => {
-  const timeRound = timeRoundMultiplier[timeRangeUnits];
+  const roundTime = roundTimeMultiplier[timeRangeUnits];
   //define the End and Start times in UNIX time Stamp format for getMetricsData method
-  //Rounded off to nearest timeRoundMultiplier
+  //Rounded off to nearest roundTimeMultiplier
   const EndTime =
-    Math.round(new Date().getTime() / 1000 / 60 / timeRound) * 60 * timeRound; //current time in Unix TimeStamp
+    Math.round(new Date().getTime() / 1000 / 60 / roundTime) * 60 * roundTime; //current time in Unix TimeStamp
   const StartTime =
     EndTime - timeRangeNum * timeRangeMultiplier[timeRangeUnits];
 
