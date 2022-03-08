@@ -4,10 +4,13 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import Insights from './pages/Insights.jsx';
-
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
 function App() {
+    //We can read data from the store with useSelector
+    // const user = useSelector()
+
     return (
         <>
         <Router>
