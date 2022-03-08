@@ -43,6 +43,8 @@ AWSUtilFunc.prepCwMetricQueryLambdaAllFunc = (
 
   // define the End and Start times in UNIX time Stamp format for getMetricsData method
   const EndTime =
+    // dividing by 1000 returns seconds and dividing further by 60 returns minutes
+    // roundTime will round to the nearest 5 minutes, 15 minutes for hours, and nearest hour for days
     Math.round(new Date().getTime() / 1000 / 60 / roundTime) * 60 * roundTime; //current time in Unix TimeStamp
   
   const StartTime =
