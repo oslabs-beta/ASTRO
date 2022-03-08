@@ -9,8 +9,8 @@ aggregated by 1 minute (60 seconds)
 */
 
 const timeRangePeriod = {
-  minutes: 60, // 60 seconds
-  hours: 300, // 300 secs
+  minutes: 60, // 1 min
+  hours: 300, // 5 mins
   days: 3600, // 1 hour
 };
 
@@ -26,8 +26,8 @@ const roundTimeMultiplier = {
 
 const timeRangeMultiplier = {
   minutes: 60, // the EndTime time stamps will be rounded to nearest 5 minutes
-  hours: 3600, // rounded to nearest 15 minutes
-  days: 86400, // rounded to nearest hour
+  hours: 3600, // 3600 seconds in an hour
+  days: 86400, // 86400 seconds in a day
 };
 
 const AWSUtilFunc = {};
@@ -43,7 +43,8 @@ AWSUtilFunc.prepCwMetricQueryLambdaAllFunc = (
 
   // define the End and Start times in UNIX time Stamp format (milliseconds) for getMetricsData method
   const EndTime =
-    //current time in Unix TimeStamp
+    //current time in Unix TimeStamp (# of milliseconds between current time stamp and UTC January 1, 1970 (Unix Epoch))
+    // Unix epoch useful to computers to track and sort dated info in dynamic and distributed apps both online and client side
     Math.round(new Date().getTime() / 1000 / 60 / roundTime) * 60 * roundTime; 
   
   const StartTime =

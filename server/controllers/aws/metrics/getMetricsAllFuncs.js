@@ -36,8 +36,8 @@ const getMetricsAllFunc = async (req, res, next) => {
   if (!req.body.metricStat) graphMetricStat = 'Sum';
   else graphMetricStat = req.body.metricStat;
 
-  //Metrics for All Functions (combined)
-  //Prepare the input parameters for the AWS getMetricsData API Query
+  // Metrics for All Functions (combined)
+  // Prepare the input parameters for the AWS getMetricsData API Query
   const metricAllFuncInputParams = AWSUtilFunc.prepCwMetricQueryLambdaAllFunc(
     graphPeriod,
     graphUnits,

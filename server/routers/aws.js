@@ -11,7 +11,8 @@ router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
     res.status(200).json(res.locals.functions);
 });
 
-//Returning specified metric for all Lambda funcs
+// Returning specified metric for all Lambda funcs
+// http://localhost:1111/aws/getMetricsAllFunc/:metricName
 router.route('/getMetricsAllFunc/:metricName').post(getMetricsAllFunc, (req, res) => {
     res.status(200).json(res.locals.metricAllFuncData)
 });
