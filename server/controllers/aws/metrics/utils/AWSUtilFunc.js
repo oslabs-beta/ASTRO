@@ -38,21 +38,20 @@ AWSUtilFunc.prepCwMetricQueryLambdaAllFunc = (
   metricName,
   metricStat
 ) => {
-  // roundTimeMultiplier rounds off the time to the nearest unit
+  // roundTime will round to the nearest 5 minutes, 15 minutes for hours, and nearest hour for days
   const roundTime = roundTimeMultiplier[timeRangeUnits];
 
-  // define the End and Start times in UNIX time Stamp format for getMetricsData method
+  // define the End and Start times in UNIX time Stamp format (milliseconds) for getMetricsData method
   const EndTime =
-    // dividing by 1000 returns seconds and dividing further by 60 returns minutes
-    // roundTime will round to the nearest 5 minutes, 15 minutes for hours, and nearest hour for days
-    Math.round(new Date().getTime() / 1000 / 60 / roundTime) * 60 * roundTime; //current time in Unix TimeStamp
+    //current time in Unix TimeStamp
+    Math.round(new Date().getTime() / 1000 / 60 / roundTime) * 60 * roundTime; 
   
   const StartTime =
     EndTime - timeRangeNum * timeRangeMultiplier[timeRangeUnits];
 
   const period = timeRangePeriod[timeRangeUnits];
 
-  //initialize the parameters
+  // initialize the parameters
   const metricParamsBaseAllFunc = {
     StartTime: new Date(StartTime * 1000),
     EndTime: new Date(EndTime * 1000),

@@ -1,5 +1,5 @@
 const {
-    Lambda,
+    // Lambda,
     LambdaClient,
     ListFunctionsCommand,
 } = require('@aws-sdk/client-lambda');
@@ -15,20 +15,21 @@ const getFunctions = async (req, res, next) => {
     const client = new LambdaClient({
       // note that we do not need to specify config.region or config.credentials; aws automatically recognizes we want to set the config object's region & credentials properties to specific values
       region: req.body.region,
+      //us-east-1
       credentials: req.body.credentials,
+      //{"accessKeyId": "AKIA5TZBMT7EJNT2I***",
+      //"secretAccessKey": "Z1v9TuQztlqbGicoPEVxBE351Y6qFqlSYdi5R***"}
     });
-    // console.log('lambda client', lambdaClient);
   
-    // set FunctionVersion to 'ALL' to include all published AND unpublished versions of each function 
+    // set FunctionVersion to 'ALL' to include all published/unpublished versions of each function 
     const lamParams = { FunctionVersion: 'ALL' };
 
     try {
-      // calling send operation on client with command object as input
+      // calling send operation on client with lamParams object as input
       const listOfLambdaFuncs = await client.send(
         // ListFunctionsCommand is a class that returns a list of Lambda functions (50 max) with version-specific configuration of each one
         new ListFunctionsCommand(lamParams)
       );
-      console.log('a list of lambda functions: ', listOfLambdaFuncs)
 
       funcNames = listOfLambdaFuncs.Functions.map(el => el.FunctionName);
       res.locals.functions = funcNames;
