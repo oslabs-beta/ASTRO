@@ -24,4 +24,14 @@ router
     res.status(200).json(res.locals.metricByFuncData);
   });
 
+//Returing Lambda Functions Logs
+router.route('/getLogs').post(getLogs, (req, res) => {
+  res.status(200).json(res.locals.functionLogs);
+});
+
+//Updating Lambda Function Logs
+router.route('/updateLogs').post(updateLogs, (req, res) => {
+  res.status(200).json(res.locals.updatedLogs);
+});
+
 module.exports = router;
