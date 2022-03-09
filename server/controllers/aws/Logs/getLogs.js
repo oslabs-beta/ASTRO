@@ -17,7 +17,7 @@ const getLogs = async (req, res, next) => {
   });
 
   // StartTime and EndTime for CloudWatchLogsClient need to be in millisecond format so need to find what the provided time period equates to
-  let StartTime;gto90
+  let StartTime;
   if (req.body.timePeriod === '30min') {
     StartTime = new Date(
       new Date().setMinutes(new Date().getMinutes() - 30)
