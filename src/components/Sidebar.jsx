@@ -12,9 +12,9 @@ useEffect(() => {
 
 /**
  * @Remember { Axios }
+ * @Remember {https://reactjs.org/docs/conditional-rendering.html}
  */
 
-console.log(result)
 return(
     <div>
         { ( result && result.length > 0 ) && result.map((res, idx) => <div key={idx}>{res}</div>) }
