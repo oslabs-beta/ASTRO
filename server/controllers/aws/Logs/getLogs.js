@@ -44,22 +44,26 @@ const getLogs = async (req, res, next) => {
 		).valueOf();
 	}
 
-	// if a nextToken exists (meaning there are more logs to fetch), helperFunc provides a recursive way to get all the logs
+	// nextToken is a parameter specified by AWS CloudWatch for the FilterLogEventsCommand; this token is needed to fetch the next set of events
+	// helperFunc provides a recursive way to get all the logs
 	async function helperFunc(nextToken, data = []) {
-		// once we run out of nextTokens, return data
+		// once we run out of nextTokens, return data (base case)
 		if (!nextToken) {
 			return data;
 		}
 		const nextLogEvents = await cwLogsClient.send(
+			// FilterLogEventsCommand is a class that lists log events from a specified log group, which can be filtered using a filter pattern, a time range, and/or the name of the log stream
+			// by default this lists logs up to 1 megabyte of log events (~10,000 log events) but we are limiting the data to the most recent 50 log events
+			// query will return results from LEAST recent to MOST recent
 			new FilterLogEventsCommand({
 				logGroupName,
 				endTime: new Date().valueOf(),
 				startTime: StartTime,
 				nextToken,
+				// START, END, REPORT are keywords that appear at the start of the message for specific log events and our filter pattern detects only these events to be included in our logs
 				filterPattern: '- START - END - REPORT',
 			})
 		);
-		console.log('nextLogEvents is: ', nextLogEvents);
 		data.push(nextLogEvents.events);
 		return helperFunc(nextLogEvents.nextToken, data);
 	}
@@ -74,55 +78,71 @@ const getLogs = async (req, res, next) => {
 				filterPattern: '- START - END - REPORT',
 			})
 		);
-		console.log('logevents is: ', logEvents);
 
-		/*
-    logEvents is:  
-    { 
-      '$metadata': { 
-        httpStatusCode: 200,
-        requestId: '2d2497e0-eaa1-46e4-a288-d31e33ba5ecb',
-        extendedRequestId: undefined,
-        cfId: undefined,
-        attempts: 1,
-        totalRetryDelay: 0 
-      },
-      events: [],
-      nextToken: undefined,
-      searchedLogStreams: [] 
-    }
-
-  */
-		// if no log events, just go back to frontend
+		// if no log events exist, return back to frontend
 		if (!logEvents) {
 			res.locals.functionLogs = false;
 			return next();
 		}
-		// only send back most recent 50 logs to reduce size
+		// only send back most recent 50 logs to reduce size of payload
 		const shortenedEvents = [];
 
-		// if we received a nextToken, start helperFunc process and make sure to parse through that data in order to grab from the end
+		// if we received a nextToken, start helperFunc to recursively parse through most recent data (meaning we grab data from the end since that is the most recent log stream)
 		if (logEvents.nextToken) {
 			const helperFuncResults = await helperFunc(logEvents.nextToken);
+
+			// poppedEl gets the most recent log stream that currently exists in helperFunc (log streams that are even more recent will have already been added to shortenedEvents)
 			let poppedEl;
 
-			// while we still have logs to grab from the helperFunc and shortenedEvents is shorter than 50 logs, add to it from the end (giving us the most recent first instead)
+			// while we still have logs to grab from the helperFunc and shortenedEvents is shorter than 50 logs, add to shortenedEvents array from the end (the most recent log stream)
 			while (
 				helperFuncResults.length &&
 				shortenedEvents.length <= 50
 			) {
+				// poppedEl gets the most recent log stream that currently exists in helperFunc (log streams that are even more recent will have already been added to shortenedEvents)
+				// but the for loop below is iterating through helperFunc such that we are adding the most recent log stream at the beginning of the shortenedEvent array
 				poppedEl = helperFuncResults.pop();
+				/**
+				
+				shortenedEvent = [                                              helperFuncResults = [
+					index 0: { most recent event log stream },                      index 0: { least recent event log stream }
+					.                                                               .
+					.                                                               .
+					.                                                               .
+					index N: { least recent event log stream },                     index N: { most recent event log stream }
+				]																																]
+				
+				*/
 				for (let i = poppedEl.length - 1; i >= 0; i -= 1) {
-					if (shortenedEvents.length === 50) {
-						break;
-					}
-					shortenedEvents.push(poppedEl[i]);
+					// we don't want to have more than 50 logs at any point in time to reduce operational load and size
+					if (shortenedEvents.length === 50) break;
+					else shortenedEvents.push(poppedEl[i]);
 				}
 			}
 		}
 
-		// if we didn't have a nextToken and got all logs in one request to the CloudWatchLogsClient
-		if (!logEvents.nextToken) {
+		/**
+		 *
+		 * If we didn't have a nextToken and got all logs in one request to the CloudWatchLogsClient
+		 * we will usually get a nextToken. But, if a nextToken exists, there are no events in helperfunc,
+		 * so there was no data to populate shortenedEvent originally, the code would only populate shortenedEvents
+		 * with event log streams if there was no nextToken but we did have a nextToken so we couldn't populate
+		 * shortenedEvents with event log data.
+		 *
+		 * aka this code was originally instructing: if there is nextToken, don't even check the first event.
+		 * But we were getting a nextToken but weren't getting 50 events from nextToken and we still need to
+		 * query for more event log data.
+		 *
+		 * Additionally, the code assumed that there were more than 50 events in the log stream, which might
+		 * not be the case depending on how frequently (or infrequently) a lambda function is triggered; it
+		 * code also didn't account for the fewer number of triggers over a shorter period of time versus a
+		 * larger span of time.
+		 *
+		 * Thus, the if clause below needs to consider the case when there are fewer than 50 event log streams; if
+		 * it's equal to 50 then we aren't adding any more events because of the break keyword within the for loop;
+		 *
+		 */
+		if (!logEvents.nextToken || shortenedEvents.length < 50) {
 			// grab from the end to grab most recent logs and stop once we reach 50 to send back to frontend
 			for (let i = logEvents.events.length - 1; i >= 0; i -= 1) {
 				if (shortenedEvents.length === 50) break;
@@ -135,32 +155,43 @@ const getLogs = async (req, res, next) => {
 			name: req.body.function,
 			timePeriod: req.body.timePeriod,
 		};
+
 		const streams = [];
 
 		// loop through logs in order to eventually add to eventLog object
 		for (let i = 0; i < shortenedEvents.length; i += 1) {
+			// the very first shortenedEvent element is the most recent log stream
 			let eventObj = shortenedEvents[i];
-			// create the individual arrays to populate the table, this info makes up one row
+			// create the individual arrays to populate the table; note that this will represent a single row of info (log stream name + time stamp + stream message)
 			const dataArr = [];
-			// just cut off the last five characters for the log stream name as an identifier
+			// cut off the last five characters from the log stream name to create an identifier for this specific log stream
+			// note that logStreamName appears before the timestamp
 			dataArr.push('...' + eventObj.logStreamName.slice(-5));
-			// format the date of the log timestamp to be more readable
+			// format('lll') creates a human readable date from the specific log stream's timestamp
 			dataArr.push(moment(eventObj.timestamp).format('lll'));
 
-			// if message is just from a normal log, remove the first 67 characters as it's all just metadata/a string of timestamps and unnecessary info
+			// if message is just from a normal log, remove the first 67 characters of the message as it's all just metadata/a string of timestamps and unnecessary info
 			if (
 				eventObj.message.slice(0, 4) !== 'LOGS' &&
 				eventObj.message.slice(0, 9) !== 'EXTENSION'
-			) {
+			)
 				dataArr.push(eventObj.message.slice(67));
-				// if the message starts with LOGS or EXTENSION, it's usually different type of info and the beginning part has to stay
-			} else {
-				dataArr.push(eventObj.message);
-			}
-			// push to the larger array to then make up the table
+			// messages starting with LOGS or EXTENSION represents different/pertinent info and we don't want to mutate the message like we did within the if block just above
+			else dataArr.push(eventObj.message);
+			// push the formatted dataArr into the outer array, streams, to make the table for our logs
 			streams.push(dataArr);
 		}
 		eventLog.streams = streams;
+		/**
+				
+				streams = [
+					index 0: [ { most recent event log stream } ],
+					.
+					.
+					.
+					index N: [ { least recent event log stream } ],
+				]																																
+		*/
 
 		// grab just the ERROR logs
 		try {
