@@ -17,8 +17,6 @@ const getFunctions = async (req, res, next) => {
       region: req.body.region,
       //us-east-1
       credentials: req.body.credentials,
-      //{"accessKeyId": "AKIA5TZBMT7EJNT2I***",
-      //"secretAccessKey": "Z1v9TuQztlqbGicoPEVxBE351Y6qFqlSYdi5R***"}
     });
   
     // set FunctionVersion to 'ALL' to include all published/unpublished versions of each function 
