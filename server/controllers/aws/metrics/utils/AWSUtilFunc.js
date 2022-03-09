@@ -41,15 +41,13 @@ AWSUtilFunc.prepCwMetricQueryLambdaAllFunc = (
   // roundTime will round to the nearest 5 minutes, 15 minutes for hours, and nearest hour for days
   const roundTime = roundTimeMultiplier[timeRangeUnits];
 
-  // define the End and Start times in UNIX time Stamp format (milliseconds) for getMetricsData method
-  const EndTime =
-    //current time in Unix TimeStamp (# of milliseconds between current time stamp and UTC January 1, 1970 (Unix Epoch))
-    // Unix epoch useful to computers to track and sort dated info in dynamic and distributed apps both online and client side
-    Math.round(new Date().getTime() / 1000 / 60 / roundTime) * 60 * roundTime; 
-  
-  const StartTime =
-    EndTime - timeRangeNum * timeRangeMultiplier[timeRangeUnits];
-
+  /* 
+  define the End and Start times in UNIX time Stamp format (milliseconds) for getMetricsData method
+  Current time in Unix TimeStamp is # of milliseconds since UTC January 1, 1970 (Unix Epoch)
+  Unix epoch useful bc it allows computers track and sort dated info in dynamic and distributed apps both online and client side
+  */
+  const EndTime = Math.round( new Date().getTime() / 1000 / 60 / roundTime ) * 60 * roundTime;
+  const StartTime = EndTime - timeRangeNum * timeRangeMultiplier[timeRangeUnits];
   const period = timeRangePeriod[timeRangeUnits];
 
   // initialize the parameters
@@ -57,6 +55,7 @@ AWSUtilFunc.prepCwMetricQueryLambdaAllFunc = (
     StartTime: new Date(StartTime * 1000),
     EndTime: new Date(EndTime * 1000),
     LabelOptions: {
+      // -0400 represents 4 hours and 0 minutes behind UTC
       Timezone: '-0400',
     },
     //    MetricDataQueries: [],
