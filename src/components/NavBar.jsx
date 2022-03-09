@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
-function NavBar(){
+export const NavBar = () => {
 
     const logged  = useSelector((state)=> state?.user.logged);
 
@@ -21,5 +21,3 @@ function NavBar(){
         )
     );
 }
-
-export default NavBar;
