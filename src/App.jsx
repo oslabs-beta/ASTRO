@@ -8,7 +8,7 @@ import MustBeLoggedIn from './pages/MustBeLoggedIn.jsx';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
-import { SideBar, NavBar } from './components/'
+import { NavBar } from './components/'
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/sidebar" element={<SideBar/>} />
+            {/* <Route path="/sidebar" element={<SideBar/>} /> */}
             </>
         {logged ? (
             <>

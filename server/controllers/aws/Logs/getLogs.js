@@ -120,7 +120,6 @@ const getLogs = async (req, res, next) => {
 				}
 			}
 		}
-
 		/**
 		 *
 		 * If we didn't have a nextToken and got all logs in one request to the CloudWatchLogsClient
@@ -142,6 +141,7 @@ const getLogs = async (req, res, next) => {
 		 * it's equal to 50 then we aren't adding any more events because of the break keyword within the for loop;
 		 *
 		 */
+
 		if (!logEvents.nextToken || shortenedEvents.length < 50) {
 			// grab from the end to grab most recent logs and stop once we reach 50 to send back to frontend
 			for (let i = logEvents.events.length - 1; i >= 0; i -= 1) {
