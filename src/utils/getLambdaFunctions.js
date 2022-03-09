@@ -8,8 +8,8 @@ export const data = async () => {
       body: JSON.stringify({
         region: "us-east-1",
         credentials: {
-            accessKeyId: "AKIA5TZBMT7EJNT2IGMU",
-            secretAccessKey: "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"
+            accessKeyId: "",
+            secretAccessKey: ""
         }
       })
     })
