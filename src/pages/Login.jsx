@@ -17,6 +17,9 @@ function Login() {
         action=""
         onSubmit={handleSubmit((data) => {
             console.log(data)
+            //send fetch request to verify that user account exists
+            //if it doesnt then do something
+            //if it does then change userSlice state to true and take person to home page
         })}>
 
             <input 

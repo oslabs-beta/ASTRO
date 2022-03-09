@@ -10,6 +10,7 @@ const updateLogs = require('../controllers/aws/Logs/updateLogs');
 
 // Returning all Lambda funcs
 router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
+    // console.log(res.locals.functions)
     res.status(200).json(res.locals.functions);
 });
 
