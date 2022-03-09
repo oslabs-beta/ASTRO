@@ -8,12 +8,12 @@ const {
 //***********************Begin************************ */
 
 const getFunctions = async (req, res, next) => {
-
+    console.log('In get functions')
     const lambdaClient = new LambdaClient({
       region: req.body.region,
       credentials: req.body.credentials,
     });
-    console.log('lambda client', lambdaClient);
+    // console.log('lambda client', lambdaClient);
   
     const lamParams = { FunctionVersion: 'ALL' };
     let funcNames = [];
