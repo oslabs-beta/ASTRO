@@ -7,6 +7,7 @@ const getMetricsAllFunc = require('../controllers/aws/metrics/getMetricsAllFuncs
 
 //Returning all Lambda funcs
 router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
+    // console.log(res.locals.functions)
     res.status(200).json(res.locals.functions);
 });
 
