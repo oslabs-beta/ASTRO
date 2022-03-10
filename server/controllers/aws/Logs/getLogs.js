@@ -121,27 +121,9 @@ const getLogs = async (req, res, next) => {
 			}
 		}
 		/**
-		 *
-		 * If we didn't have a nextToken and got all logs in one request to the CloudWatchLogsClient
-		 * we will usually get a nextToken. But, if a nextToken exists, there are no events in helperfunc,
-		 * so there was no data to populate shortenedEvent originally, the code would only populate shortenedEvents
-		 * with event log streams if there was no nextToken but we did have a nextToken so we couldn't populate
-		 * shortenedEvents with event log data.
-		 *
-		 * aka this code was originally instructing: if there is nextToken, don't even check the first event.
-		 * But we were getting a nextToken but weren't getting 50 events from nextToken and we still need to
-		 * query for more event log data.
-		 *
-		 * Additionally, the code assumed that there were more than 50 events in the log stream, which might
-		 * not be the case depending on how frequently (or infrequently) a lambda function is triggered; it
-		 * code also didn't account for the fewer number of triggers over a shorter period of time versus a
-		 * larger span of time.
-		 *
-		 * Thus, the if clause below needs to consider the case when there are fewer than 50 event log streams; if
-		 * it's equal to 50 then we aren't adding any more events because of the break keyword within the for loop;
-		 *
+		 * If a nextToken exists, we can't populate shortenedEvents with event log data without the second part of
+		 * the or clause since we want to consider the situation when there are < 50 event log streams;
 		 */
-
 		if (!logEvents.nextToken || shortenedEvents.length < 50) {
 			// grab from the end to grab most recent logs and stop once we reach 50 to send back to frontend
 			for (let i = logEvents.events.length - 1; i >= 0; i -= 1) {
