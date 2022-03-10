@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.use(cors());
 app.use(cookieParser());
 
-// const userRouter = require('./routers/userRouter.js');
+const userRouter = require('./routers/userRouter.js');
 const awsRouter = require('./routers/aws.js');
 
 // app.get('/', (req, res) => {
@@ -20,26 +20,26 @@ const awsRouter = require('./routers/aws.js');
 // })
 
 app.use('/aws', awsRouter);
+app.use('/user', userRouter);
 
 app.use('*', (req, res) => {
-  res.status(404).json({ err: 'endpoint requested is not found' });
+	res.status(404).json({ err: 'endpoint requested is not found' });
 });
 
 app.use((err, req, res, next) => {
+	const defaultErr = {
+		log: `Express error handler caught unknown middleware error ${err}`,
+		status: 500,
+		message: {
+			err: 'An error occurred. Please contact the Astro team.',
+		},
+	};
 
-  const defaultErr = {
-    log: `Express error handler caught unknown middleware error ${err}`,
-    status: 500,
-    message: { err: 'An error occurred. Please contact the Astro team.' },
-  };
-
-  const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
-  return res.status(errorObj.status).json(errorObj.message);
+	const errorObj = Object.assign({}, defaultErr, err);
+	console.log(errorObj.log);
+	return res.status(errorObj.status).json(errorObj.message);
 });
-
 
 app.listen(PORT, () => {
-  console.log('Listening on port ' + PORT);
+	console.log('Listening on port ' + PORT);
 });
-  
