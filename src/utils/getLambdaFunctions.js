@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 export const data = async () => {
     try {
     const data = await fetch('http://localhost:1111/aws/getLambdaFunctions', {
@@ -8,8 +10,8 @@ export const data = async () => {
       body: JSON.stringify({
         region: "us-east-1",
         credentials: {
-            accessKeyId: "",
-            secretAccessKey: ""
+            accessKeyId: '',
+            secretAccessKey: ''
         }
       })
     })

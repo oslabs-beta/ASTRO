@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 export const metricsByFunc = async (param) => {
   try {
   const data = await fetch(`http://localhost:1111/aws/getMetricsByFunc/Invocations`, {
@@ -8,8 +10,8 @@ export const metricsByFunc = async (param) => {
   body: JSON.stringify({
     region: "us-east-1",
     credentials: {
-      accessKeyId: "",
-      secretAccessKey: ""
+      accessKeyId: '',
+      secretAccessKey: ''
     },
     timePeriod: "24hr"
   })
