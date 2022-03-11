@@ -15,12 +15,12 @@ app.use(cookieParser());
 const userRouter = require('./routers/userRouter.js');
 const awsRouter = require('./routers/aws.js');
 
-// app.get('/', (req, res) => {
-//   res.status(200).sendFile(path.join(__dirname, '../src/index.html'));
-// })
+app.use('/secret', (req, res) => {
+  return res.status(200).send('Made it to secret page!');
+})
 
 app.use('/aws', awsRouter);
-app.use('/user', userRouter);
+// app.use('/user', userRouter);
 
 app.use('*', (req, res) => {
 	res.status(404).json({ err: 'endpoint requested is not found' });

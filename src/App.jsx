@@ -10,7 +10,7 @@ import Metrics from './components/Metrics.jsx'
 
 
 
-import { BrowserRouter as Router, Routes, Route, Link, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import { NavBar } from './components/'
 
@@ -20,7 +20,7 @@ function App() {
     const logged  = useSelector((state)=> state?.user.logged);
 
     return (
-        <Router history={browserHistory}>
+        <Router>
         <NavBar/>
         <Routes>
             <>
