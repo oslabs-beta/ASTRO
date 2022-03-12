@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 //AWS middleware
+const getCreds = require('../controllers/aws/credentials/getCreds');
 const getFunctions = require('../controllers/aws/metrics/getLambdaFuncs');
 const getMetricsAllFunc = require('../controllers/aws/metrics/getMetricsAllFuncs');
 const getMetricsByFunc = require('../controllers/aws/metrics/getMetricsByFunc');
 const getLogs = require('../controllers/aws/Logs/getLogs');
 const updateLogs = require('../controllers/aws/Logs/updateLogs');
 
-// Returning all Lambda funcs
+router.route('/getCreds').get(getCreds, (req,res) => {
+  res.status(200).json(res.locals.credentials);
+})
+
+// Returning all Lambda funcs for an account
 router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
     // console.log(res.locals.functions)
     res.status(200).json(res.locals.functions);
