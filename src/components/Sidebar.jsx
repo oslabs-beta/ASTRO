@@ -1,24 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { data } from '../utils/getLambdaFunctions.js'
+import { useSelector, useDispatch} from 'react-redux';
+import { getFuncs } from '../features/slices/funcListSlice';
+import { nameChange } from '../features/slices/chartSlice'
 
-export const SideBar = () => {
 
-const [result, setResult] = useState([])
+export const SideBar = (props) => {
 
-useEffect(() => {
-  const res = Promise.resolve(data()).then(res => setResult(res)).catch(err => console.log(err))
-},[])
+  const list = useSelector((state) => state.funcList.funcList)
+  const dispatch = useDispatch()
+
+   useEffect(() => {
+     dispatch(getFuncs())
+   }, [])
+
+  console.log('this is funcList', list)
+
+  const handleClick = (key) => {
+    console.log('this is the key', key)
+    dispatch(nameChange(key))
+  }
+ 
+  return(
+    <div>
+      {list.map((element, idx) =>
+        <button
+          key={idx}
+          onClick={() => handleClick(idx)}
+        >
+          {element}
+        </button>
+      )}
+    </div>
+ )
+}
+
 
 /**
  * @Remember { Axios }
  * @Remember {https://reactjs.org/docs/conditional-rendering.html}
  */
-
-return(
-    <div>
-        { ( result && result.length > 0 ) && result.map((res, idx) => <div key={idx}>{res}</div>) }
-    </div>
-    )
-
-}

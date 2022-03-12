@@ -3,15 +3,12 @@ import React from 'react'
 import 'chart.js/auto';
 import {Line} from "react-chartjs-2";
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 
-const Metrics = () => {
+const Errors = () => {
 
 const [title, setTitle] = useState('')
 const [yAxis, setYAxis] = useState([])
 const [xAxis, setXAxis] = useState([])
-
-const { type } = useParams()
 
   const data = {
     labels: [...xAxis],
@@ -24,7 +21,7 @@ const { type } = useParams()
     plugins: {
     title: {
       display: true,
-      text: title+" function"
+      text: "Errors"
       }
     }
   }
@@ -34,9 +31,7 @@ const { type } = useParams()
 
   useEffect(() => {
       const response = Promise.resolve(metricsByFunc()).then((data) => {
-          // console.log('this is data', data.series[0].data)
-          console.log('This is the whole data obj', data)
-          console.log('This is name', data.options.funcNames[1])
+
           setTitle(data.options.funcNames[0])
           const x = []
           const y = []
@@ -61,7 +56,6 @@ const { type } = useParams()
   )
  
 }
-export default Metrics;
-
+export default Errors;
 
 
