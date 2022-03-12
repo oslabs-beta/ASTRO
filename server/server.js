@@ -20,7 +20,7 @@ const awsRouter = require('./routers/aws.js');
 // })
 
 app.use('/aws', awsRouter);
-app.use('/user', userRouter);
+// app.use('/user', userRouter);
 
 app.use('*', (req, res) => {
 	res.status(404).json({ err: 'endpoint requested is not found' });
