@@ -1,15 +1,16 @@
-export const metricsByFunc = async () => {
+
+export const metricsByFunc = async (credentials, metric) => {
   try {
-  const data = await fetch(`http://localhost:1111/aws/getMetricsByFunc/Invocations`, {
+  const data = await fetch(`http://localhost:1111/aws/getMetricsByFunc/${metric}`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    region: "us-east-1",
+    region: credentials.region,
     credentials: {
-      accessKeyId: '',
-      secretAccessKey: ''
+      accessKeyId: credentials.credentials.accessKeyId,
+      secretAccessKey: credentials.credentials.secretAccessKey
     },
     timePeriod: "7d"
   })

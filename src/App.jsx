@@ -5,8 +5,12 @@ import Signup from './pages/Signup.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import Insights from './pages/Insights.jsx';
 import MustBeLoggedIn from './pages/MustBeLoggedIn.jsx';
-import { useSelector } from 'react-redux';
-import Metrics from './components/Invocations.jsx'
+import { useSelector, useDispatch } from 'react-redux';
+import Metrics from './components/Invocations.jsx';
+import { useEffect } from 'react';
+import { getCreds } from './utils/getAWSCreds';
+import { getBackendCreds } from './features/slices/credSlice';
+
 
 
 
@@ -16,20 +20,30 @@ import { NavBar } from './components/'
 
 
 function App() {
-    //We can read data from the store with useSelector
+
   const logged  = useSelector((state)=> state?.user.logged);
+  const creds = useSelector((state) => state.creds)
+  const dispatch = useDispatch();
+
+  
+  useEffect(() => {
+    Promise.resolve(getCreds()).then((data) => {
+      dispatch(getBackendCreds(data))
+    return;
+    })
+  }, [creds])
 
   return (
     <Router>
     <NavBar/>
     <Routes>
+      
     <>
     <Route path="/" element={<Home />} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
-    
-    {/* <Route path="/sidebar" element={<SideBar/>} /> */}
     </>
+
     {logged ? 
      (
       <>

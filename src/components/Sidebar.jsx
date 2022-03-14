@@ -7,16 +7,14 @@ import { nameChange } from '../features/slices/chartSlice'
 export const SideBar = (props) => {
 
   const list = useSelector((state) => state.funcList.funcList)
+  const credentials = useSelector((state) => state.creds)
   const dispatch = useDispatch()
 
    useEffect(() => {
-     dispatch(getFuncs())
+     dispatch(getFuncs(credentials))
    }, [])
 
-  console.log('this is funcList', list)
-
   const handleClick = (key) => {
-    console.log('this is the key', key)
     dispatch(nameChange(key))
   }
  

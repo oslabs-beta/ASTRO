@@ -5,14 +5,15 @@ import {Line} from "react-chartjs-2";
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
+
 const Invocations = () => {
 
-const currentFunc = useSelector((state) => state.chart.name)
-// console.log('CurrentFunc in Invocations: ', currentFunc)
+  const currentFunc = useSelector((state) => state.chart.name)
+  const credentials = useSelector((state) => state.creds)
 
-const [title, setTitle] = useState('')
-const [yAxis, setYAxis] = useState([])
-const [xAxis, setXAxis] = useState([])
+  const [title, setTitle] = useState('')
+  const [yAxis, setYAxis] = useState([])
+  const [xAxis, setXAxis] = useState([])
 
   const data = {
     labels: [...xAxis],
@@ -31,7 +32,7 @@ const [xAxis, setXAxis] = useState([])
   }
    
   useEffect(() => {
-    const response = Promise.resolve(metricsByFunc()).then((data) => {
+    const response = Promise.resolve(metricsByFunc(credentials, 'Invocations')).then((data) => {
       
       setTitle(data.options.funcNames[0])
       

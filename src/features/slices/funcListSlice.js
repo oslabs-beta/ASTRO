@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getFuncs = createAsyncThunk(
   'funcs/getFuncs',
-  //async func goes here
-  async () => {
+
+  async (credentials) => {
 
     try {
       const data = await fetch('http://localhost:1111/aws/getLambdaFunctions', {
@@ -12,10 +12,10 @@ export const getFuncs = createAsyncThunk(
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          region: 'us-east-1',
+          region: credentials.region,
           credentials: {
-            accessKeyId: '',
-            secretAccessKey: ''
+            accessKeyId: credentials.credentials.accessKeyId,
+            secretAccessKey: credentials.credentials.secretAccessKey
           }
         })
       })
@@ -39,9 +39,8 @@ export const funcList = createSlice({
   }
 });
 
-// const res = Promise.resolve(data()).then(res => {dispatch({ type: 'listChange', payload: res })}).catch(err => console.log(err))
-
-//createSlice already makes an action creator for each of the difference methods inside our reducers//
+//createSlice already makes an action creator for each of the different methods inside our reducers//
 export const { listChange } = funcList.actions;
 //exporting your reducer//
+// do we need to export this again if we're already exporting the entire function it's part of?
 export default funcList.reducer;
