@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production nodemon server/server.js",
     "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=development webpack"
+    "build": "NODE_ENV=development webpack & (echo 'AWS_REGION=\"insert region here\"'; echo 'AWS_ACCESS_KEY_ID=\"insert aws access key here\"'; echo 'AWS_SECRET_ACCESS_KEY=\"insert aws secret access key here\"') > .env"
   },
   "repository": {
     "type": "git",
