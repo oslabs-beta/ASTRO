@@ -1,14 +1,18 @@
 import { metricsByFunc } from '../utils/getMetricsByFunc.js'
-import React from 'react'
+import React from 'react';
 import 'chart.js/auto';
 import {Line} from "react-chartjs-2";
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Errors = () => {
 
-const [title, setTitle] = useState('')
-const [yAxis, setYAxis] = useState([])
-const [xAxis, setXAxis] = useState([])
+  const currentFunc = useSelector((state) => state.chart.name);
+  const credentials = useSelector((state) => state.creds);
+
+  const [title, setTitle] = useState('');
+  const [yAxis, setYAxis] = useState([]);
+  const [xAxis, setXAxis] = useState([]);
 
   const data = {
     labels: [...xAxis],
@@ -25,14 +29,12 @@ const [xAxis, setXAxis] = useState([])
       }
     }
   }
-   
-
-
 
   useEffect(() => {
-      const response = Promise.resolve(metricsByFunc()).then((data) => {
+      const response = Promise.resolve(metricsByFunc(credentials, 'Errors')).then((data) => {
 
-          setTitle(data.options.funcNames[0])
+          setTitle(data.options.funcNames[0]);
+
           const x = []
           const y = []
 
@@ -43,15 +45,14 @@ const [xAxis, setXAxis] = useState([])
 
           setYAxis(y)
           setXAxis(x)
-      }).catch((err) => console.log(err))
-  
-    
-  }, [])
+      })
+        .catch((err) => console.log(err))
+
+  }, [currentFunc])
  
   return (
     <div>
       <Line data = {data} options={options}/>
-      
     </div>
   )
  

@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
 export const chartName = createSlice({
   name: 'chartName',
   initialState: {
@@ -8,7 +7,7 @@ export const chartName = createSlice({
   },
   reducers: {
     nameChange: (state, action) => {
-      state.name = action.payload
+      state.name = action.payload;
     }
   }
 });
