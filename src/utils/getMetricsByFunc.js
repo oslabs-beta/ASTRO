@@ -1,4 +1,4 @@
-export const metricsByFunc = async (param) => {
+export const metricsByFunc = async () => {
   try {
   const data = await fetch(`http://localhost:1111/aws/getMetricsByFunc/Invocations`, {
   method: 'POST',
@@ -8,10 +8,10 @@ export const metricsByFunc = async (param) => {
   body: JSON.stringify({
     region: "us-east-1",
     credentials: {
-      accessKeyId: "",
-      secretAccessKey: ""
+      accessKeyId: '',
+      secretAccessKey: ''
     },
-    timePeriod: "24hr"
+    timePeriod: "7d"
   })
  })
 
