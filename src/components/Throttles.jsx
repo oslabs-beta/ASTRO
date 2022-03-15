@@ -16,8 +16,10 @@ const Throttles = () => {
 
   const data = {
     labels: [...xAxis],
+    fill: true,
+    backgroundColor: "#000",
      datasets: [{
-       data: [...yAxis]
+       data: [...yAxis],
      }]
    }
    
@@ -25,7 +27,9 @@ const Throttles = () => {
     plugins: {
     title: {
       display: true,
-      text: "Throttles"
+      text: "Throttles",
+     
+      
       }
     }
   }
