@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const getCreds = (req, res, next) => {
+  console.log('In getCreds middleware')
   const creds = {
     region: process.env.AWS_REGION,
     credentials: {

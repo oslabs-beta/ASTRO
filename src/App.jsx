@@ -27,7 +27,7 @@ function App() {
 
   
   useEffect(() => {
-    let result = Promise.resolve(getCreds()).then((data) => {
+    const result = Promise.resolve(getCreds()).then((data) => {
       console.log('data inside useEffect App.jsx', data);
       dispatch(getBackendCreds(data))
     return;
@@ -40,7 +40,7 @@ function App() {
     <Routes>
       
     <>
-    <Route path="/" element={<Home />} />
+    <Route path="/" element={<Home creds={creds}/>} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
     </>
