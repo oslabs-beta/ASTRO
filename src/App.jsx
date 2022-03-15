@@ -27,7 +27,8 @@ function App() {
 
   
   useEffect(() => {
-    Promise.resolve(getCreds()).then((data) => {
+    const result = Promise.resolve(getCreds()).then((data) => {
+      console.log('data inside useEffect App.jsx', data);
       dispatch(getBackendCreds(data))
     return;
     })
@@ -39,7 +40,7 @@ function App() {
 
     <Routes>
   
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home creds={creds} />} />
       <Route path="/insights" element={<Insights />}/> 
       <Route path="/github" element={<Github />}/>
       <Route path="/*" element={<PageNotFound />} />
