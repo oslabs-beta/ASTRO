@@ -23,7 +23,7 @@ app.use('/aws', awsRouter);
 // app.use('/user', userRouter);
 
 app.use('*', (req, res) => {
-	res.status(404).json({ err: 'endpoint requested is not found' });
+	return res.status(404).json({ err: 'endpoint requested is not found' });
 });
 
 app.use((err, req, res, next) => {
