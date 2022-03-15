@@ -17,13 +17,13 @@ function Home(props) {
   }
 
   if (creds.region.length) {
-    // invocations
+    // Invocations
     const invocations = promise('Invocations', setInvocations);
 
-    // throttles
+    // Throttles
     const throttles = promise('Throttles', setThrottles);
 
-    // errors
+    // Errors
     const errors = promise('Errors', setErrors);
   }
 
