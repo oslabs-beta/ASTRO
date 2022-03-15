@@ -10,13 +10,13 @@ const getLogs = require('../controllers/aws/Logs/getLogs');
 const updateLogs = require('../controllers/aws/Logs/updateLogs');
 
 router.route('/getCreds').get(getCreds, (req,res) => {
-  res.status(200).json(res.locals.credentials);
+  return res.status(200).json(res.locals.credentials);
 })
 
 // Returning all Lambda funcs for an account
 router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
     // console.log(res.locals.functions)
-    res.status(200).json(res.locals.functions);
+  return res.status(200).json(res.locals.functions);
 });
 
 // Returning specified metric for all Lambda funcs
@@ -24,28 +24,28 @@ router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
 router
   .route('/getMetricsAllFunc/:metricName')
   .post(getMetricsAllFunc, (req, res) => {
-    res.status(200).json(res.locals.metricAllFuncData)
+    return res.status(200).json(res.locals.metricAllFuncData)
 });
 
 // Return metric for specified func
 router
   .route('/getMetricsByFunc/:metricName')
   .post(getFunctions, getMetricsByFunc, (req, res) => {
-    res.status(200).json(res.locals.metricByFuncData);
+    return res.status(200).json(res.locals.metricByFuncData);
   });
 
 // Returning Lambda Functions Logs
 router
   .route('/getLogs')
   .post(getLogs, (req, res) => {
-    res.status(200).json(res.locals.functionLogs);
+    return res.status(200).json(res.locals.functionLogs);
 });
 
 // Updating Lambda Function Logs
 router
   .route('/updateLogs')
   .post(updateLogs, (req, res) => {
-    res.status(200).json(res.locals.updatedLogs);
+    return res.status(200).json(res.locals.updatedLogs);
 });
 
 module.exports = router;
