@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 // import { Link, Outlet } from 'react-router-dom';
 
 function Insights(){
@@ -27,33 +28,60 @@ function Insights(){
   return (
   
     <div>
+
       <h1>Lambda Func</h1>
-      <SideBar />
-      <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} columns={16} justifyContent="center">
-        <Grid item xs={10}>
-          <Item><Invocations/></Item>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2} columns={16} justifyContent="center">
-          <Grid item >
-            <Item><Errors/></Item>
-          </Grid>
-          <Grid item >
-            <Item><Throttles/></Item>
-          </Grid>
-        </Grid>
-    </Box>
-        
-    {/* <Link to="/insights/metrics/"> Invocations </Link>  |
-    <Link to="/insights/metrics/"> Errors </Link>  |
-    <Link to="/insights/metrics/"> Throttles </Link>  */}
-            
-        
-        
-        
-        {/* <Outlet/> */}
+      <div><SideBar /></div>
+
+
+          <Box component="main" >
+            <Grid container spacing={1} columns={16} justifyContent='center'>
+
+                  <Grid item xs={3}>
+                    <Item></Item>
+                  </Grid>
+                  <Grid item xs={12} >
+                    <Item><Invocations /></Item>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Item></Item>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Item><Errors /></Item>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Item><Throttles /></Item>
+                  </Grid>
+
+            </Grid>
+          </Box>
     </div>
+
+
+    // <Container >
+
+    //     <Box><SideBar /></Box>
+
+
+    //     <Box component="main">
+    //       <Grid container spacing={1} columns={16}>
+
+    //             <Grid item xs={12} >
+    //               <Item><Invocations /></Item>
+    //             </Grid>
+         
+    //             <Grid item xs={6}>
+    //               <Item><Errors /></Item>
+    //             </Grid>
+                
+    //             <Grid item xs={6}>
+    //               <Item><Throttles /></Item>
+    //             </Grid>
+
+    //       </Grid>
+    //     </Box>
+
+    // </Container>
+
     );
 }
 
