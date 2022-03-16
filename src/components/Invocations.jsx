@@ -43,7 +43,6 @@ const Invocations = () => {
         beginAtZero: true,
         min: 0,
         ticks:{
-          
            color:"black",
            font:{
           size:18

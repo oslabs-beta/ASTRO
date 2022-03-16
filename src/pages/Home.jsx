@@ -10,8 +10,31 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+// Font-Family
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+// Transparency
+
+
+//CARD COMPONENT EXAMPLE
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { CardActionArea } from '@mui/material';
 
 function Home(props) {
+
+
+	const theme = createTheme({
+		typography: {
+			fontFamily: [
+				"Nanum Gothic",
+				"sans-serif"
+			].join(","),
+		},
+	});
+
+
+
+
   const [totalInvocations, setInvocations] = useState(0);
   const [totalThrottles, setThrottles] = useState(0);
   const [totalErrors, setErrors] = useState(0);
@@ -36,46 +59,121 @@ function Home(props) {
     const errors = promise('Errors', setErrors);
   }
 
+  // const classes = useStyles();
+
   return (
+		<ThemeProvider theme={theme}>
+			<Container
+				maxWidth="lg"
+			>
+				<Box>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							mt: 1,
+							pt: 1,
+							bgcolor: "background.paper",
+							borderRadius: 1,
+						}}
+					>
+						<Typography variant="h3">Welcome to Astro</Typography>
+					</Box>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							bgcolor: "background.paper",
+							borderRadius: 0,
+						}}
+					>
+						<Typography variant="subtitle2" gutterBottom>
+							Your solution to AWS Lambda Function Monitoring
+						</Typography>
+					</Box>
 
-    <Container maxWidth="lg">
-       <Typography variant="h3" component="div" gutterBottom>
-              Account Totals
-        </Typography>
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', bgcolor: '#cfe8fc', height: '100vh' }}>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							bgcolor: "background.paper",
+							borderRadius: 1,
+						}}
+					>
+						<Typography variant="overline" display="block" gutterBottom>
+							These are the total number of Invocations, Throttles and Errors
+							for your account within the last 7 Days.
+						</Typography>
+					</Box>
+				</Box>
 
-        <Grid container spacing={2} >
+				<Box sx={{ display: "flex", mt: 3 }}>
+					<Card sx={{ maxWidth: 345, ml: 2 }}>
+						<CardActionArea>
+							<CardContent>
+								<Stack sx={{ width: "100%" }} spacing={2}>
+									<Alert severity="success">
+										<AlertTitle>Invocations</AlertTitle>
+										<Typography>{totalInvocations}</Typography>
+									</Alert>
+								</Stack>
+							</CardContent>
 
-            <Grid item xs={5}>
-                <Stack sx={{ width: '100%' }} spacing={2}>
+							<CardContent>
+								<Typography variant="body2" color="text.secondary">
+									Invocations are the number of times a function was invoked by
+									either an API call or an event response from another AWS
+									service.
+								</Typography>
+							</CardContent>
+						</CardActionArea>
+					</Card>
 
-                    <Alert severity="success">
-                      <AlertTitle>Invocations</AlertTitle>
-                      { totalInvocations }
-                    </Alert>
+					<Card sx={{ maxWidth: 345, ml: 2 }}>
+						<CardActionArea>
+							<CardContent>
+								<Stack sx={{ width: "100%" }} spacing={2}>
+									<Alert severity="warning">
+										<AlertTitle>Throttles</AlertTitle>
+										<Typography>{totalThrottles}</Typography>
+									</Alert>
+								</Stack>
+							</CardContent>
 
-                    <Alert severity="warning">
-                      <AlertTitle>Throttles</AlertTitle>
-                      { totalThrottles }
-                    </Alert>
+							<CardContent>
+								<Typography variant="body2" color="text.secondary">
+									Throttles occur when the number of invocations for a function
+									exceeds its concurrency pool, which causes Lambda to start
+									rejecting incoming requests.
+								</Typography>
+							</CardContent>
+						</CardActionArea>
+					</Card>
 
-                    <Alert severity="error">
-                      <AlertTitle>Errors</AlertTitle>
-                      { totalErrors }
-                    </Alert>
+					<Card sx={{ maxWidth: 345, ml: 2 }}>
+						<CardActionArea>
+							<CardContent>
+								<Stack sx={{ width: "100%" }} spacing={2}>
+									<Alert severity="error">
+										<AlertTitle>Errors</AlertTitle>
+										<Typography>{totalErrors}</Typography>
+									</Alert>
+								</Stack>
+							</CardContent>
 
-                </Stack>
-            </Grid>
-
-            <Grid item xs={7}>
-              <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur animi quia explicabo itaque, ipsa laborum corrupti sed atque ab totam quaerat veniam expedita suscipit, similique sint est ipsam doloribus facilis!
-              </Typography>
-            </Grid>
-
-        </Grid>
-      </Box>
-    </Container>
-  )
+							<CardContent>
+								<Typography variant="body2" color="text.secondary">
+									Errors log the number of errors thrown by a function. It can
+									be used with the Invocations metric to calculate the total
+									percentage of errors.
+								</Typography>
+							</CardContent>
+						</CardActionArea>
+					</Card>
+				</Box>
+			</Container>
+		</ThemeProvider>
+	);
 }
 
 export default Home;
