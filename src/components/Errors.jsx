@@ -1,7 +1,7 @@
 import { metricsByFunc } from '../utils/getMetricsByFunc.js'
 import React from 'react';
 import 'chart.js/auto';
-import {Line} from "react-chartjs-2";
+import {Line,Bar} from "react-chartjs-2";
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 const moment = require("moment")
@@ -10,6 +10,7 @@ const Errors = () => {
 
   const currentFunc = useSelector((state) => state.chart.name);
   const credentials = useSelector((state) => state.creds);
+  const funcList = useSelector((state) => state.funcList.funcList);
 
   const [title, setTitle] = useState('');
   const [yAxis, setYAxis] = useState([]);
@@ -33,7 +34,7 @@ const Errors = () => {
       legend: {display: false},
     title: {
       display: true,
-      text: "ERRORS"
+      text: funcList[currentFunc] + " ERRORS"
       }
     },
     layout:{padding:{bottom:100}},
@@ -45,6 +46,15 @@ const Errors = () => {
           color:"black",
           font:{
             size:18
+          }
+        }
+      },
+      x:{
+        ticks:{
+          
+          color:"black",
+          font:{
+            size:10      
           }
         }
       }
@@ -59,10 +69,10 @@ const Errors = () => {
 
           const x = []
           const y = []
-
-          data.series[0].data.forEach((element) => {
-            let num = moment(`${element.x}`).format("MMM Do YY, h:mm a ")
-            console.log('here is the doodoo', num)
+          console.log('response data in Errors.jsx', data.series)
+          data.series[currentFunc].data.forEach((element) => {
+            let num = moment(`${element.x}`).format("MM/DD  h a ")
+           
             x.push(num)
             y.push(element.y)
           })
@@ -70,13 +80,13 @@ const Errors = () => {
           setYAxis(y)
           setXAxis(x)
       })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err)) 
 
   }, [currentFunc])
  
   return (
     <div>
-      <Line data = {data} options={options}/>
+      <Bar data = {data} options={options}/>
     </div>
   )
  

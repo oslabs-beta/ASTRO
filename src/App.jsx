@@ -39,8 +39,7 @@ function App() {
     <Routes>
   
       <Route path="/" element={<Home creds={creds} />} />
-      <Route path="/insights" element={<Insights />}/> 
-      <Route path="/github" element={<Github />}/>
+      <Route path="/insights" element={<Insights />} />
       <Route path="/*" element={<PageNotFound />} />
       
     </Routes>

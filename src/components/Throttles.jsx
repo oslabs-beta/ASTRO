@@ -1,7 +1,7 @@
 import { metricsByFunc } from '../utils/getMetricsByFunc.js'
 import React from 'react'
 import 'chart.js/auto';
-import {Line} from "react-chartjs-2";
+import {Line, Bar} from "react-chartjs-2";
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 const moment = require("moment")
@@ -11,6 +11,7 @@ const Throttles = () => {
 
   const currentFunc = useSelector((state) => state.chart.name)
   const credentials = useSelector((state) => state.creds)
+  const funcList = useSelector((state) => state.funcList.funcList);
 
   const [title, setTitle] = useState('')
   const [yAxis, setYAxis] = useState([])
@@ -40,7 +41,7 @@ const data = {
       legend: {display: false},
     title: {
       display: true,
-      text: "THROTTLES"
+      text: funcList[currentFunc] + " THROTTLES"
       }
     },
     layout:{padding:{bottom:100}},
@@ -54,6 +55,15 @@ const data = {
             size:18
           }
         }
+      },
+      x:{
+        ticks:{
+          
+          color:"black",
+          font:{
+            size:10      
+          }
+        }
       }
     },
   }
@@ -65,8 +75,8 @@ const data = {
           const x = []
           const y = []
 
-          data.series[0].data.forEach((element) => {
-            let num = moment(`${element.x}`).format("MMM Do YY, h:mm a ")
+          data.series[currentFunc].data.forEach((element) => {
+            let num = moment(`${element.x}`).format("MM/DD h a ")
             x.push(num)
             y.push(element.y)
           })
@@ -80,7 +90,7 @@ const data = {
   return (
     <div class = "chart">
         
-      <Line data = {data} options={options}/>
+      <Bar data = {data} options={options}/>
     </div>
   )
  
