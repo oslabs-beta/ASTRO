@@ -4,6 +4,8 @@ import 'chart.js/auto';
 import {Line} from "react-chartjs-2";
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+const moment = require("moment")
+
 
 const Throttles = () => {
 
@@ -14,24 +16,46 @@ const Throttles = () => {
   const [yAxis, setYAxis] = useState([])
   const [xAxis, setXAxis] = useState([])
 
-  const data = {
+
+
+
+const data = {
     labels: [...xAxis],
     fill: true,
     backgroundColor: "#000",
      datasets: [{
        data: [...yAxis],
+       fill: true,
+       borderColor: '#000',
+       backgroundColor:'#02086C',
+       tension: 0.4,
+       pointBorderWidth: 5,
+       pointRadius: 4,
      }]
    }
    
+  
    const options = {
     plugins: {
+      legend: {display: false},
     title: {
       display: true,
-      text: "Throttles",
-     
-      
+      text: "THROTTLES"
       }
-    }
+    },
+    layout:{padding:{bottom:100}},
+    scales: {
+      y:{
+        beginAtZero: true,
+        min: 0,
+        ticks:{
+          color:"black",
+          font:{
+            size:18
+          }
+        }
+      }
+    },
   }
    
   useEffect(() => {
@@ -42,7 +66,8 @@ const Throttles = () => {
           const y = []
 
           data.series[0].data.forEach((element) => {
-            x.push(element.x)
+            let num = moment(`${element.x}`).format("MMM Do YY, h:mm a ")
+            x.push(num)
             y.push(element.y)
           })
 
@@ -53,12 +78,14 @@ const Throttles = () => {
   }, [currentFunc])
  
   return (
-    <div>
+    <div class = "chart">
+        
       <Line data = {data} options={options}/>
     </div>
   )
  
 }
 export default Throttles;
+
 
 
