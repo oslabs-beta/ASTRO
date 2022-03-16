@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 
 
@@ -24,7 +25,7 @@ export const NavBar = () => {
             className="navbar-astro"
           >Astro</Link>
           </Button>
-
+          <Box  sx={{ ml: 2 }} >
           <Button variant="contained" disableElevation>
           <Link to="/insights">Insights</Link>
           </Button>

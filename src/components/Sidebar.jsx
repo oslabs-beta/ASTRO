@@ -50,7 +50,7 @@ export const SideBar = (props) => {
           onClick={() => handleClick(idx)}
           >
             <ListItemText primary={element}/>
-          </ListItemButton>)
+            </ListItemButton>)
         })}
       </List>
       <Divider/>
