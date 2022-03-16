@@ -4,6 +4,7 @@ import 'chart.js/auto';
 import {Line} from "react-chartjs-2";
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+const moment = require("moment")
 
 const Errors = () => {
 
@@ -13,22 +14,43 @@ const Errors = () => {
   const [title, setTitle] = useState('');
   const [yAxis, setYAxis] = useState([]);
   const [xAxis, setXAxis] = useState([]);
-
+  
   const data = {
     labels: [...xAxis],
      datasets: [{
-       data: [...yAxis]
+       data: [...yAxis],
+       fill: true,
+       borderColor: '#000',
+       backgroundColor:'#02086C',
+       tension: 0.4,
+       pointBorderWidth: 5,
+       pointRadius: 4,
      }]
    }
    
    const options = {
     plugins: {
+      legend: {display: false},
     title: {
       display: true,
-      text: "Errors"
+      text: "ERRORS"
       }
-    }
+    },
+    layout:{padding:{bottom:100}},
+    scales: {
+      y:{
+        beginAtZero: true,
+        min: 0,
+        ticks:{
+          color:"black",
+          font:{
+            size:18
+          }
+        }
+      }
+    },
   }
+ 
 
   useEffect(() => {
       const response = Promise.resolve(metricsByFunc(credentials, 'Errors')).then((data) => {
@@ -39,7 +61,9 @@ const Errors = () => {
           const y = []
 
           data.series[0].data.forEach((element) => {
-            x.push(element.x)
+            let num = moment(`${element.x}`).format("MMM Do YY, h:mm a ")
+            console.log('here is the doodoo', num)
+            x.push(num)
             y.push(element.y)
           })
 
@@ -57,6 +81,8 @@ const Errors = () => {
   )
  
 }
+
 export default Errors;
+
 
 
