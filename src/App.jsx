@@ -12,8 +12,6 @@ import { getCreds } from './utils/getAWSCreds';
 import { getBackendCreds } from './features/slices/credSlice';
 
 
-
-
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import { NavBar } from './components/'
@@ -47,7 +45,7 @@ function App() {
       
     </Routes>
 
-    <footer>footer stuff here!</footer>
+    {/* <footer>footer stuff here!</footer> */}
 
     </Router>
     )

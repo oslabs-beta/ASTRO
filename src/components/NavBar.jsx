@@ -15,21 +15,22 @@ export const NavBar = () => {
 
   return (
 
-      <AppBar position="static">
+      <AppBar position="sticky" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
 
-          <Button >
+          <Button>
           <Link 
             to="/"
             className="navbar-astro"
           >Astro</Link>
           </Button>
 
-          <Button >
+          <Button variant="contained" disableElevation>
           <Link to="/insights">Insights</Link>
           </Button>
 
-          <Button >
+          <Button variant="contained" disableElevation>
+          {/* <Link to="https://github.com/oslabs-beta/ASTRO" target="_blank" rel="noopener noreferrer">Github</Link> */}
           <Link to="/github">Github</Link>
           </Button>
 

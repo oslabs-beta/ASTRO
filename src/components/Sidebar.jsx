@@ -9,14 +9,9 @@ import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
 
 // const drawerWidth = 240;
 
@@ -50,16 +45,12 @@ export const SideBar = (props) => {
        
         <List>
         {list.map((element, idx) => {
-          
-          return <ListItemButton
-          button
+          return (<ListItemButton
           key={idx}
           onClick={() => handleClick(idx)}
           >
             <ListItemText primary={element}/>
-
-          </ListItemButton>
-         
+          </ListItemButton>)
         })}
       </List>
       <Divider/>
@@ -67,18 +58,6 @@ export const SideBar = (props) => {
     </Box>
  )
 }
-
-// return(
-//   <div>
-//     {list.map((element, idx) =>
-//       <button
-//         key={idx}
-//         onClick={() => handleClick(idx)}
-//       >
-//         {element}
-//       </button>
-//     )}
-//   </div>
 
 
 /**
