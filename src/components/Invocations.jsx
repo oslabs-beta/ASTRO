@@ -65,7 +65,6 @@ const Invocations = () => {
   console.dir(chartRef);
   useEffect(() => {
     const response = Promise.resolve(metricsByFunc(credentials, 'Invocations')).then((data) => {
-      console.log(data); 
       setTitle(data.options.funcNames[0])
       
       const x = []

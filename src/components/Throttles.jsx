@@ -21,6 +21,8 @@ const Throttles = () => {
 
 const data = {
     labels: [...xAxis],
+    fill: true,
+    backgroundColor: "#000",
      datasets: [{
        data: [...yAxis],
        fill: true,
