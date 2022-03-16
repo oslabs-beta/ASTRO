@@ -4,9 +4,10 @@ import 'chart.js/auto';
 import {Line} from "react-chartjs-2";
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-
+const moment = require("moment")
 
 const Invocations = () => {
+
 
   const currentFunc = useSelector((state) => state.chart.name)
   const credentials = useSelector((state) => state.creds)
@@ -18,19 +19,50 @@ const Invocations = () => {
   const data = {
     labels: [...xAxis],
      datasets: [{
-       data: [...yAxis]
+       data: [...yAxis],
+       fill: true,
+       borderColor: '#000',
+       backgroundColor:'#02086C',
+       tension: 0.4,
+       pointBorderWidth: 5,
+       pointRadius: 4,
      }]
    }
    
    const options = {
     plugins: {
+      legend: {display: false},
     title: {
       display: true,
-      text: "Invocations"
+      text: "INVOCATIONS"
       }
-    }
+    },
+    layout:{padding:{bottom:100}},
+    scales: {
+      y: {
+        beginAtZero: true,
+        min: 0,
+        ticks:{
+          
+           color:"black",
+           font:{
+          size:18
+           }
+        }
+      },
+      x:{
+        ticks:{
+          
+          color:"black",
+          font:{
+            size:18      
+          }
+        }
+      }
+    },
   }
-   
+  const chartRef = React.createRef();
+  console.dir(chartRef);
   useEffect(() => {
     const response = Promise.resolve(metricsByFunc(credentials, 'Invocations')).then((data) => {
       console.log(data); 
@@ -40,7 +72,8 @@ const Invocations = () => {
       const y = []
 
       data.series[currentFunc].data.forEach((element) => {
-        x.push(element.x)
+        let num = moment(`${element.x}`).format("MMM Do YY, h:mm a ")
+        x.push(num)
         y.push(element.y)
       })
 
@@ -53,12 +86,13 @@ const Invocations = () => {
  
   return (
     <div>
-      <Line data = {data} options={options}/>
+      <Line className = ''data = {data} options={options}/>
     </div>
   )
  
 }
 export default Invocations;
+
 
 
 
