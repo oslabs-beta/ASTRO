@@ -27,14 +27,13 @@ export const NavBar = () => {
           </Button>
           <Box  sx={{ ml: 2 }} >
           <Button variant="contained" disableElevation>
-            <Link to="/insights">Insights</Link>
-            </Button>
+          <Link to="/insights">Insights</Link>
+          </Button>
 
-            <Button variant="contained" disableElevation>
-            {/* <Link to="https://github.com/oslabs-beta/ASTRO" target="_blank" rel="noopener noreferrer">Github</Link> */}
-            <Link to="/github">Github</Link>
-            </Button>
-          </Box>
+          <Button variant="contained" disableElevation>
+           <a href="https://github.com/oslabs-beta/ASTRO" target="_blank">Github</a> 
+          
+          </Button>
 
         </Toolbar>
       </AppBar>
