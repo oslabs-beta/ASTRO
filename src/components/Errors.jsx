@@ -22,7 +22,7 @@ const Errors = () => {
        data: [...yAxis],
        fill: true,
        borderColor: '#000',
-       backgroundColor:'#02086C',
+       backgroundColor:'#64b5f6',
        tension: 0.4,
        pointBorderWidth: 5,
        pointRadius: 4,
@@ -69,7 +69,6 @@ const Errors = () => {
 
           const x = []
           const y = []
-          console.log('response data in Errors.jsx', data.series)
           data.series[currentFunc].data.forEach((element) => {
             let num = moment(`${element.x}`).format("MM/DD  h a ")
            

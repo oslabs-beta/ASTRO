@@ -12,8 +12,8 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
 
-// const drawerWidth = 240;
 
 export const SideBar = (props) => {
 
@@ -41,6 +41,7 @@ export const SideBar = (props) => {
         }}
       >
         <Toolbar/>
+        <Typography variant="h6" sx={{color: '#616161', mt: 2, ml: 1}}>Functions</Typography>
         <Box sx={{ overflow: 'auto' }}></Box>
        
         <List>
