@@ -1,5 +1,6 @@
 const HWP = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -41,9 +42,10 @@ module.exports = {
     })
   ],
   devServer: {
+    historyApiFallback: true,
     static: {
-      publicPath: '/dist',
-      directory: path.resolve(__dirname, 'dist')
+      directory: path.resolve(__dirname, 'dist'),
+      publicPath: '/build'
     },
     proxy: {
       '/api': 'http://localhost:1111',
