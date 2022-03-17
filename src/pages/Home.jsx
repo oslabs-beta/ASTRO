@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { metricsAllFunc } from '../utils/getMetricsAllFunc';
-import Typography from '@mui/material/Typography';
 
 ///MATERIAL UI
 import Alert from '@mui/material/Alert';
@@ -10,12 +9,8 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-// Font-Family
+import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// Transparency
-
-
-//CARD COMPONENT EXAMPLE
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
@@ -87,7 +82,7 @@ function Home(props) {
 							borderRadius: 0,
 						}}
 					>
-						<Typography variant="subtitle2" gutterBottom>
+						<Typography variant="subtitle1" gutterBottom>
 							Your solution to AWS Lambda Function Monitoring
 						</Typography>
 					</Box>
@@ -100,9 +95,8 @@ function Home(props) {
 							borderRadius: 1,
 						}}
 					>
-						<Typography variant="overline" display="block" gutterBottom>
-							These are the total number of Invocations, Throttles and Errors
-							for your account within the last 7 Days.
+						<Typography variant="subtitle1" display="block" gutterBottom>
+							Below are the account totals of invocations, throttles, and errors over the past 7 days.
 						</Typography>
 					</Box>
 				</Box>

@@ -23,7 +23,7 @@ const Invocations = () => {
        data: [...yAxis],
        fill: true,
        borderColor: '#000',
-       backgroundColor:'#02086C',
+       backgroundColor:'#64b5f6',
        tension: 0.4,
        pointBorderWidth: 5,
        pointRadius: 4,
@@ -61,7 +61,7 @@ const Invocations = () => {
     },
   }
   const chartRef = React.createRef();
-  console.dir(chartRef);
+
   useEffect(() => {
     const response = Promise.resolve(metricsByFunc(credentials, 'Invocations')).then((data) => {
       setTitle(data.options.funcNames[0])

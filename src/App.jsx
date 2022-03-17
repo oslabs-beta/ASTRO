@@ -26,7 +26,6 @@ function App() {
   
   useEffect(() => {
     const result = Promise.resolve(getCreds()).then((data) => {
-      console.log('data inside useEffect App.jsx', data);
       dispatch(getBackendCreds(data))
     return;
     })

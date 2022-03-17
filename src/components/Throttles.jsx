@@ -28,7 +28,7 @@ const data = {
        data: [...yAxis],
        fill: true,
        borderColor: '#000',
-       backgroundColor:'#02086C',
+       backgroundColor:'#64b5f6',
        tension: 0.4,
        pointBorderWidth: 5,
        pointRadius: 4,
@@ -88,7 +88,7 @@ const data = {
   }, [currentFunc])
  
   return (
-    <div class = "chart">
+    <div>
         
       <Bar data = {data} options={options}/>
     </div>
