@@ -20,7 +20,7 @@ app.use('/secret', (req, res) => {
 })
 
 app.use('/aws', awsRouter);
-// app.use('/user', userRouter);
+app.use('/user', userRouter);
 
 app.use('*', (req, res) => {
 	return res.status(404).json({ err: 'endpoint requested is not found' });

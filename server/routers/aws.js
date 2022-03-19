@@ -9,6 +9,7 @@ const getMetricsByFunc = require('../controllers/aws/metrics/getMetricsByFunc');
 const getLogs = require('../controllers/aws/Logs/getLogs');
 const updateLogs = require('../controllers/aws/Logs/updateLogs');
 
+// only used when credentials are inputted into .env file
 router.route('/getCreds').get(getCreds, (req,res) => {
   return res.status(200).json(res.locals.credentials);
 })
