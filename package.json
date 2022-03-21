@@ -4,10 +4,10 @@
   "description": "Monitoring tool for AWS Lambda services",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production nodemon server/server.js",
     "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=development webpack & (echo 'AWS_REGION=\"insert region here\"'; echo 'AWS_ACCESS_KEY_ID=\"insert aws access key here\"'; echo 'AWS_SECRET_ACCESS_KEY=\"insert aws secret access key here\"') > .env"
+    "build": "NODE_ENV=development webpack & (echo 'AWS_REGION=\"insert region here\"'; echo 'AWS_ACCESS_KEY_ID=\"insert aws access key here\"'; echo 'AWS_SECRET_ACCESS_KEY=\"insert aws secret access key here\"') > .env",
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/react": "^12.1.4",
     "babel-loader": "^8.2.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.0",
