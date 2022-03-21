@@ -8,7 +8,7 @@ router.route('/login').post(
   userController.getUser, 
   STSCreds.get,
   (req, res) => {
-    return res.status(200).json(res.locals);
+    return res.status(200).json(res.locals.STSCreds);
   }
 )
 
@@ -16,7 +16,7 @@ router.route('/register').post(
   userController.createUser, 
   STSCreds.get,
   (req, res) => {
-    return res.sendStatus(200);
+    return res.status(200).json(res.locals.STSCreds);
   }
 )
 
