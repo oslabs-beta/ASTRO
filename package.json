@@ -42,6 +42,7 @@
     "@aws-sdk/client-cloudwatch": "^3.53.0",
     "@aws-sdk/client-cloudwatch-logs": "^3.53.0",
     "@aws-sdk/client-lambda": "^3.53.0",
+    "@aws-sdk/client-sts": "^3.54.1",
     "@babel/core": "^7.17.5",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
