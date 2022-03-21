@@ -1,4 +1,4 @@
-const AWSUtilFunc = require('../Metrics/utils/AWSUtilFunc.js');
+const AWSUtilFunc = require('../metrics/utils/AWSUtilFunc.js');
 const STSCreds = {};
 const dotenv = require('dotenv');
 dotenv.config();

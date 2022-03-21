@@ -8,9 +8,12 @@ const moment = require("moment")
 
 const Invocations = () => {
 
-  const creds = useSelector((state) => state.creds)
-  const currentFunc = useSelector((state) => state.chart.name)
+  const creds = useSelector((state) => state.creds);
+  const currentFunc = useSelector((state) => state.chart.name);
   const funcList = useSelector((state) => state.funcList.funcList);
+  const chartData = useSelector((state) => state.data.data);
+
+  console.log('this is chart data in invocations', chartData)
 
   const [title, setTitle] = useState('')
   const [yAxis, setYAxis] = useState([])
@@ -68,7 +71,7 @@ const Invocations = () => {
 				setTitle(data.options.funcNames[0]);
 				const x = [];
 				const y = [];
-
+        console.log('in invocations promise')
 				data.series[currentFunc].data.forEach((element) => {
 					let num = moment(`${element.x}`).format("MM/DD, h a ");
 					x.push(num);
