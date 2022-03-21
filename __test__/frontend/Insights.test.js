@@ -18,6 +18,6 @@ import Insights from "../../src/pages/Insights";
 
 test('on initial render, the insights page should render the dashboard and change on user click', () => {
 	render(< Insights />)
-
+	console.log('in render')
 	screen.debug();
 })
