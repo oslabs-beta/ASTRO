@@ -3,6 +3,7 @@ import userReducer from './slices/userSlice';
 import funcListReducer from './slices/funcListSlice';
 import chartSliceReducer from './slices/chartSlice';
 import userCredsReducer from './slices/credSlice';
+import insightsToggleReducer from './slices/insightsToggleSlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
       funcList: funcListReducer,
       chart: chartSliceReducer,
       creds: userCredsReducer,
+      toggleInsights: insightsToggleReducer
   }
 });
 

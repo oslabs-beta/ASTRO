@@ -1,7 +1,7 @@
 import { metricsByFunc } from '../utils/getMetricsByFunc.js'
 import React from 'react';
 import 'chart.js/auto';
-import {Line,Bar} from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 const moment = require("moment")
@@ -9,7 +9,7 @@ const moment = require("moment")
 const Errors = () => {
 
   const currentFunc = useSelector((state) => state.chart.name);
-  const credentials = useSelector((state) => state.creds);
+  const creds = useSelector((state) => state.creds);
   const funcList = useSelector((state) => state.funcList.funcList);
 
   const [title, setTitle] = useState('');
@@ -63,7 +63,7 @@ const Errors = () => {
  
 
   useEffect(() => {
-      const response = Promise.resolve(metricsByFunc(credentials, 'Errors')).then((data) => {
+          Promise.resolve(metricsByFunc(creds, 'Errors')).then((data) => {
 
           setTitle(data.options.funcNames[0]);
 
@@ -81,7 +81,7 @@ const Errors = () => {
       })
         .catch((err) => console.log(err)) 
 
-  }, [currentFunc])
+  }, [])
  
   return (
     <div>
