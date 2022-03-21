@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { metricsAllFunc } from '../utils/getMetricsAllFunc';
+import { useSelector } from 'react-redux';
 
 ///MATERIAL UI
 import Alert from '@mui/material/Alert';
@@ -15,49 +16,45 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
 
-function Home(props) {
+function AccountTotal(props) {
 
+	const creds = useSelector((state) => state.creds)
 
-	const theme = createTheme({
-		typography: {
-			fontFamily: [
-				"Nanum Gothic",
-				"sans-serif"
-			].join(","),
-		},
-	});
-
-
-
+	// const theme = createTheme({
+	// 	typography: {
+	// 		fontFamily: [
+	// 			"Nanum Gothic",
+	// 			"sans-serif"
+	// 		].join(","),
+	// 	},
+	// });
 
   const [totalInvocations, setInvocations] = useState(0);
   const [totalThrottles, setThrottles] = useState(0);
   const [totalErrors, setErrors] = useState(0);
 
-  const { creds } = props;
+	const promise = (metric, setter) => {
+		Promise.resolve(metricsAllFunc(creds, metric))
+			.then(data => data.data.reduce((x, y) => x + y.y, 0))
+			.then(data => setter(data))
+			.catch(e => console.log(e))
+	}
+	
+	useEffect(() => {
+		if (creds.region.length) {
 
-  const promise = (metric, setter) => {
-    Promise.resolve(metricsAllFunc(creds, metric))
-      .then(data => data.data.reduce((x, y) => x + y.y , 0))
-      .then(data => setter(data))
-      .catch(e => console.log(e));
-  }
+			const invocations = promise('Invocations', setInvocations);
 
-  if (creds.region.length) {
-    // Invocations
-    const invocations = promise('Invocations', setInvocations);
+			const throttles = promise('Throttles', setThrottles);
 
-    // Throttles
-    const throttles = promise('Throttles', setThrottles);
+			const errors = promise('Errors', setErrors);
+		}
+	} , [creds])
 
-    // Errors
-    const errors = promise('Errors', setErrors);
-  }
 
-  // const classes = useStyles();
 
   return (
-		<ThemeProvider theme={theme}>
+		// <ThemeProvider theme={theme}>
 			<Container
 				maxWidth="lg"
 			>
@@ -72,7 +69,7 @@ function Home(props) {
 							borderRadius: 1,
 						}}
 					>
-						<Typography variant="h3">Welcome to Astro</Typography>
+						
 					</Box>
 					<Box
 						sx={{
@@ -82,9 +79,7 @@ function Home(props) {
 							borderRadius: 0,
 						}}
 					>
-						<Typography variant="subtitle1" gutterBottom>
-							Your solution to AWS Lambda Function Monitoring
-						</Typography>
+						
 					</Box>
 
 					<Box
@@ -95,9 +90,7 @@ function Home(props) {
 							borderRadius: 1,
 						}}
 					>
-						<Typography variant="subtitle1" display="block" gutterBottom>
-							Below are the account totals of invocations, throttles, and errors over the past 7 days.
-						</Typography>
+						
 					</Box>
 				</Box>
 
@@ -166,8 +159,8 @@ function Home(props) {
 					</Card>
 				</Box>
 			</Container>
-		</ThemeProvider>
+		// </ThemeProvider>
 	);
 }
 
-export default Home;
+export default AccountTotal;

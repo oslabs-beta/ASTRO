@@ -6,6 +6,7 @@ function Signup(){
 
   // const handleSubmit = () => {
   //     //does something with submit
+  //     console.log('submitted')
   // }
 
   //register is a callback function that will return some of the props and inject into your inputs
@@ -62,6 +63,28 @@ function Signup(){
           />
         
         <small>{errors.password?.message}</small>
+        
+        <button  
+          name="button"
+          id="button"
+        >      
+        <a href='https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?stackName=astro-delegation&templateURL=https://cf-templates-umzzmlcqhatf-us-east-1.s3.amazonaws.com/2022077ggf-cf-astro.yaml ' target='_blank'>Click here</a>     
+        </button>  
+
+        <input 
+          type="password" 
+          {...register("ARN", 
+          { required: 'Required field' 
+            // minLength: { 
+            //   value: 8, 
+            //   message: 'Minimum length of 8 characters required' 
+            // }
+          })} 
+            id="ARN"
+            placeholder='ARN'
+          />
+        
+        <small>{errors.ARN?.message}</small>
 
         <button
           type='Submit'
