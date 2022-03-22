@@ -8,5 +8,11 @@
 	  ],
 	  "@babel/preset-react"
 	],
-	"plugins": ["@babel/plugin-transform-runtime"]
+	"plugins": [["@babel/plugin-transform-runtime", 
+	{
+		"helpers": true,
+		"regenerator": true
+	}], 
+		["@babel/plugin-transform-async-to-generator"]
+		]
   }
