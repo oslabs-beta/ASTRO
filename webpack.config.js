@@ -16,7 +16,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/env', '@babel/react']
+          presets: ['@babel/env', '@babel/react'],
+          plugins: ['@babel/plugin-transform-runtime', '@babel/transform-async-to-generator'],
         }
       },
       {
@@ -34,6 +35,9 @@ module.exports = {
         ],
       },
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   plugins:[
     new HWP({
