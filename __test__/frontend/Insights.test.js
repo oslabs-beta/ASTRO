@@ -16,7 +16,7 @@ possible tests we can implement:
 import { render, screen } from "@testing-library/react"
 import Insights from "../../src/pages/Insights";
 
-test('on initial render, the insights page should render the dashboard and change on user click', () => {
+xtest('on initial render, the insights page should render the dashboard and change on user click', () => {
 	render(< Insights />)
 	console.log('in render')
 	screen.debug();
