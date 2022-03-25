@@ -51,6 +51,7 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch": "^3.53.0",
     "@aws-sdk/client-cloudwatch-logs": "^3.53.0",
+    "@aws-sdk/client-iam": "^3.56.0",
     "@aws-sdk/client-lambda": "^3.53.0",
     "@aws-sdk/client-sts": "^3.54.1",
     "@babel/core": "^7.17.5",
@@ -65,6 +66,7 @@
     "@mui/material": "^5.5.1",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.2",
+    "aws-sdk-client-mock": "^0.6.2",
     "babel-loader": "^8.2.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
