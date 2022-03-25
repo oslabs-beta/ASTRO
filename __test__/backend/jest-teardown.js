@@ -1,6 +1,5 @@
-// import regeneratorRuntime from 'regenerator-runtime';
-
+// import 'regenerator-runtime';
 
 module.exports = async (globalConfig) => {
-  global.testServer.close();
+	global.testServer.close();
 };

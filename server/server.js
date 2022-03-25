@@ -16,14 +16,16 @@ const userRouter = require('./routers/userRouter.js');
 const awsRouter = require('./routers/aws.js');
 
 app.use('/secret', (req, res) => {
-  return res.status(200).send('Made it to secret page!');
-})
+	return res.status(200).send('Made it to secret page!');
+});
 
 app.use('/aws', awsRouter);
 app.use('/user', userRouter);
 
 app.use('*', (req, res) => {
-	return res.status(404).json({ err: 'endpoint requested is not found' });
+	return res
+		.status(404)
+		.json({ err: 'endpoint requested is not found' });
 });
 
 app.use((err, req, res, next) => {
@@ -40,6 +42,8 @@ app.use((err, req, res, next) => {
 	return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 	console.log('Listening on port ' + PORT);
 });
+
+module.exports = server;
