@@ -1,10 +1,20 @@
 import { metricsByFunc } from '../utils/getMetricsByFunc.js'
 import React from 'react'
-import 'chart.js/auto';
-import { Bar } from "react-chartjs-2";
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 const moment = require("moment")
+import Paper from '@mui/material/Paper';
+import {
+  Chart,
+  ArgumentAxis,
+  ValueAxis,
+  LineSeries,
+  Title,
+  Legend,
+} from '@devexpress/dx-react-chart-material-ui';
+import { Animation } from '@devexpress/dx-react-chart';
+
+
 
 const Invocations = () => {
 
@@ -19,50 +29,7 @@ const Invocations = () => {
   const [yAxis, setYAxis] = useState([])
   const [xAxis, setXAxis] = useState([])
 
-  const data = {
-    labels: [...xAxis],
-     datasets: [{
-       data: [...yAxis],
-       fill: true,
-       borderColor: '#000',
-       backgroundColor:'#64b5f6',
-       tension: 0.4,
-       pointBorderWidth: 5,
-       pointRadius: 4,
-     }]
-   }
-   const options = {
-    plugins: {
-      legend: {display: false},
-    title: {
-      display: true,
-      text: funcList[currentFunc] + " INVOCATIONS"
-      }
-    },
-    layout:{padding:{bottom:100}},
-    scales: {
-      y: {
-        beginAtZero: true,
-        min: 0,
-        ticks:{
-           color:"black",
-           font:{
-          size:18
-           }
-        }
-      },
-      x:{
-        ticks:{
-          
-          color:"black",
-          font:{
-            size:13      
-          }
-        }
-      }
-    },
-  }
-  const chartRef = React.createRef();
+     const chartRef = React.createRef();
 
   useEffect(() => {
 
@@ -87,7 +54,28 @@ const Invocations = () => {
  
   return (
     <div>
-      <Bar data = {data} options={options}/>
+     <Paper>
+        <Chart
+          data={chartData}
+          className={classes.chart}
+        >
+          <ArgumentAxis tickFormat={format} />
+          <ValueAxis
+            max={50}
+            labelComponent={ValueLabel}
+          />
+
+          <LineSeries name="TV news" valueField="tvNews" argumentField="year"
+          />
+       
+          <Legend position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />
+          <Title
+            text={`Confidence in Institutions in American society ${'\n'}(Great deal)`}
+            textComponent={TitleText}
+          />
+          <Animation />
+        </Chart>
+      </Paper>
     </div>
   )
  
