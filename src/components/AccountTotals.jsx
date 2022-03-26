@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { metricsAllFunc } from '../utils/getMetricsAllFunc';
 import { useSelector } from 'react-redux';
+import { Doughnut } from "react-chartjs-2";
 
 ///MATERIAL UI
 import Alert from '@mui/material/Alert';
@@ -18,10 +19,13 @@ import { CardActionArea } from '@mui/material';
 export const AccountTotals = () => {
 
 	const creds = useSelector((state) => state.creds)
+	const chartData = useSelector((state) => state.data);
+	const list = useSelector((state) => state.funcList.funcList);
 
   const [totalInvocations, setInvocations] = useState(0);
   const [totalThrottles, setThrottles] = useState(0);
   const [totalErrors, setErrors] = useState(0);
+  const [pieChartInvocations, setPCI] = useState([])
 
 	const promise = (metric, setter) => {
 		Promise.resolve(metricsAllFunc(creds, metric))
@@ -29,18 +33,52 @@ export const AccountTotals = () => {
 			.then(data => setter(data))
 			.catch(e => console.log(e))
 	}
+
+	const data = {
+		labels: [...list],
+		datasets: [
+			{
+				data: pieChartInvocations,
+				backgroundColor: [
+					"rgb(242,165,152)",
+					"rgb(255,232,157)",
+					"rgb(236,107,109)",
+					"rgb(122,231,125)",
+					"rgb(195,233,151)"
+				],
+				hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+			}
+		],
+	 
+		plugins: {
+			labels: {
+				render: "percentage",
+				fontColor: ["green", "white", "red"],
+				precision: 2
+			},
+		},
+		 text: "23%",
+	};
 	
 	useEffect(() => {
+		console.log('chart data : ', chartData.data)
 		if (creds.region.length) {
-		
+			// console.log(chartData.data)
 			const invocations = promise('Invocations', setInvocations);
 			const throttles = promise('Throttles', setThrottles);
 			const errors = promise('Errors', setErrors);
 
 		}
-	} , [creds])
+		if (chartData.data) {
+			const chartInvocations = [];
+			for (let i = 0; i < chartData.data.invocations.length; i++) {
+				chartInvocations.push(chartData.data.invocations[i].total);
+			}
+			setPCI(chartInvocations)
+		}
+	} , [creds, chartData])
 
-
+	console.log('this is data', data)
 
   return (
 
@@ -94,6 +132,26 @@ export const AccountTotals = () => {
 										<AlertTitle>Invocations</AlertTitle>
 										<Typography>{totalInvocations}</Typography>
 									</Alert>
+
+									<Doughnut
+										data={data}
+										options={{
+											
+											elements: {
+												
+												center: {
+													legend: { display: true, position: "right" },
+													text: "Red is 2/3 the total numbers",
+													color: "#FF6384", // Default is #000000
+													fontStyle: "Arial", // Default is Arial
+													sidePadding: 20, // Default is 20 (as a percentage)
+													minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
+													lineHeight: 25 // Default is 25 (in px), used for when text wraps
+												}
+											},
+											
+										}}
+									/>
 								</Stack>
 							</CardContent>
 
