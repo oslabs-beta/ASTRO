@@ -1,101 +1,83 @@
-import { metricsByFunc } from '../utils/getMetricsByFunc.js'
-import React from 'react'
-import 'chart.js/auto';
-import { Bar } from "react-chartjs-2";
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-const moment = require("moment")
+import {metricsByFunc} from '../utils/getMetricsByFunc.js';
+import React from 'react';
+import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
+const moment = require('moment');
+import Paper from '@mui/material/Paper';
+import {invocationsChange} from '../features/slices/dataSlice.js';
+import {
+  ArgumentAxis,
+  ValueAxis,
+  Chart,
+  LineSeries
+} from '@devexpress/dx-react-chart-material-ui';
+import {ClosedCaptionOffSharp, ConstructionOutlined} from '@mui/icons-material';
 
 const Invocations = () => {
-
   const creds = useSelector((state) => state.creds);
   const currentFunc = useSelector((state) => state.chart.name);
   const funcList = useSelector((state) => state.funcList.funcList);
-  const chartData = useSelector((state) => state.data.data);
-  const timePeriod = useSelector((state) => state.time.time)
+  const chartData = useSelector((state) => state.data);
 
-  // console.log('this is chart data in invocations', chartData)
+  const [title, setTitle] = useState('');
+  const [yAxis, setYAxis] = useState([]);
+  const [xAxis, setXAxis] = useState([]);
 
-  const [title, setTitle] = useState('')
-  const [yAxis, setYAxis] = useState([])
-  const [xAxis, setXAxis] = useState([])
-
-  const data = {
-    labels: [...xAxis],
-     datasets: [{
-       data: [...yAxis],
-       fill: true,
-       borderColor: '#000',
-       backgroundColor:'#64b5f6',
-       tension: 0.4,
-       pointBorderWidth: 5,
-       pointRadius: 4,
-     }]
-   }
-   const options = {
-    plugins: {
-      legend: {display: false},
-    title: {
-      display: true,
-      text: funcList[currentFunc] + " INVOCATIONS"
-      }
-    },
-    layout:{padding:{bottom:100}},
-    scales: {
-      y: {
-        beginAtZero: true,
-        min: 0,
-        ticks:{
-           color:"black",
-           font:{
-          size:18
-           }
-        }
-      },
-      x:{
-        ticks:{
-          
-          color:"black",
-          font:{
-            size:13      
-          }
-        }
-      }
-    },
-  }
   const chartRef = React.createRef();
+  const xData = [xAxis];
 
   useEffect(() => {
-    
-      Promise.resolve(metricsByFunc(creds, "Invocations", timePeriod))
-			.then((data) => {
-        console.log('in invocations', data)
-				setTitle(data.options.funcNames[0]);
-				const x = [];
-				const y = [];
-        // console.log('in invocations promise')
-				data.series[currentFunc].data.forEach((element) => {
-					let num = moment(`${element.x}`).format("MM/DD, h a ");
-					x.push(num);
-					y.push(element.y);
-				});
+    Promise.resolve(metricsByFunc(creds, 'Invocations'))
+      .then((data) => {
+        setTitle(data.options.funcNames[0]);
+        const x = [];
+        data.series[currentFunc].data.forEach((element) => {
+          let num = moment(`${element.x}`).format('MM/DD, h a ');
+          x.push(num);
+        });
+        setXAxis(x);
+      })
+      .catch((err) => console.log(err));
+  }, [currentFunc]);
+console.log("heres the state data", chartData)
+  let yData = [];
+  let eData = [];
+  let tData = [];
 
-				setYAxis(y);
-				setXAxis(x);
-			})
-			.catch((err) => console.log(err));
+  if (Array.isArray(chartData.data.invocations)) {
+    for (let i = 0; i < chartData.data.invocations[0].data.length; i++) {
+      yData.push(chartData.data.invocations[0].data[i].y);
+    }
+  }
+  if(chartData.data.errors){
+    for (let i = 0; i < chartData.data.errors[0].data.length; i++) {
+      eData.push(chartData.data.errors[0].data[i].y);
+    }
+  }
+  if(chartData.data.throttles){
+    console.log(chartData.data.throttles)
+    for (let i = 0; i < chartData.data.throttles[0].data.length; i++) {
+      tData.push(chartData.data.throttles[0].data[i].y);
+    }
+  }
+  
+  const data = [];
+  for (let i = 0; i < xData[0].length; i++) {
+    data.push({x: xData[0][i], y: yData[i], e: eData[i], t: tData[i]});
+  }
 
-  }, [currentFunc, timePeriod])
- 
   return (
     <div>
-      <Bar data = {data} options={options}/>
+      <Paper>
+        <Chart data={data}>
+          <ArgumentAxis />
+          <ValueAxis />
+          <LineSeries valueField="y" argumentField="x" />
+          <LineSeries valueField="e" argumentField="x" />
+          <LineSeries valueField="t" argumentField="x" />
+        </Chart>
+      </Paper>
     </div>
-  )
- 
-}
+  );
+};
 export default Invocations;
-
-
-
-
