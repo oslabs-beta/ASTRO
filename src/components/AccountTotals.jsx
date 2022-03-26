@@ -25,7 +25,9 @@ export const AccountTotals = () => {
   const [totalInvocations, setInvocations] = useState(0);
   const [totalThrottles, setThrottles] = useState(0);
   const [totalErrors, setErrors] = useState(0);
-  const [pieChartInvocations, setPCI] = useState([])
+  const [pieChartInvocations, setPCI] = useState([]);
+  const [pieChartErrors, setPCE] = useState([]);
+  const [pieChartThrottles, setPCT] = useState([])
 
 	const promise = (metric, setter) => {
 		Promise.resolve(metricsAllFunc(creds, metric))
@@ -34,31 +36,33 @@ export const AccountTotals = () => {
 			.catch(e => console.log(e))
 	}
 
-	const data = {
-		labels: [...list],
-		datasets: [
-			{
-				data: pieChartInvocations,
-				backgroundColor: [
-					"rgb(242,165,152)",
-					"rgb(255,232,157)",
-					"rgb(236,107,109)",
-					"rgb(122,231,125)",
-					"rgb(195,233,151)"
-				],
-				hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
-			}
-		],
-	 
-		plugins: {
-			labels: {
-				render: "percentage",
-				fontColor: ["green", "white", "red"],
-				precision: 2
+	const pieChartData = (funcNames, metric) =>{
+		return {
+			labels: [...funcNames],
+			datasets: [
+				{
+					data: metric,
+					backgroundColor: [
+						"rgb(242,165,152)",
+						"rgb(255,232,157)",
+						"rgb(236,107,109)",
+						"rgb(122,231,125)",
+						"rgb(195,233,151)"
+					],
+					hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+				}
+			],
+		
+			plugins: {
+				labels: {
+					render: "percentage",
+					fontColor: ["green", "white", "red"],
+					precision: 2
+				},
 			},
-		},
-		 text: "23%",
-	};
+			text: "23%",
+		};
+	}
 	
 	useEffect(() => {
 		console.log('chart data : ', chartData.data)
@@ -74,11 +78,24 @@ export const AccountTotals = () => {
 			for (let i = 0; i < chartData.data.invocations.length; i++) {
 				chartInvocations.push(chartData.data.invocations[i].total);
 			}
-			setPCI(chartInvocations)
+			setPCI(chartInvocations);
+
+			const chartErrors = [];
+			for (let i = 0; i < chartData.data.errors.length; i++) {
+				chartErrors.push(chartData.data.errors[i].total);
+			}
+			setPCE(chartErrors);
+
+			const chartThrottles = [];
+			for (let i = 0; i < chartData.data.throttles.length; i++) {
+				chartThrottles.push(chartData.data.throttles[i].total);
+			}
+			setPCT(chartThrottles);
+
 		}
 	} , [creds, chartData])
 
-	console.log('this is data', data)
+
 
   return (
 
@@ -134,7 +151,7 @@ export const AccountTotals = () => {
 									</Alert>
 
 									<Doughnut
-										data={data}
+										data={pieChartData(list, pieChartInvocations)}
 										options={{
 											
 											elements: {
@@ -173,6 +190,26 @@ export const AccountTotals = () => {
 										<AlertTitle>Throttles</AlertTitle>
 										<Typography>{totalThrottles}</Typography>
 									</Alert>
+
+									<Doughnut
+										data={pieChartData(list, pieChartThrottles)}
+										options={{
+											
+											elements: {
+												
+												center: {
+													legend: { display: true, position: "right" },
+													text: "Red is 2/3 the total numbers",
+													color: "#FF6384", // Default is #000000
+													fontStyle: "Arial", // Default is Arial
+													sidePadding: 20, // Default is 20 (as a percentage)
+													minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
+													lineHeight: 25 // Default is 25 (in px), used for when text wraps
+												}
+											},
+											
+										}}
+									/>
 								</Stack>
 							</CardContent>
 
@@ -194,6 +231,26 @@ export const AccountTotals = () => {
 										<AlertTitle>Errors</AlertTitle>
 										<Typography>{totalErrors}</Typography>
 									</Alert>
+
+									<Doughnut
+										data={pieChartData(list, pieChartErrors)}
+										options={{
+											
+											elements: {
+												
+												center: {
+													legend: { display: true, position: "right" },
+													text: "Red is 2/3 the total numbers",
+													color: "#FF6384", // Default is #000000
+													fontStyle: "Arial", // Default is Arial
+													sidePadding: 20, // Default is 20 (as a percentage)
+													minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
+													lineHeight: 25 // Default is 25 (in px), used for when text wraps
+												}
+											},
+											
+										}}
+									/>
 								</Stack>
 							</CardContent>
 
