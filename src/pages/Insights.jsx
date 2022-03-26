@@ -1,14 +1,14 @@
 import React from 'react';
 import { SideBar } from '../components/Sidebar.jsx';
-import AccountTotals from '../components/AccountTotals.jsx'
+import { AccountTotals } from '../components/AccountTotals.jsx'
 import { toggleChange } from '../features/slices/insightsToggleSlice'
-import Dashboard from '../components/Dashboard.jsx'
+import { Dashboard } from '../components/Dashboard.jsx'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 
 
-function Insights(props){
+export const Insights = () =>{
 
   const componentChange = useSelector((state) => state.toggleInsights.toggle);
 
@@ -22,7 +22,7 @@ function Insights(props){
   const componentSwitch = (componentName) => {
     switch(componentName){
       case 'Account Total':
-        return <AccountTotals />
+        return <AccountTotals data-testid="accountTotals"/>
       case 'Functions':
         return <Dashboard />
     }
@@ -41,4 +41,3 @@ function Insights(props){
     );
 }
 
-export default Insights;

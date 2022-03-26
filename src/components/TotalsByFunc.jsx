@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { metricsByFunc } from "../utils/getMetricsByFunc";
 import { useSelector } from 'react-redux';
+import { timeChange } from '../features/slices/timePeriodSlice'
+import { useDispatch } from 'react-redux';
 
 ///MATERIAL UI
 import Alert from '@mui/material/Alert';
@@ -16,10 +18,18 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
 
-function TotalsByFunc() {
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Timelapse, TimelineOutlined } from '@mui/icons-material';
 
+function TotalsByFunc() {
+	const dispatch = useDispatch();
 	const creds = useSelector((state) => state.creds)
 	const currentFunc = useSelector((state) => state.chart.name)
+	const timePeriod = useSelector((state) => state.time.time)
 
 	const theme = createTheme({
 		typography: {
@@ -34,32 +44,49 @@ function TotalsByFunc() {
   const [totalInvocations, setInvocations] = useState(0);
   const [totalThrottles, setThrottles] = useState(0);
   const [totalErrors, setErrors] = useState(0);
+	const [time, setTime] = useState('')
+		console.log('this is time period', timePeriod)
 
 
-  const promise = (metric, setter) => {
-    Promise.resolve(metricsByFunc(creds, metric))
-			.then((data) => data.series[currentFunc].data.reduce((x, y) => x + y.y, 0))
+
+  const promise = (metric, setter, time) => {
+		console.log('time', typeof time)
+    Promise.resolve(metricsByFunc(creds, metric, time))
+			.then((data) => {
+				console.log('this is data we getting back', data)
+				data.series[currentFunc].data.reduce((x, y) => x + y.y, 0)
+			})
 			.then((data) => setter(data))
 			.catch((e) => console.log(e));
   }
 
 	useEffect(() => {
-		if (creds.region.length) {
+		// console.log('this is time period', timePeriod)
+		if (creds.region.length && time.length) {
+			// console.log('in the if')
 			//use promise.all here?
-			const invocations = promise("Invocations", setInvocations);
-			const throttles = promise("Throttles", setThrottles);
-			const errors = promise("Errors", setErrors);
+			const invocations = promise("Invocations", setInvocations, time);
+			const throttles = promise("Throttles", setThrottles, time);
+			const errors = promise("Errors", setErrors, time);
 		}
-	}, [currentFunc]);
+	}, [currentFunc, time]);
 	
+	const handleChange = async (event) => {
+		setTime(event.target.value)
+    dispatch(timeChange(event.target.value))
+  };
+
 
   return (
 		<ThemeProvider theme={theme}>
 			<Container
 				maxWidth="lg"
 			>
-	
+				 
+
 				<Box sx={{ display: "flex", mt: 3 }}>
+
+					
 					<Card sx={{ maxWidth: 345, ml: 2 }}>
 						<CardActionArea>
 							<CardContent>
@@ -103,6 +130,33 @@ function TotalsByFunc() {
 						</CardActionArea>
 					</Card>
 
+					<FormControl sx={{ m: 1, minWidth: 120 }}>
+
+						<InputLabel id="demo-simple-select-helper-label">Time period</InputLabel>
+
+							<Select
+								labelId="demo-simple-select-helper-label"
+								id="demo-simple-select-helper"
+								value={time}
+								label="Time Period"
+								onChange={handleChange}
+							>
+
+								<MenuItem value="">
+									<em>None</em>
+								</MenuItem>
+								<MenuItem value='30min'>30min</MenuItem>
+								<MenuItem value='1hr'>1hr</MenuItem>
+								<MenuItem value='24hr'>24hr</MenuItem>
+								<MenuItem value='7d'>7d</MenuItem>
+								<MenuItem value='14d'>14d</MenuItem>
+								<MenuItem value='30d'>30d</MenuItem>
+
+							</Select>
+
+						<FormHelperText>Choose your time period</FormHelperText>
+						
+      		</FormControl>
 
 				</Box>
 			</Container>

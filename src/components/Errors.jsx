@@ -34,7 +34,7 @@ const Errors = () => {
       legend: {display: false},
     title: {
       display: true,
-      text: funcList[currentFunc] + " ERRORS"
+      text: "Errors - " +funcList[currentFunc]
       }
     },
     layout:{padding:{bottom:100}},

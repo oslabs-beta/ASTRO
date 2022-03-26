@@ -39,6 +39,7 @@
     "css-loader": "^6.7.0",
     "eslint": "^8.10.0",
     "html-webpack-plugin": "^5.5.0",
+    "msw": "^0.39.2",
     "nodemon": "^2.0.15",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",

@@ -17,7 +17,7 @@ export const metricsAllFunc = async (credentials, metric) => {
 		})
 		// console.log('this is data in metricsAllFunc: ', await data.json())
         const formattedData = await data.json();
-		return formattedData;
+				return formattedData;
 	}
 
 	catch (e) {

@@ -3,7 +3,7 @@ import Invocations from '../components/Invocations.jsx';
 import Errors from '../components/Errors.jsx';
 import Throttles from '../components/Throttles.jsx';
 import TotalsByFunc from '../components/TotalsByFunc.jsx';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, Provider } from 'react-redux';
 import { metricsByFunc } from '../utils/getMetricsByFunc';
 import { invocationsChange, errorsChange, throttlesChange } from '../features/slices/dataSlice.js';
 
@@ -15,10 +15,11 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
 
-function Dashboard() {
+export const Dashboard = () => {
 
   const dispatch = useDispatch();
 	const creds = useSelector((state) => state.creds)
+	const timePeriod = useSelector((state) => state.time.time)
 
 	const Item = styled(Paper)(({ theme }) => ({
 		backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -30,20 +31,21 @@ function Dashboard() {
 
 	// let promise = 
 	useEffect(() => {
-		Promise.resolve(metricsByFunc(creds, 'Invocations'))
+		Promise.resolve(metricsByFunc(creds, 'Invocations', timePeriod))
 		.then((data) => dispatch(invocationsChange(data.series)))
 		.catch((e) => console.log(e));
 
-		Promise.resolve(metricsByFunc(creds, 'Errors'))
+		Promise.resolve(metricsByFunc(creds, 'Errors', timePeriod))
 		.then((data) => dispatch(errorsChange(data.series)))
 		.catch((e) => console.log(e));
 
-		Promise.resolve(metricsByFunc(creds, 'Throttles'))
+		Promise.resolve(metricsByFunc(creds, 'Throttles', timePeriod))
 		.then((data) => dispatch(throttlesChange(data.series)))
 		.catch((e) => console.log(e));
-	}, [])
+	}, [timePeriod])
 
 	return (
+
 		<Fragment>
 			<Box component="main">
 				<Grid container spacing={1} columns={16} justifyContent="center">
@@ -73,7 +75,7 @@ function Dashboard() {
 				</Grid>
 			</Box>
 		</Fragment>
-	);
+		
+	)
 }
 
-export default Dashboard;

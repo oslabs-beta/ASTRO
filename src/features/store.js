@@ -5,6 +5,7 @@ import chartSliceReducer from './slices/chartSlice';
 import userCredsReducer from './slices/credSlice';
 import insightsToggleReducer from './slices/insightsToggleSlice';
 import chartDataReducer from './slices/dataSlice';
+import timePeriodReducer from './slices/timePeriodSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
       chart: chartSliceReducer,
       creds: userCredsReducer,
       toggleInsights: insightsToggleReducer,
-      data: chartDataReducer
+      data: chartDataReducer,
+      time: timePeriodReducer
   }
 });
 

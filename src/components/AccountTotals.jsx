@@ -11,23 +11,13 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
 
-function AccountTotal(props) {
+export const AccountTotals = () => {
 
 	const creds = useSelector((state) => state.creds)
-
-	// const theme = createTheme({
-	// 	typography: {
-	// 		fontFamily: [
-	// 			"Nanum Gothic",
-	// 			"sans-serif"
-	// 		].join(","),
-	// 	},
-	// });
 
   const [totalInvocations, setInvocations] = useState(0);
   const [totalThrottles, setThrottles] = useState(0);
@@ -42,22 +32,23 @@ function AccountTotal(props) {
 	
 	useEffect(() => {
 		if (creds.region.length) {
-
+		
 			const invocations = promise('Invocations', setInvocations);
-
 			const throttles = promise('Throttles', setThrottles);
-
 			const errors = promise('Errors', setErrors);
+
 		}
 	} , [creds])
 
 
 
   return (
-		// <ThemeProvider theme={theme}>
+
 			<Container
 				maxWidth="lg"
 			>
+
+				<h1>Account Totals</h1>
 				<Box>
 					<Box
 						sx={{
@@ -159,8 +150,6 @@ function AccountTotal(props) {
 					</Card>
 				</Box>
 			</Container>
-		// </ThemeProvider>
+	
 	);
 }
-
-export default AccountTotal;

@@ -12,8 +12,9 @@ const Invocations = () => {
   const currentFunc = useSelector((state) => state.chart.name);
   const funcList = useSelector((state) => state.funcList.funcList);
   const chartData = useSelector((state) => state.data.data);
+  const timePeriod = useSelector((state) => state.time.time)
 
-  console.log('this is chart data in invocations', chartData)
+  // console.log('this is chart data in invocations', chartData)
 
   const [title, setTitle] = useState('')
   const [yAxis, setYAxis] = useState([])
@@ -65,13 +66,14 @@ const Invocations = () => {
   const chartRef = React.createRef();
 
   useEffect(() => {
-
-      Promise.resolve(metricsByFunc(creds, "Invocations"))
+    
+      Promise.resolve(metricsByFunc(creds, "Invocations", timePeriod))
 			.then((data) => {
+        console.log('in invocations', data)
 				setTitle(data.options.funcNames[0]);
 				const x = [];
 				const y = [];
-        console.log('in invocations promise')
+        // console.log('in invocations promise')
 				data.series[currentFunc].data.forEach((element) => {
 					let num = moment(`${element.x}`).format("MM/DD, h a ");
 					x.push(num);
@@ -83,7 +85,7 @@ const Invocations = () => {
 			})
 			.catch((err) => console.log(err));
 
-  }, [currentFunc])
+  }, [currentFunc, timePeriod])
  
   return (
     <div>
