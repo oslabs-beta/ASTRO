@@ -22,6 +22,7 @@ function App() {
   
   useEffect(() => {
       Promise.resolve(getCreds()).then((data) => {
+        // console.log(data)
       dispatch(getBackendCreds(data))
       return;
     })

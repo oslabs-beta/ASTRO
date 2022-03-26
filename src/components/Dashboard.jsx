@@ -31,17 +31,18 @@ export const Dashboard = () => {
 
 	// let promise = 
 	useEffect(() => {
-		Promise.resolve(metricsByFunc(creds, 'Invocations', timePeriod))
+		const invocations = Promise.resolve(metricsByFunc(creds, 'Invocations', timePeriod))
 		.then((data) => dispatch(invocationsChange(data.series)))
 		.catch((e) => console.log(e));
 
-		Promise.resolve(metricsByFunc(creds, 'Errors', timePeriod))
+		const errors = Promise.resolve(metricsByFunc(creds, 'Errors', timePeriod))
 		.then((data) => dispatch(errorsChange(data.series)))
 		.catch((e) => console.log(e));
 
-		Promise.resolve(metricsByFunc(creds, 'Throttles', timePeriod))
+		const throttles = Promise.resolve(metricsByFunc(creds, 'Throttles', timePeriod))
 		.then((data) => dispatch(throttlesChange(data.series)))
 		.catch((e) => console.log(e));
+
 	}, [timePeriod])
 
 	return (
@@ -61,7 +62,7 @@ export const Dashboard = () => {
 						</Item>
 					</Grid>
 
-					<Grid item xs={6}>
+					{/* <Grid item xs={6}>
 						<Item>
 							<Errors />
 						</Item>
@@ -71,7 +72,7 @@ export const Dashboard = () => {
 						<Item>
 							<Throttles />
 						</Item>
-					</Grid>
+					</Grid> */}
 				</Grid>
 			</Box>
 		</Fragment>

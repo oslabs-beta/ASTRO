@@ -1,6 +1,6 @@
 
 export const metricsByFunc = async (credentials, metric, time) => {
-  console.log('in get metrics by func', time)
+  // console.log('in get metrics by func', time)
   try {
   const data = await fetch(`http://localhost:1111/aws/getMetricsByFunc/${metric}`, {
   method: 'POST',
@@ -16,7 +16,7 @@ export const metricsByFunc = async (credentials, metric, time) => {
     timePeriod: time
   })
  })
- console.log('this is data in metrics by func', data)
+//  console.log('this is data in metrics by func', data)
  return data.json()
 }
   

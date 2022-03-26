@@ -45,31 +45,24 @@ function TotalsByFunc() {
   const [totalThrottles, setThrottles] = useState(0);
   const [totalErrors, setErrors] = useState(0);
 	const [time, setTime] = useState('')
-		console.log('this is time period', timePeriod)
-
-
-
-  const promise = (metric, setter, time) => {
-		console.log('time', typeof time)
-    Promise.resolve(metricsByFunc(creds, metric, time))
-			.then((data) => {
-				console.log('this is data we getting back', data)
-				data.series[currentFunc].data.reduce((x, y) => x + y.y, 0)
-			})
-			.then((data) => setter(data))
-			.catch((e) => console.log(e));
-  }
+	const chartData = useSelector((state) => state.data);
 
 	useEffect(() => {
-		// console.log('this is time period', timePeriod)
-		if (creds.region.length && time.length) {
-			// console.log('in the if')
-			//use promise.all here?
-			const invocations = promise("Invocations", setInvocations, time);
-			const throttles = promise("Throttles", setThrottles, time);
-			const errors = promise("Errors", setErrors, time);
+
+		if (chartData.data.invocations && chartData.data.errors && chartData.data.throttles) {
+
+			console.log('in use effect')
+			const invocations = chartData.data.invocations[currentFunc].data.reduce((x, y) => x + y.y, 0)
+			setInvocations(invocations)
+
+			const errors = chartData.data.errors[currentFunc].data.reduce((x, y) => x + y.y, 0)
+			setErrors(errors)
+
+			const throttles = chartData.data.throttles[currentFunc].data.reduce((x, y) => x + y.y, 0)
+			setThrottles(throttles)
+	
 		}
-	}, [currentFunc, time]);
+	}, [currentFunc, chartData]);
 	
 	const handleChange = async (event) => {
 		setTime(event.target.value)
@@ -137,7 +130,7 @@ function TotalsByFunc() {
 							<Select
 								labelId="demo-simple-select-helper-label"
 								id="demo-simple-select-helper"
-								value={time}
+								value={timePeriod}
 								label="Time Period"
 								onChange={handleChange}
 							>

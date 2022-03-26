@@ -68,24 +68,24 @@ const data = {
     },
   }
    
-  useEffect(() => {
-          Promise.resolve(metricsByFunc(creds, 'Throttles')).then((data) => {
+  // useEffect(() => {
+  //         Promise.resolve(metricsByFunc(creds, 'Throttles')).then((data) => {
   
-          setTitle(data.options.funcNames[0])
-          const x = []
-          const y = []
+  //         setTitle(data.options.funcNames[0])
+  //         const x = []
+  //         const y = []
 
-          data.series[currentFunc].data.forEach((element) => {
-            let num = moment(`${element.x}`).format("MM/DD h a ")
-            x.push(num)
-            y.push(element.y)
-          })
+  //         data.series[currentFunc].data.forEach((element) => {
+  //           let num = moment(`${element.x}`).format("MM/DD h a ")
+  //           x.push(num)
+  //           y.push(element.y)
+  //         })
 
-          setYAxis(y)
-          setXAxis(x)
-      })
-      .catch((err) => console.log(err))
-  }, [])
+  //         setYAxis(y)
+  //         setXAxis(x)
+  //     })
+  //     .catch((err) => console.log(err))
+  // }, [])
  
   return (
     <div>
