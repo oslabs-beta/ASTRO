@@ -1,4 +1,4 @@
-// import 'regenerator-runtime/runtime';
+import 'regenerator-runtime/runtime';
 
 const request = require('supertest');
 const fs = require('fs');

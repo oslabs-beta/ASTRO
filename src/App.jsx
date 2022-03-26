@@ -3,7 +3,7 @@ import React from 'react';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
-import Insights from './pages/Insights.jsx';
+import { Insights } from './pages/Insights.jsx';
 import MustBeLoggedIn from './pages/MustBeLoggedIn.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 // import Github from './components/Github.jsx';
@@ -21,12 +21,12 @@ function App() {
 
   
   useEffect(() => {
-    // getCreds() gets credentials from .env from backend
-    // dispatch is then used to update state with the credentials
-    const result = Promise.resolve(getCreds()).then((data) => {
+      Promise.resolve(getCreds()).then((data) => {
+        // console.log(data)
       dispatch(getBackendCreds(data))
-    return;
+      return;
     })
+    .catch(err => console.log(err))
   }, [])
 
 
@@ -38,7 +38,7 @@ function App() {
       <>
       <NavBar />
       {/* <Home /> */}
-      <Insights /> 
+      <Insights/> 
       </> :
       <>
       <div>loading</div>
@@ -46,7 +46,7 @@ function App() {
     :
 
     <Signup />
-    
+
     )
 }
 

@@ -5,8 +5,9 @@
   /* background-color: #38b6ff; */
 }
 
-a:link, a:visited {
+a:link, a:visited, a:active {
   text-decoration: none;
+  color: white;
 }
 
 .navbar-astro {

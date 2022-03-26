@@ -14,57 +14,53 @@ import {
 import {ClosedCaptionOffSharp, ConstructionOutlined} from '@mui/icons-material';
 
 const Invocations = () => {
-  const creds = useSelector((state) => state.creds);
-  const currentFunc = useSelector((state) => state.chart.name);
-  const funcList = useSelector((state) => state.funcList.funcList);
+
+  //this shows the chart data that is in state - we populate state in Dashboard
   const chartData = useSelector((state) => state.data);
-
-  const [title, setTitle] = useState('');
-  const [yAxis, setYAxis] = useState([]);
-  const [xAxis, setXAxis] = useState([]);
-
-  const chartRef = React.createRef();
-  const xData = [xAxis];
+  //this gives you the index of the function you need
+  const currentFunc = useSelector((state) => state.chart.name);
+  
+  const [data, setData] = useState([])
+  
 
   useEffect(() => {
-    Promise.resolve(metricsByFunc(creds, 'Invocations'))
-      .then((data) => {
-        setTitle(data.options.funcNames[0]);
-        const x = [];
-        data.series[currentFunc].data.forEach((element) => {
-          let num = moment(`${element.x}`).format('MM/DD, h a ');
-          x.push(num);
-        });
-        setXAxis(x);
-      })
-      .catch((err) => console.log(err));
-  }, [currentFunc]);
-console.log("heres the state data", chartData)
-  let yData = [];
-  let eData = [];
-  let tData = [];
+    if (chartData.data.invocations && chartData.data.errors && chartData.data.throttles){
 
-  if (Array.isArray(chartData.data.invocations)) {
-    for (let i = 0; i < chartData.data.invocations[0].data.length; i++) {
-      yData.push(chartData.data.invocations[0].data[i].y);
-    }
-  }
-  if(chartData.data.errors){
-    for (let i = 0; i < chartData.data.errors[0].data.length; i++) {
-      eData.push(chartData.data.errors[0].data[i].y);
-    }
-  }
-  if(chartData.data.throttles){
-    console.log(chartData.data.throttles)
-    for (let i = 0; i < chartData.data.throttles[0].data.length; i++) {
-      tData.push(chartData.data.throttles[0].data[i].y);
-    }
-  }
+      let yData = [];
+      let eData = [];
+      let tData = [];
+      const xAxis = [];
+
+        for (let i = 0; i < chartData.data.invocations[currentFunc].data.length; i++) {
+          chartData.data.invocations[currentFunc].data.forEach((element) => {
+          let num = moment(`${element.x}`).format("MM/DD, h a ");
+          xAxis.push(num);
+          })
+        }
+
+        for (let i = 0; i < chartData.data.invocations[currentFunc].data.length; i++) {
+          yData.push(chartData.data.invocations[currentFunc].data[i].y);
+        }
   
-  const data = [];
-  for (let i = 0; i < xData[0].length; i++) {
-    data.push({x: xData[0][i], y: yData[i], e: eData[i], t: tData[i]});
-  }
+        for (let i = 0; i < chartData.data.errors[currentFunc].data.length; i++) {
+          eData.push(chartData.data.errors[currentFunc].data[i].y);
+        }
+      
+        for (let i = 0; i < chartData.data.throttles[currentFunc].data.length; i++) {
+          tData.push(chartData.data.throttles[currentFunc].data[i].y);
+        }
+
+        const data = [];
+
+        for (let i = 0; i < xAxis.length; i++) {
+          data.push({x: xAxis[i], y: yData[i], e: eData[i], t: tData[i]});
+        }
+        setData(data)
+
+    }
+  }, [chartData, currentFunc])
+
+
 
   return (
     <div>

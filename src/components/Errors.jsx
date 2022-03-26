@@ -34,7 +34,7 @@ const Errors = () => {
       legend: {display: false},
     title: {
       display: true,
-      text: funcList[currentFunc] + " ERRORS"
+      text: "Errors - " +funcList[currentFunc]
       }
     },
     layout:{padding:{bottom:100}},
@@ -62,26 +62,26 @@ const Errors = () => {
   }
  
 
-  useEffect(() => {
-          Promise.resolve(metricsByFunc(creds, 'Errors')).then((data) => {
+  // useEffect(() => {
+  //         Promise.resolve(metricsByFunc(creds, 'Errors')).then((data) => {
 
-          setTitle(data.options.funcNames[0]);
+  //         setTitle(data.options.funcNames[0]);
 
-          const x = []
-          const y = []
-          data.series[currentFunc].data.forEach((element) => {
-            let num = moment(`${element.x}`).format("MM/DD  h a ")
+  //         const x = []
+  //         const y = []
+  //         data.series[currentFunc].data.forEach((element) => {
+  //           let num = moment(`${element.x}`).format("MM/DD  h a ")
            
-            x.push(num)
-            y.push(element.y)
-          })
+  //           x.push(num)
+  //           y.push(element.y)
+  //         })
 
-          setYAxis(y)
-          setXAxis(x)
-      })
-        .catch((err) => console.log(err)) 
+  //         setYAxis(y)
+  //         setXAxis(x)
+  //     })
+  //       .catch((err) => console.log(err)) 
 
-  }, [])
+  // }, [])
  
   return (
     <div>

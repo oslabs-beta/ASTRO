@@ -8,13 +8,13 @@ import Box from '@mui/material/Box';
 
 
 
-export const NavBar = () => {
 
+export const NavBar = () => {
 
   return (
 		<AppBar
 			position="sticky"
-			sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: "#64b5f6" }}
+			sx={{ zIndex: (theme) => theme.zIndex.drawer + 1}}
 		>
 			<Toolbar>
 				<Button className="navbar-astro">
@@ -23,18 +23,18 @@ export const NavBar = () => {
 					</a>
 				</Button>
 
-				<Button
+				{/* <Button
 					variant="contained"
 					disableElevation
 					sx={{ background: "#64b5f6" }}
+					data-testid="dashBtnNavBar"
 				>
 					Dashboard
-				</Button>
+				</Button> */}
 
 				<Button
 					variant="contained"
 					disableElevation
-					sx={{ background: "#64b5f6" }}
 				>
 					<a href="https://github.com/oslabs-beta/ASTRO" target="_blank">
 						Github
@@ -43,5 +43,6 @@ export const NavBar = () => {
 
 			</Toolbar>
 		</AppBar>
+
 	);
 }
