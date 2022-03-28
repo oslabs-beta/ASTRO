@@ -47,7 +47,8 @@ AWSUtilFunc.prepCwMetricQueryLambdaAllFunc = (
   Unix epoch useful bc it allows computers track and sort dated info in dynamic and distributed apps both online and client side
   */
   const EndTime = Math.round( new Date().getTime() / 1000 / 60 / roundTime ) * 60 * roundTime;
-  const StartTime = EndTime - timeRangeNum * timeRangeMultiplier[timeRangeUnits];
+  //end time: 1648494000
+  const StartTime = EndTime - ( timeRangeNum * timeRangeMultiplier[timeRangeUnits] );
   const period = timeRangePeriod[timeRangeUnits];
 
   // initialize the parameters
@@ -114,7 +115,7 @@ AWSUtilFunc.prepCwMetricQueryLambdaByFunc = (
   const metricDataQueryByFunc = [];
 
   funcNames.forEach((func, index) => {
-    let metricDataQuery = {
+    const metricDataQuery = {
       Id: `m${index}`,
       Label: `Lambda ${metricName} ${func}`,
       MetricStat: {
