@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { metricsAllFunc } from '../utils/getMetricsAllFunc';
 import { useSelector } from 'react-redux';
 import { Doughnut } from "react-chartjs-2";
+import 'chart.js/auto';
+
 
 ///MATERIAL UI
 import Alert from '@mui/material/Alert';

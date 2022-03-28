@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import Invocations from '../components/Invocations.jsx';
-import Errors from '../components/Errors.jsx';
-import Throttles from '../components/Throttles.jsx';
+// import Errors from '../components/Errors.jsx';
+// import Throttles from '../components/Throttles.jsx';
 import TotalsByFunc from '../components/TotalsByFunc.jsx';
 import { useSelector, useDispatch, Provider } from 'react-redux';
 import { metricsByFunc } from '../utils/getMetricsByFunc';
