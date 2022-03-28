@@ -51,7 +51,6 @@ function TotalsByFunc() {
 
 		if (chartData.data.invocations && chartData.data.errors && chartData.data.throttles) {
 
-			console.log('in use effect')
 			const invocations = chartData.data.invocations[currentFunc].data.reduce((x, y) => x + y.y, 0)
 			setInvocations(invocations)
 

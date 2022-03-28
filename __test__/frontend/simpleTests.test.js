@@ -34,5 +34,11 @@ import { Insights } from '../../src/pages/Insights.jsx'
 	});
 
 
+	it("has a button named github", () => {
+		render(<Insights/>)
+		const githubButton = screen.getByRole('button', {name: /Github/i})
+		expect(githubButton).toBeInTheDocument()
+	})
+
 
 
