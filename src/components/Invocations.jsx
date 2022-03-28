@@ -13,7 +13,7 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 import {ClosedCaptionOffSharp, ConstructionOutlined} from '@mui/icons-material';
 
-const Invocations = () => {
+export const Invocations = () => {
 
   //this shows the chart data that is in state - we populate state in Dashboard
   const chartData = useSelector((state) => state.data);

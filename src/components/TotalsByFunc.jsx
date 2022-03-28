@@ -25,7 +25,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Timelapse, TimelineOutlined } from '@mui/icons-material';
 
-function TotalsByFunc() {
+export const TotalsByFunc = () => {
 	const dispatch = useDispatch();
 	const creds = useSelector((state) => state.creds)
 	const currentFunc = useSelector((state) => state.chart.name)

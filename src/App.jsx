@@ -36,7 +36,7 @@ function App() {
 
     creds.region.length ?
       <>
-      <NavBar />
+      {/* <NavBar /> */}
       {/* <Home /> */}
       <Insights/> 
       </> :

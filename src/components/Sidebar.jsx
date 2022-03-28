@@ -1,79 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
-import { getFuncs } from '../features/slices/funcListSlice';
-import { nameChange } from '../features/slices/chartSlice';
-import { getCreds } from '../utils/getAWSCreds';
-import { toggleChange } from "../features/slices/insightsToggleSlice";
-////////////STYLING///////////////
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
+// import React, { useState, useEffect } from 'react';
+// import { useSelector, useDispatch} from 'react-redux';
+// import { getFuncs } from '../features/slices/funcListSlice';
+// import { nameChange } from '../features/slices/chartSlice';
+// import { getCreds } from '../utils/getAWSCreds';
+// import { toggleChange } from "../features/slices/insightsToggleSlice";
+// ////////////STYLING///////////////
+// import Box from '@mui/material/Box';
+// import Drawer from '@mui/material/Drawer';
+// import AppBar from '@mui/material/AppBar';
+// import CssBaseline from '@mui/material/CssBaseline';
+// import Toolbar from '@mui/material/Toolbar';
+// import List from '@mui/material/List';
+// import Divider from '@mui/material/Divider';
+// import ListItemButton from '@mui/material/ListItemButton';
+// import ListItemText from '@mui/material/ListItemText';
+// import Typography from '@mui/material/Typography';
 
 
-export const SideBar = () => {
+// export const SideBar = () => {
 
-  const list = useSelector((state) => state.funcList.funcList);
-  const creds = useSelector((state) => state.creds)
-  const dispatch = useDispatch();
+//   const list = useSelector((state) => state.funcList.funcList);
+//   const creds = useSelector((state) => state.creds)
+//   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getFuncs(creds))
-  }, [])
+//   useEffect(() => {
+//     dispatch(getFuncs(creds))
+//   }, [])
 
-  const handleClick = (key) => {
-    dispatch(nameChange(key))
-  }
+//   const handleClick = (key) => {
+//     dispatch(nameChange(key))
+//   }
 
-	const handleComponentChange = (tab) => {
-		dispatch(toggleChange(tab))
-	}
+// 	const handleComponentChange = (tab) => {
+// 		dispatch(toggleChange(tab))
+// 	}
 
-  return (
-		<Box sx={{ display: "flex" }}>
-			<Drawer
-				variant="permanent"
-				sx={{
-					width: 240,
-					flexShrink: 0,
-					[`& .MuiDrawer-paper`]: { width: 240, boxSizing: "border-box" },
-				}}
-			>
-				<Toolbar />
+//   return (
+// 		<Box sx={{ display: "flex" }}>
+// 			<Drawer
+// 				variant="permanent"
+// 				sx={{
+// 					width: 240,
+// 					flexShrink: 0,
+// 					[`& .MuiDrawer-paper`]: { width: 240, boxSizing: "border-box" },
+// 				}}
+// 			>
+// 				<Toolbar />
 
-				<Typography variant="h6" sx={{ color: "#616161" }}>
-					<ListItemButton data-testid="funcbutton"onClick={() => handleComponentChange("Functions")}>
-						Functions
-					</ListItemButton>
-				</Typography>
+// 				<Typography variant="h6" sx={{ color: "#616161" }}>
+// 					<ListItemButton data-testid="funcbutton"onClick={() => handleComponentChange("Functions")}>
+// 						Functions
+// 					</ListItemButton>
+// 				</Typography>
 
-				<Box sx={{ overflow: "auto" }}></Box>
+// 				<Box sx={{ overflow: "auto" }}></Box>
 
-				<List>
-					{list.map((element, idx) => {
-						return (
-							<ListItemButton key={idx} onClick={() => handleClick(idx)}>
-								<ListItemText primary={element} />
-							</ListItemButton>
-						);
-					})}
-				</List>
+// 				<List>
+// 					{list.map((element, idx) => {
+// 						return (
+// 							<ListItemButton key={idx} onClick={() => handleClick(idx)}>
+// 								<ListItemText primary={element} />
+// 							</ListItemButton>
+// 						);
+// 					})}
+// 				</List>
 
-				<Typography variant="h6" sx={{ color: "#616161" }}>
-					<ListItemButton onClick={() => handleComponentChange("Account Total")}>
-						Account Total
-					</ListItemButton>
-				</Typography>
-			</Drawer>
-		</Box>
-	);
-}
+// 				<Typography variant="h6" sx={{ color: "#616161" }}>
+// 					<ListItemButton onClick={() => handleComponentChange("Account Total")}>
+// 						Account Total
+// 					</ListItemButton>
+// 				</Typography>
+// 			</Drawer>
+// 		</Box>
+// 	);
+// }
 
 
 /**
@@ -84,13 +84,9 @@ export const SideBar = () => {
 // import React from 'react';
 
 // //MUI Styling
-// import AppBar from '@mui/material/AppBar';
-// import Toolbar from '@mui/material/Toolbar';
 // import Button from '@mui/material/Button';
-// import Box from '@mui/material/Box';
 
-
-// import * as React from 'react';
+// // import * as React from 'react';
 // import { styled, useTheme } from '@mui/material/styles';
 // import Box from '@mui/material/Box';
 // import MuiDrawer from '@mui/material/Drawer';

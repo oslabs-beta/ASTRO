@@ -1,6 +1,7 @@
-import React, {Fragment, useEffect} from 'react';
-import Invocations from '../components/Invocations.jsx';
-import TotalsByFunc from '../components/TotalsByFunc.jsx';
+import React from 'react';
+import { Fragment, useEffect } from 'react'
+import  { Invocations } from '../components/Invocations.jsx';
+import { TotalsByFunc } from '../components/TotalsByFunc.jsx';
 import { useSelector, useDispatch, Provider } from 'react-redux';
 import { metricsByFunc } from '../utils/getMetricsByFunc';
 import { invocationsChange, errorsChange, throttlesChange } from '../features/slices/dataSlice.js';
@@ -65,4 +66,6 @@ export const Dashboard = () => {
 		
 	)
 }
+
+/////////////////////////////////////////////////////////////////
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { SideBar } from '../components/Sidebar.jsx';
+import { App } from '../pages/AppBar'
 import { AccountTotals } from '../components/AccountTotals.jsx'
 import { toggleChange } from '../features/slices/insightsToggleSlice'
 import { Dashboard } from '../components/Dashboard.jsx'
@@ -32,9 +33,10 @@ export const Insights = () =>{
 
     <div>
 
-      <SideBar/>
+      {/* <SideBar/> */}
+      <App/>
 
-      {componentSwitch(componentChange)}
+      {/* {componentSwitch(componentChange)} */}
 
     </div>
 
