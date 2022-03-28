@@ -1,5 +1,4 @@
 const {
-    // Lambda,
     LambdaClient,
     ListFunctionsCommand,
 } = require('@aws-sdk/client-lambda');
@@ -8,17 +7,12 @@ const {
 //***********************Begin************************ */
 
 const getFunctions = async (req, res, next) => {
-    let funcNames = [];
-
     // constructing a new client object (LambdaClient) to invoke service methods on AWS Lambda using the specified AWS account credentials provider, client config options, and request metric collector. 
     // service calls made using the new client object is blocking (other code won't be allowed to run) and won't return until the service call completes
     const client = new LambdaClient({
       // note that we do not need to specify config.region or config.credentials; aws automatically recognizes we want to set the config object's region & credentials properties to specific values
       region: req.body.region,
-      //us-east-1
       credentials: req.body.credentials,
-      //{"accessKeyId": "AKIA5TZBMT7EJNT2I***",
-      //"secretAccessKey": "Z1v9TuQztlqbGicoPEVxBE351Y6qFqlSYdi5R***"}
     });
   
     // set FunctionVersion to 'ALL' to include all published/unpublished versions of each function 
@@ -31,7 +25,7 @@ const getFunctions = async (req, res, next) => {
         new ListFunctionsCommand(lamParams)
       );
 
-      funcNames = listOfLambdaFuncs.Functions.map(el => el.FunctionName);
+      const funcNames = listOfLambdaFuncs.Functions.map(el => el.FunctionName);
       res.locals.functions = funcNames;
 
       return next();

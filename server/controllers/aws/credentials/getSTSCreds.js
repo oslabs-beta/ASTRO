@@ -1,4 +1,3 @@
-const AWSUtilFunc = require('../metrics/utils/AWSUtilFunc.js');
 const STSCreds = {};
 const dotenv = require('dotenv');
 dotenv.config();
@@ -7,17 +6,6 @@ const {
 	AssumeRoleCommand,
 	STSClient,
 } = require('@aws-sdk/client-sts');
-
-const {
-	Lambda,
-	LambdaClient,
-	ListFunctionsCommand,
-} = require('@aws-sdk/client-lambda');
-
-const {
-	CloudWatchClient,
-	GetMetricDataCommand,
-} = require('@aws-sdk/client-cloudwatch');
 
 STSCreds.get = async (req, res, next) => {
 	const roleParams = {
@@ -57,10 +45,6 @@ STSCreds.get = async (req, res, next) => {
 			region,
 		};
 
-		// console.log(
-		// 	'temporary credentials from getSTSCreds.js are: ',
-		// 	res.locals.STScreds
-		// );
 		return next();
     
 	} catch (err) {

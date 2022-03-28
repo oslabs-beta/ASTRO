@@ -16,7 +16,6 @@ router.route('/getCreds').get(getCreds, (req,res) => {
 
 // Returning all Lambda funcs for an account
 router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
-    // console.log(res.locals.functions)
   return res.status(200).json(res.locals.functions);
 });
 
