@@ -1,8 +1,6 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
-const { restart } = require('nodemon');
 const PORT = 1111;
 
 const app = express();
@@ -10,14 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(cors());
-app.use(cookieParser());
 
 const userRouter = require('./routers/userRouter.js');
 const awsRouter = require('./routers/aws.js');
-
-app.use('/secret', (req, res) => {
-	return res.status(200).send('Made it to secret page!');
-});
 
 app.use('/aws', awsRouter);
 app.use('/user', userRouter);
