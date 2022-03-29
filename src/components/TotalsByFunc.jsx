@@ -87,7 +87,7 @@ export const TotalsByFunc = () => {
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
-									<Alert severity="success" color="info">
+									<Alert color="info">
 										<AlertTitle>Invocations</AlertTitle>
 										<Typography>{totalInvocations}</Typography>
 									</Alert>
@@ -101,7 +101,7 @@ export const TotalsByFunc = () => {
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
-									<Alert severity="warning">
+									<Alert severity="success">
 										<AlertTitle>Throttles</AlertTitle>
 										<Typography>{totalThrottles}</Typography>
 									</Alert>
