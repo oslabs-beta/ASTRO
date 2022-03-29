@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch, Provider } from 'react-redux';
-import  { Invocations } from '../components/Invocations.jsx';
+import  { LineChart } from '../components/LineChart.jsx';
 import { TotalsByFunc } from '../components/TotalsByFunc.jsx';
 import { metricsByFunc } from '../utils/getMetricsByFunc';
 import { invocationsChange, errorsChange, throttlesChange } from '../features/slices/dataSlice.js';
@@ -17,14 +17,6 @@ export const Dashboard = () => {
   const dispatch = useDispatch();
 	const creds = useSelector((state) => state.creds)
 	const timePeriod = useSelector((state) => state.time.time)
-
-	const Item = styled(Paper)(({ theme }) => ({
-		backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-		...theme.typography.body2,
-		padding: theme.spacing(1),
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
-	}));
 
 
 	useEffect(() => {
@@ -58,15 +50,11 @@ export const Dashboard = () => {
 	
 				<Grid container spacing={1} columns={16} justifyContent="center">
 					<Grid item xs={12}>
-						<Item>
 							<TotalsByFunc />
-						</Item>
 					</Grid>
 
 					<Grid item xs={12}>
-						<Item>
-							<Invocations />
-						</Item>
+							<LineChart />
 					</Grid>
 				</Grid>
 

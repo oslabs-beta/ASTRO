@@ -1,4 +1,3 @@
-import {metricsByFunc} from '../utils/getMetricsByFunc.js';
 import React from 'react';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
@@ -14,7 +13,7 @@ import {
 import {ClosedCaptionOffSharp, ConstructionOutlined} from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 
-export const Invocations = () => {
+export const LineChart = () => {
 
   //this shows the chart data that is in state - we populate state in Dashboard
   const chartData = useSelector((state) => state.data);

@@ -2,13 +2,12 @@ import React, { useEffect, useState }  from 'react';
 import { useSelector } from 'react-redux';
 import { metricsAllFunc } from '../utils/getMetricsAllFunc';
 
-///MATERIAL UI
+///STYLING - MATERIAL UI && CHART.JS///
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -32,6 +31,9 @@ export const AccountTotals = () => {
   const [pieChartErrors, setPCE] = useState([]);
   const [pieChartThrottles, setPCT] = useState([])
 
+	/*
+	Helper function that is called on load - retrieves the data needed to sum metric totals and store it in local state
+	*/
 	const promise = (metric, setter) => {
 		Promise.resolve(metricsAllFunc(creds, metric))
 			.then(data => data.data.reduce((x, y) => x + y.y, 0))
@@ -39,6 +41,9 @@ export const AccountTotals = () => {
 			.catch(e => console.log(e))
 	}
 
+	/*
+	Helper function to create customized formatted chart.js data based on function metric 
+	*/
 	const pieChartData = (funcNames, metric) =>{
 		return {
 			labels: [...funcNames],
@@ -68,12 +73,11 @@ export const AccountTotals = () => {
 	}
 	
 	useEffect(() => {
-		
+
 		if (creds.region.length) {
 			promise('Invocations', setInvocations);
 			promise('Throttles', setThrottles);
 			promise('Errors', setErrors);
-
 		}
 		if (chartData.data.invocations && chartData.data.errors && chartData.data.throttles) {
 			const chartInvocations = [];
@@ -155,10 +159,14 @@ export const AccountTotals = () => {
 				</Box>
 
 				<Box sx={{ display: "flex", mt: 3 }}>
+
+					{/* INVOCATIONS CARD */}
+
 					<Card sx={{ maxWidth: 345, ml: 2 }}>
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
+
 									<Alert severity="success">
 										<AlertTitle>Invocations</AlertTitle>
 										<Typography>{totalInvocations}</Typography>
@@ -183,6 +191,7 @@ export const AccountTotals = () => {
 											
 										}}
 									/>
+
 								</Stack>
 							</CardContent>
 
@@ -196,10 +205,14 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 
+
+					{/* THROTTLES CARD */}
+
 					<Card sx={{ maxWidth: 345, ml: 2 }}>
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
+
 									<Alert severity="warning">
 										<AlertTitle>Throttles</AlertTitle>
 										<Typography>{totalThrottles}</Typography>
@@ -237,10 +250,13 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 
+					{/* ERRORS CARD */}
+
 					<Card sx={{ maxWidth: 345, ml: 2 }}>
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
+
 									<Alert severity="error">
 										<AlertTitle>Errors</AlertTitle>
 										<Typography>{totalErrors}</Typography>
@@ -278,6 +294,7 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 				</Box>
+
 			</Container>
 
 			:

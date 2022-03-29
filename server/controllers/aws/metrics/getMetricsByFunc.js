@@ -107,23 +107,23 @@ const getMetricsByFunc = async (req, res, next) => {
 
     const metricByFuncData = metricByFuncResult.MetricDataResults.map(
       (metricDataResult) => {
-        let metricName = metricDataResult.Label;
-        let timeStamps = metricDataResult.Timestamps.reverse();
-        let values = metricDataResult.Values.reverse();
-        let metricData = timeStamps.map((timeStamp, index) => {
+        const metricName = metricDataResult.Label;
+        const timeStamps = metricDataResult.Timestamps.reverse();
+        const values = metricDataResult.Values.reverse();
+        const metricData = timeStamps.map((timeStamp, index) => {
           return {
             x: timeStamp,
             y: values[index],
           };
         });
 
-        let maxValue = Math.max(0, Math.max(...values));
-        let total = values.reduce((accum, curr) => accum + curr, 0);
+        const maxValue = Math.max(0, Math.max(...values));
+        const total = values.reduce((accum, curr) => accum + curr, 0);
 
         return {
           name: metricName,
           data: metricData,
-          maxVaue: maxValue,
+          maxValue: maxValue,
           total: total,
         };
       }
@@ -131,7 +131,7 @@ const getMetricsByFunc = async (req, res, next) => {
 
     const metricMaxValueAllFunc = metricByFuncData.reduce(
       (maxValue, dataByFunc) => {
-        return Math.max(maxValue, dataByFunc.maxVaue);
+        return Math.max(maxValue, dataByFunc.maxValue);
       },
       0
     );
