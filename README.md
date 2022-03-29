@@ -27,7 +27,7 @@
       <li><a href="#contributing">Contributing</a></li>     
     </ul>
     <li><a href="#license">License</a></li>
-    <li><a href="#authors">Authors</a></li>
+    <li><a href="#contributors">Authors</a></li>
   </ol>
 </details>
 
@@ -128,7 +128,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- CONTACT -->
 
-## Authors
+## Contributors
 
 - Adam White [Github](https://github.com/adam-k-w) | [Linkedin](https://www.linkedin.com/in/adam-white-24ba841b3/)
 - Anthony Piscocama [Github](https://github.com/adavid1696) | [Linkedin](https://www.linkedin.com/in/anthony-piscocama-07858b167/)
