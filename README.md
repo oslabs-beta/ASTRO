@@ -3,10 +3,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/oslabs-beta/ASTRO">
-    <img src="public/astro-banner.jpeg" width="500" alt="Logo" >
-  </a>
- </div>
+    <img src="public/astro-banner.jpeg" width="800px" align="center" alt="Logo" >
+    <h1>AWS Lambda Metrics Monitoring Tool</h1>
+
+<!-- PROJECT SHIELDS -->
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -14,7 +14,10 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
+</div>
+
 <!-- TABLE OF CONTENTS -->
+
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
