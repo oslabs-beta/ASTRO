@@ -43,7 +43,7 @@ As a way to solve this, we built Astro: a free, open-source lambda function moni
 
 ### Tech Stack
 
-- [Redux Toolkit](https://nextjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
 - [React](https://reactjs.org/)
 - [Material-UI](https://material-ui.com)
 - [Node](https://nodejs.org/en/)
