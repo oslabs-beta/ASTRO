@@ -1,22 +1,22 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { metricsAllFunc } from '../utils/getMetricsAllFunc';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Doughnut } from "react-chartjs-2";
-import 'chart.js/auto';
+import { metricsAllFunc } from '../utils/getMetricsAllFunc';
 
 
-///MATERIAL UI
+///STYLING - MATERIAL UI && CHART.JS///
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
+import { Doughnut } from "react-chartjs-2";
+import 'chart.js/auto';
+
+
 
 export const AccountTotals = () => {
 
@@ -31,6 +31,9 @@ export const AccountTotals = () => {
   const [pieChartErrors, setPCE] = useState([]);
   const [pieChartThrottles, setPCT] = useState([])
 
+	/*
+	Helper function that is called on load - retrieves the data needed to sum metric totals and store it in local state
+	*/
 	const promise = (metric, setter) => {
 		Promise.resolve(metricsAllFunc(creds, metric))
 			.then(data => data.data.reduce((x, y) => x + y.y, 0))
@@ -38,6 +41,9 @@ export const AccountTotals = () => {
 			.catch(e => console.log(e))
 	}
 
+	/*
+	Helper function to create customized formatted chart.js data based on function metric 
+	*/
 	const pieChartData = (funcNames, metric) =>{
 		return {
 			labels: [...funcNames],
@@ -67,14 +73,13 @@ export const AccountTotals = () => {
 	}
 	
 	useEffect(() => {
-		console.log('chart data : ', chartData.data)
-		if (creds.region.length) {
-			// console.log(chartData.data)
-			const invocations = promise('Invocations', setInvocations);
-			const throttles = promise('Throttles', setThrottles);
-			const errors = promise('Errors', setErrors);
 
+		if (creds.region.length) {
+			promise('Invocations', setInvocations);
+			promise('Throttles', setThrottles);
+			promise('Errors', setErrors);
 		}
+
 		if (chartData.data) {
 			const chartInvocations = [];
 			for (let i = 0; i < chartData.data.invocations.length; i++) {
@@ -101,52 +106,20 @@ export const AccountTotals = () => {
 
   return (
 
-			<Container
-				maxWidth="lg"
-			>
+			<Container maxWidth="lg">
 
 				<h1>Account Totals</h1>
-				<Box>
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "center",
-							mt: 1,
-							pt: 1,
-							bgcolor: "background.paper",
-							borderRadius: 1,
-						}}
-					>
-						
-					</Box>
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "center",
-							bgcolor: "background.paper",
-							borderRadius: 0,
-						}}
-					>
-						
-					</Box>
 
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "center",
-							bgcolor: "background.paper",
-							borderRadius: 1,
-						}}
-					>
-						
-					</Box>
-				</Box>
 
 				<Box sx={{ display: "flex", mt: 3 }}>
+
+					{/* INVOCATIONS CARD */}
+
 					<Card sx={{ maxWidth: 345, ml: 2 }}>
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
+
 									<Alert severity="success">
 										<AlertTitle>Invocations</AlertTitle>
 										<Typography>{totalInvocations}</Typography>
@@ -161,16 +134,17 @@ export const AccountTotals = () => {
 												center: {
 													legend: { display: true, position: "right" },
 													text: "Red is 2/3 the total numbers",
-													color: "#FF6384", // Default is #000000
-													fontStyle: "Arial", // Default is Arial
-													sidePadding: 20, // Default is 20 (as a percentage)
-													minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-													lineHeight: 25 // Default is 25 (in px), used for when text wraps
+													color: "#FF6384", 
+													fontStyle: "Arial", 
+													sidePadding: 20, 
+													minFontSize: 20,  
+													lineHeight: 25 
 												}
 											},
 											
 										}}
 									/>
+
 								</Stack>
 							</CardContent>
 
@@ -184,10 +158,14 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 
+
+					{/* THROTTLES CARD */}
+
 					<Card sx={{ maxWidth: 345, ml: 2 }}>
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
+
 									<Alert severity="warning">
 										<AlertTitle>Throttles</AlertTitle>
 										<Typography>{totalThrottles}</Typography>
@@ -202,11 +180,11 @@ export const AccountTotals = () => {
 												center: {
 													legend: { display: true, position: "right" },
 													text: "Red is 2/3 the total numbers",
-													color: "#FF6384", // Default is #000000
-													fontStyle: "Arial", // Default is Arial
-													sidePadding: 20, // Default is 20 (as a percentage)
-													minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-													lineHeight: 25 // Default is 25 (in px), used for when text wraps
+													color: "#FF6384",
+													fontStyle: "Arial",
+													sidePadding: 20,
+													minFontSize: 20,
+													lineHeight: 25
 												}
 											},
 											
@@ -225,10 +203,13 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 
+					{/* ERRORS CARD */}
+
 					<Card sx={{ maxWidth: 345, ml: 2 }}>
 						<CardActionArea>
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
+
 									<Alert severity="error">
 										<AlertTitle>Errors</AlertTitle>
 										<Typography>{totalErrors}</Typography>
@@ -243,11 +224,11 @@ export const AccountTotals = () => {
 												center: {
 													legend: { display: true, position: "right" },
 													text: "Red is 2/3 the total numbers",
-													color: "#FF6384", // Default is #000000
-													fontStyle: "Arial", // Default is Arial
-													sidePadding: 20, // Default is 20 (as a percentage)
-													minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-													lineHeight: 25 // Default is 25 (in px), used for when text wraps
+													color: "#FF6384", 
+													fontStyle: "Arial",
+													sidePadding: 20,
+													minFontSize: 20,
+													lineHeight: 25
 												}
 											},
 											
@@ -266,6 +247,7 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 				</Box>
+
 			</Container>
 	
 	);
