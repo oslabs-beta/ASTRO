@@ -1,6 +1,7 @@
 import React from 'react';
 import { SideBar } from '../components/Sidebar.jsx';
-import { App } from '../pages/AppBar'
+import { Navigation } from './AppBar.jsx'
+import { timePeriod } from '../../src/components/timePeriod'
 import { AccountTotals } from '../components/AccountTotals.jsx'
 import { toggleChange } from '../features/slices/insightsToggleSlice'
 import { Dashboard } from '../components/Dashboard.jsx'
@@ -31,14 +32,11 @@ export const Insights = () =>{
 
   return (
 
-    <div>
+    <>
+      <timePeriod/>
+      <Navigation/>
 
-      {/* <SideBar/> */}
-      <App/>
-
-      {/* {componentSwitch(componentChange)} */}
-
-    </div>
+    </>
 
     );
 }

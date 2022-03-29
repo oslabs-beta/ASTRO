@@ -17,6 +17,8 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const AccountTotals = () => {
 
@@ -67,15 +69,14 @@ export const AccountTotals = () => {
 	}
 	
 	useEffect(() => {
-		console.log('chart data : ', chartData.data)
+		
 		if (creds.region.length) {
-			// console.log(chartData.data)
 			const invocations = promise('Invocations', setInvocations);
 			const throttles = promise('Throttles', setThrottles);
 			const errors = promise('Errors', setErrors);
 
 		}
-		if (chartData.data) {
+		if (chartData.data.invocations && chartData.data.errors && chartData.data.throttles) {
 			const chartInvocations = [];
 			for (let i = 0; i < chartData.data.invocations.length; i++) {
 				chartInvocations.push(chartData.data.invocations[i].total);
@@ -101,11 +102,23 @@ export const AccountTotals = () => {
 
   return (
 
+		chartData ? 
+
 			<Container
 				maxWidth="lg"
 			>
 
+			<Paper elevation={0} sx={{
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				textAlign: "center",
+				verticalAlign: "middle",
+				borderRadius: "25px",
+  		}}>
 				<h1>Account Totals</h1>
+			</Paper>
+
 				<Box>
 					<Box
 						sx={{
@@ -267,6 +280,10 @@ export const AccountTotals = () => {
 					</Card>
 				</Box>
 			</Container>
+
+			:
+
+			<CircularProgress />
 	
 	);
 }

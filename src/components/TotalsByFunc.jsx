@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
+import Paper from '@mui/material/Paper';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -70,59 +71,9 @@ export const TotalsByFunc = () => {
 
 
   return (
-		<ThemeProvider theme={theme}>
-			<Container
-				maxWidth="lg"
-			>
-				 
 
-				<Box sx={{ display: "flex", mt: 3 }}>
-
-					
-					<Card sx={{ maxWidth: 345, ml: 2 }}>
-						<CardActionArea>
-							<CardContent>
-								<Stack sx={{ width: "100%" }} spacing={2}>
-									<Alert severity="success">
-										<AlertTitle>Invocations</AlertTitle>
-										<Typography>{totalInvocations}</Typography>
-									</Alert>
-								</Stack>
-							</CardContent>
-						</CardActionArea>
-					</Card>
-
-
-
-					<Card sx={{ maxWidth: 345, ml: 2 }}>
-						<CardActionArea>
-							<CardContent>
-								<Stack sx={{ width: "100%" }} spacing={2}>
-									<Alert severity="warning">
-										<AlertTitle>Throttles</AlertTitle>
-										<Typography>{totalThrottles}</Typography>
-									</Alert>
-								</Stack>
-							</CardContent>
-						</CardActionArea>
-					</Card>
-
-
-
-					<Card sx={{ maxWidth: 5000, ml: 2 }}>
-						<CardActionArea>
-							<CardContent>
-								<Stack sx={{ width: "100%" }} spacing={2}>
-									<Alert severity="error">
-										<AlertTitle>Errors</AlertTitle>
-										<Typography>{totalErrors}</Typography>
-									</Alert>
-								</Stack>
-							</CardContent>
-						</CardActionArea>
-					</Card>
-
-					<FormControl sx={{ m: 1, minWidth: 120 }}>
+		<>
+				 {/* <FormControl sx={{ m: 1, minWidth: 120 }}>
 
 						<InputLabel id="demo-simple-select-helper-label">Time period</InputLabel>
 
@@ -148,11 +99,62 @@ export const TotalsByFunc = () => {
 
 						<FormHelperText>Choose your time period</FormHelperText>
 						
-      		</FormControl>
+      		</FormControl>  */}
 
-				</Box>
-			</Container>
+			<ThemeProvider theme={theme}>
+				 
+
+				{/* <Box sx={{ display: "flex", mt: 3 }}> */}
+					<Paper sx={{ 
+						display: "flex", 
+						mt: 3,
+						 }} >
+
+			
+						<CardActionArea>
+							<CardContent>
+								<Stack sx={{ width: "100%" }} spacing={2}>
+									<Alert severity="success">
+										<AlertTitle>Invocations</AlertTitle>
+										<Typography>{totalInvocations}</Typography>
+									</Alert>
+								</Stack>
+							</CardContent>
+						</CardActionArea>
+
+
+
+
+						<CardActionArea>
+							<CardContent>
+								<Stack sx={{ width: "100%" }} spacing={2}>
+									<Alert severity="warning">
+										<AlertTitle>Throttles</AlertTitle>
+										<Typography>{totalThrottles}</Typography>
+									</Alert>
+								</Stack>
+							</CardContent>
+						</CardActionArea>
+		
+
+
+	
+						<CardActionArea>
+							<CardContent>
+								<Stack sx={{ width: "100%" }} spacing={2}>
+									<Alert severity="error">
+										<AlertTitle>Errors</AlertTitle>
+										<Typography>{totalErrors}</Typography>
+									</Alert>
+								</Stack>
+							</CardContent>
+						</CardActionArea>
+				</Paper>
+
+
+			
 		</ThemeProvider>
+		</>
 	);
 }
 
