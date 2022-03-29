@@ -1,16 +1,181 @@
-# ASTRO
-Monitoring tool for AWS lambda services
 
-# MOTIVATIONS
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-Serverless is becoming increasingly popular in today's tech landscape, especially as it can offer crucial cost-effective benefits since serverless functions are billed when they are invoked. Additionally, Amazon's Web Services (AWS) is a giant in the serverless space and is widely utilized by various companies. However, navigating through the AWS console is extremely daunting, difficult, and at times inefficient. Specifically, to measure a user's lambda functions, there are too many options and this massive flexibility proves cumbersome when one only needs to visualize specific metrics at a glance.
 
-Astro is a free, open-source lambda function monitoring tool that users can connect their AWS account to securely and easily to monitor and track key metrics.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/github_username/repo_name">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-# CONTRIBUTORS
+<h3 align="center">project_title</h3>
 
-- Adam White
-- Anthony Piscocama
-- Michelle Shahid
-- Nehreen Anam
-- Samuel Carrasco
+  <p align="center">
+    project_description
+    <br />
+    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    ·
+    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+      <li><a href="#motivation-for-project">Motivation for Project</a></li> 
+      <li><a href="#getting-started">Getting Started</a></li>      
+      <li><a href="#aws-end-users">AWS End Users</a></li>
+      <ul>
+        <li><a href="#installation-and-setup">Installation and Setup</a></li>      
+        <li><a href="#lambda-metrics">Lambda Metrics</a></li>
+        <li><a href="#logs">Logs</a></li>
+        <li><a href="#api-gateway">API Gateway</a></li>     
+        <li><a href="#user-profile">User Profile</a></li>     
+      </ul>
+      <li><a href="#developers">Developers</a></li>
+      <ul>
+            <li><a href="#built-with">Built With</a></li>     
+            <li><a href="#project-setup">Project Setup</a></li> 
+                  </ul>
+    <li><a href="#contributors">Contributors</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT -->
+## About Astro
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+Serverless architecture is becoming increasingly popular in today's tech landscape. It offers cost-effective benefits as serverless functions are billed only when they are invoked. Amazon's Web Services (AWS) is a giant in the serverless space and is widely utilized by various companies. One issue is that navigating through the AWS console can be daunting and frustrating. Specifically, to measure a user's lambda functions, there are too many options and this massive flexibility proves cumbersome when one only needs to visualize specific metrics at a glance.
+
+As a way to solve this, we built Astro: a free, open-source lambda function monitoring tool that users can connect to their AWS account to securely and easily monitor and track key metrics.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Tech Stack
+
+* [Redux Toolkit](https://nextjs.org/)
+* [React](https://reactjs.org/)
+* [Material-UI](https://material-ui.com)
+* [Node](https://nodejs.org/en/)
+* [Express](https://expressjs.com)
+* [PostgreSQL](https://postgresql.org)
+* [AWS SDK](https://aws.amazon.com/sdk-for-javascript/)
+* [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
+* [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html)
+* [Jest](https://jestjs.io/)
+* [Supertest](https://www.npmjs.com/package/supertest)
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+If you are a developer trying to add/improve functionality, you can skip step 4 and go to step 5. If you are an AWS end user, do not worry about step 5.
+
+1. Clone the repo
+
+```sh
+   git clone https://github.com/oslabs-beta/ASTRO.git
+   cd Astro
+   ```
+2. Install package devDependencies
+
+   ```sh
+   npm install
+   ```
+
+3. If you are an AWS End User then use the following command to build the application and the necessary .env template file, which you should fill in with your AWS credentials (region, security key id, and access key id). 
+```
+npm run build
+``` 
+
+4. Afterwards, you can run Astro by using the following command and then navigating to localhost:1111 in your browser
+
+```
+npm run start
+```
+
+5. If you are a developer trying to add/improve functionality, instead of step 4 you should use the following command to run Astro in development and navigate to localhost:8080 in your browser to take advantage of hot module reloading.
+
+```
+npm run dev
+```
+
+### Lambda Metrics
+
+The key AWS Lambda function metrics we focused on are: throttles, invocations, and errors. One can see their total metric values in Account Totals. To see metrics by function, click the Functions tab to see a list of your lambda functions and the associated metrics for each function. Within the function tab, users can visualize their metrics over a specific time period using the drop down menu. This will also update the account total metrics in the account total tab.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contributors
+
+- Adam White [Github](https://github.com/adam-k-w) | [Linkedin](https://www.linkedin.com/in/adam-white-24ba841b3/)
+- Anthony Piscocama [Github](https://github.com/adavid1696) | [Linkedin](https://www.linkedin.com/in/)
+- Michelle Shahid [Github](https://github.com/emshahh) | [Linkedin](https://www.linkedin.com/in/michelleshahid/)
+- Nehreen Anam [Github](https://github.com/Issafeature) | [Linkedin](https://www.linkedin.com/in/)
+- Samuel Carrasco [Github](https://github.com/samhcarrasco) | [Linkedin](https://www.linkedin.com/in/samuelhcarrasco/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
+[forks-url]: https://github.com/github_username/repo_name/network/members
+[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
+[stars-url]: https://github.com/github_username/repo_name/stargazers
+[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[issues-url]: https://github.com/github_username/repo_name/issues
+[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
+[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/screenshot.png
