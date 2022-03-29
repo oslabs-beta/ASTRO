@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="public/astro-banner.jpeg" width="800px" align="center" alt="Logo" >
+    <img src="public/astro-banner.jpeg" width="600px" align="center" alt="Logo" >
     <h1>AWS Lambda Metrics Monitoring Tool</h1>
 
 <!-- PROJECT SHIELDS -->
