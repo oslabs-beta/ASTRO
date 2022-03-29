@@ -1,4 +1,3 @@
-import {metricsByFunc} from '../utils/getMetricsByFunc.js';
 import React from 'react';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
@@ -13,7 +12,7 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 import {ClosedCaptionOffSharp, ConstructionOutlined} from '@mui/icons-material';
 
-const Invocations = () => {
+export const LineChart = () => {
 
   //this shows the chart data that is in state - we populate state in Dashboard
   const chartData = useSelector((state) => state.data);
@@ -76,4 +75,3 @@ const Invocations = () => {
     </div>
   );
 };
-export default Invocations;
