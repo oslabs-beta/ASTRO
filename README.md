@@ -66,10 +66,10 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 
 1. Clone the repo
 
-```sh
+  ```sh
    git clone https://github.com/oslabs-beta/ASTRO.git
    cd Astro
-```
+  ```
 
 2. Install package devDependencies
 
