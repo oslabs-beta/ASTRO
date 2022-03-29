@@ -8,7 +8,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/oslabs-beta/ASTRO">
-    <img src="public/astro-banner.jpeg" width="100" alt="Logo" >
+    <img src="public/astro-banner.jpeg" width="300" alt="Logo" >
   </a>
 
 </div>
