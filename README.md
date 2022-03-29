@@ -79,19 +79,19 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 
 3. If you are an AWS End User then use the following command to build the application and the necessary .env template file, which you should fill in with your AWS credentials (region, security key id, and access key id).
 
-```
+```sh
 npm run build
 ```
 
 4. Afterwards, you can run Astro by using the following command and then navigating to localhost:1111 in your browser
 
-```
+```sh
 npm run start
 ```
 
 5. If you are a developer trying to add/improve functionality, instead of step 4 you should use the following command to run Astro in development and navigate to localhost:8080 in your browser to take advantage of hot module reloading.
 
-```
+```sh
 npm run dev
 ```
 
