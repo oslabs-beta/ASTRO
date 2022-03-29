@@ -73,9 +73,9 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 
 2. Install package devDependencies
 
-   ```sh
+  ```sh
    npm install
-   ```
+  ```
 
 3. If you are an AWS End User then use the following command to build the application and the necessary .env template file, which you should fill in with your AWS credentials (region, security key id, and access key id).
 
