@@ -12,6 +12,7 @@ import {
   LineSeries
 } from '@devexpress/dx-react-chart-material-ui';
 import {ClosedCaptionOffSharp, ConstructionOutlined} from '@mui/icons-material';
+import Grid from '@mui/material/Grid';
 
 export const Invocations = () => {
 
@@ -63,8 +64,8 @@ export const Invocations = () => {
 
 
   return (
-    <div>
-      <Paper>
+
+      <Paper elevation={0}>
         <Chart data={data}>
           <ArgumentAxis />
           <ValueAxis />
@@ -73,7 +74,6 @@ export const Invocations = () => {
           <LineSeries valueField="t" argumentField="x" />
         </Chart>
       </Paper>
-    </div>
+
   );
 };
-export default Invocations;

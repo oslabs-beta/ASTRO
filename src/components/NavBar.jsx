@@ -17,7 +17,7 @@ export const NavBar = () => {
 			sx={{ zIndex: (theme) => theme.zIndex.drawer + 1}}
 		>
 			<Toolbar>
-				<Button className="navbar-astro">
+				<Button >
 					<a href="http://localhost:8080">
 						Astro
 					</a>

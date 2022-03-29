@@ -5,6 +5,8 @@ import { toggleChange } from '../features/slices/insightsToggleSlice'
 import { Dashboard } from '../components/Dashboard.jsx'
 import { styled, useTheme } from '@mui/material/styles';
 import { nameChange } from '../features/slices/chartSlice';
+import { getFuncs } from '../features/slices/funcListSlice'
+
 
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -12,7 +14,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -99,6 +100,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+////////////////////////////////////////
+///////// MUI STYLING END //////////////
+////////////////////////////////////////
+
+
 export const Navigation = () => {
 
   const dispatch = useDispatch();
@@ -106,6 +112,7 @@ export const Navigation = () => {
 
   useEffect(() => {
     dispatch(toggleChange(componentChange))
+    dispatch(getFuncs(creds))
   }, [componentChange])
 
   const componentChange = useSelector((state) => state.toggleInsights.toggle);
@@ -113,7 +120,7 @@ export const Navigation = () => {
   const creds = useSelector((state) => state.creds);
 
   const [open, setOpen] = React.useState(false);
-  const [dropDown, setDropDown] = React.useState(true);
+  const [dropDown, setDropDown] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,12 +132,17 @@ export const Navigation = () => {
 
   const handleFunctionToggle = (key) => {
         dispatch(nameChange(key))
-  }
+  };
 
-  const handleComponentChange = (tab) => {
+  const handleDDComponentChange = (tab) => {
     		dispatch(toggleChange(tab))
         setDropDown(!dropDown);
-  }
+  };
+
+  const handleComponentChange = (tab) => {
+    dispatch(toggleChange(tab))
+  };
+
     
   const componentSwitch = (componentName) => {
     switch(componentName){
@@ -141,7 +153,6 @@ export const Navigation = () => {
     }
   }
 
-  // console.log(list, 'thus list')
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -162,14 +173,14 @@ export const Navigation = () => {
           </IconButton>
 
               <Button className="navbar-astro">
-              <a href="http://localhost:8080"> Astro </a>
+                <a href="http://localhost:1111"> Astro </a>
               </Button>
 
               <Button
               variant="contained"
               disableElevation
               >
-              <a href="https://github.com/oslabs-beta/ASTRO" target="_blank"> Github </a>
+                <a href="https://github.com/oslabs-beta/ASTRO" target="_blank"> Github </a>
               </Button>
 
         </Toolbar>
@@ -187,49 +198,33 @@ export const Navigation = () => {
       onClick={() => handleComponentChange("Account Totals")}
       >
         <ListItemIcon>
-          <AddBoxTwoToneIcon />
+          <AddBoxTwoToneIcon color="primary"/>
         </ListItemIcon>
         <ListItemText primary="Account Totals" />
       </ListItemButton >
 
 
       <ListItemButton 
-      onClick={() => handleComponentChange("Functions")}
+      onClick={() => {
+        handleDDComponentChange("Functions")
+      }}
       >
         <ListItemIcon>
-          <FunctionsTwoToneIcon />
+          <FunctionsTwoToneIcon color="primary"/>
         </ListItemIcon>
         <ListItemText primary="Functions" />
         {dropDown ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={dropDown} timeout="auto" unmountOnExit>
-{/* 
+
       <List component="div" disablePadding>
           {list.map((text, index) => (
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton sx={{ pl: 4 }} key={index} onClick={() => handleFunctionToggle(index)}>
               <ListItemText primary={text}/>
             </ListItemButton>
           ))}
-        </List> */}
-
-        <List>
- 					{list.map((element, idx) => {
-						return (
-							<ListItemButton key={idx} onClick={() => handleFunctionToggle(idx)}>
-								<ListItemText primary={element} />
-							</ListItemButton>
-						);
-					})}
-				</List>
-
-
-        {/* <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary="Hello" />
-          </ListItemButton>
-        </List> */}
+        </List> 
+ 
       </Collapse>
       
         </List>
@@ -237,7 +232,11 @@ export const Navigation = () => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+
+
          {componentSwitch(componentChange)}
+
+
       </Box>
     </Box>
   );

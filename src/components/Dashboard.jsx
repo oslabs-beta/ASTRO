@@ -1,17 +1,15 @@
-import React from 'react';
-import { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react';
+import { useSelector, useDispatch, Provider } from 'react-redux';
 import  { Invocations } from '../components/Invocations.jsx';
 import { TotalsByFunc } from '../components/TotalsByFunc.jsx';
-import { useSelector, useDispatch, Provider } from 'react-redux';
 import { metricsByFunc } from '../utils/getMetricsByFunc';
 import { invocationsChange, errorsChange, throttlesChange } from '../features/slices/dataSlice.js';
+import { TimePeriod } from './TimePeriod'
 
 //Material UI Components//
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
 
 
 export const Dashboard = () => {
@@ -28,17 +26,17 @@ export const Dashboard = () => {
 		color: theme.palette.text.secondary,
 	}));
 
-	// let promise = 
+
 	useEffect(() => {
-		const invocations = Promise.resolve(metricsByFunc(creds, 'Invocations', timePeriod))
+		Promise.resolve(metricsByFunc(creds, 'Invocations', timePeriod))
 		.then((data) => dispatch(invocationsChange(data.series)))
 		.catch((e) => console.log(e));
 
-		const errors = Promise.resolve(metricsByFunc(creds, 'Errors', timePeriod))
+		Promise.resolve(metricsByFunc(creds, 'Errors', timePeriod))
 		.then((data) => dispatch(errorsChange(data.series)))
 		.catch((e) => console.log(e));
 
-		const throttles = Promise.resolve(metricsByFunc(creds, 'Throttles', timePeriod))
+		Promise.resolve(metricsByFunc(creds, 'Throttles', timePeriod))
 		.then((data) => dispatch(throttlesChange(data.series)))
 		.catch((e) => console.log(e));
 
@@ -47,7 +45,17 @@ export const Dashboard = () => {
 	return (
 
 		<Fragment>
-			<Box component="main">
+
+			<Grid container spacing={2} columns={16} >
+          <Grid item xs={14}>
+            
+          </Grid>
+          <Grid item xs={2}>
+            <TimePeriod />
+          </Grid>
+      </Grid>
+
+	
 				<Grid container spacing={1} columns={16} justifyContent="center">
 					<Grid item xs={12}>
 						<Item>
@@ -61,11 +69,10 @@ export const Dashboard = () => {
 						</Item>
 					</Grid>
 				</Grid>
-			</Box>
+
 		</Fragment>
 		
 	)
 }
 
-/////////////////////////////////////////////////////////////////
 
