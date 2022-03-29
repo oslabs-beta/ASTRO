@@ -1,64 +1,39 @@
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/oslabs-beta/ASTRO">
+    <img src="public/astro-banner.jpeg" alt="Logo" >
   </a>
 
-<h3 align="center">project_title</h3>
-
-  <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
-  </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-      <li><a href="#motivation-for-project">Motivation for Project</a></li> 
+    <li><a href="#about-astro">About Astro</a></li> 
+    <li><a href="#tech-stack">Tech Stack</a></li>      
+    <ul>
       <li><a href="#getting-started">Getting Started</a></li>      
-      <li><a href="#aws-end-users">AWS End Users</a></li>
-      <ul>
-        <li><a href="#installation-and-setup">Installation and Setup</a></li>      
-        <li><a href="#lambda-metrics">Lambda Metrics</a></li>
-        <li><a href="#logs">Logs</a></li>
-        <li><a href="#api-gateway">API Gateway</a></li>     
-        <li><a href="#user-profile">User Profile</a></li>     
-      </ul>
-      <li><a href="#developers">Developers</a></li>
-      <ul>
-            <li><a href="#built-with">Built With</a></li>     
-            <li><a href="#project-setup">Project Setup</a></li> 
-                  </ul>
-    <li><a href="#contributors">Contributors</a></li>
+      <li><a href="#lambda-metrics">Lambda Metrics</a></li>   
+    </ul>
+    <ul>
+      <li><a href="#contributing">Contributing</a></li>     
+    </ul>
     <li><a href="#license">License</a></li>
+    <li><a href="#contributors">Contributors</a></li>
   </ol>
 </details>
 
 <!-- ABOUT -->
-## About Astro
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+## About Astro
 
 Serverless architecture is becoming increasingly popular in today's tech landscape. It offers cost-effective benefits as serverless functions are billed only when they are invoked. Amazon's Web Services (AWS) is a giant in the serverless space and is widely utilized by various companies. One issue is that navigating through the AWS console can be daunting and frustrating. Specifically, to measure a user's lambda functions, there are too many options and this massive flexibility proves cumbersome when one only needs to visualize specific metrics at a glance.
 
@@ -68,23 +43,23 @@ As a way to solve this, we built Astro: a free, open-source lambda function moni
 
 ### Tech Stack
 
-* [Redux Toolkit](https://nextjs.org/)
-* [React](https://reactjs.org/)
-* [Material-UI](https://material-ui.com)
-* [Node](https://nodejs.org/en/)
-* [Express](https://expressjs.com)
-* [PostgreSQL](https://postgresql.org)
-* [AWS SDK](https://aws.amazon.com/sdk-for-javascript/)
-* [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
-* [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html)
-* [Jest](https://jestjs.io/)
-* [Supertest](https://www.npmjs.com/package/supertest)
-* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Redux Toolkit](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Material-UI](https://material-ui.com)
+- [Node](https://nodejs.org/en/)
+- [Express](https://expressjs.com)
+- [PostgreSQL](https://postgresql.org)
+- [AWS SDK](https://aws.amazon.com/sdk-for-javascript/)
+- [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
+- [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html)
+- [Jest](https://jestjs.io/)
+- [Supertest](https://www.npmjs.com/package/supertest)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 If you are a developer trying to add/improve functionality, you can skip step 4 and go to step 5. If you are an AWS end user, do not worry about step 5.
@@ -94,17 +69,19 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 ```sh
    git clone https://github.com/oslabs-beta/ASTRO.git
    cd Astro
-   ```
+```
+
 2. Install package devDependencies
 
    ```sh
    npm install
    ```
 
-3. If you are an AWS End User then use the following command to build the application and the necessary .env template file, which you should fill in with your AWS credentials (region, security key id, and access key id). 
+3. If you are an AWS End User then use the following command to build the application and the necessary .env template file, which you should fill in with your AWS credentials (region, security key id, and access key id).
+
 ```
 npm run build
-``` 
+```
 
 4. Afterwards, you can run Astro by using the following command and then navigating to localhost:1111 in your browser
 
@@ -124,8 +101,8 @@ The key AWS Lambda function metrics we focused on are: throttles, invocations, a
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -141,18 +118,16 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## Contributors
 
 - Adam White [Github](https://github.com/adam-k-w) | [Linkedin](https://www.linkedin.com/in/adam-white-24ba841b3/)
@@ -163,9 +138,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
