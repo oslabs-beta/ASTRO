@@ -65,11 +65,6 @@ export const LineChart = () => {
     }
   }, [chartData, currentFunc])
 
-  const props = [
-  { name: "Invocations" },
-  { name: "Errors" },
-  { name: "Throttles" }
-]
 
   //A component that renders the root layout.
   const Root = (props) => (
@@ -82,9 +77,9 @@ export const LineChart = () => {
   );
 
   //A component that renders an item.
-  // const Item = props => (
-  //   <Legend.Item sx={{ flexDirection: 'column' }} {...props} />
-  // );
+  const Item = props => (
+    <Legend.Item sx={{ flexDirection: 'column' }} {...props} />
+  );
   
 
   return (
@@ -94,8 +89,8 @@ export const LineChart = () => {
           <ArgumentAxis />
           <ValueAxis />
           <LineSeries name="Invocations" valueField="y" argumentField="x" />
-          <LineSeries name="Throttles" valueField="e" argumentField="x" />
-          <LineSeries name="Errors" valueField="t" argumentField="x" />
+          <LineSeries name="Errors" valueField="e" argumentField="x" />
+          <LineSeries name="Throttles" valueField="t" argumentField="x" />
           <Legend position="bottom" rootComponent={Root} labelComponent={Label} />
         </Chart>
       </Paper>

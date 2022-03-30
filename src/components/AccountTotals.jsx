@@ -194,6 +194,50 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 
+					{/* ERRORS CARD */}
+
+					<Card sx={{ maxWidth: 345, ml: 2 }}>
+						<CardActionArea>
+							<CardContent>
+								<Stack sx={{ width: "100%" }} spacing={2}>
+
+									<Alert severity="error">
+										<AlertTitle>Errors</AlertTitle>
+										<Typography>{totalErrors}</Typography>
+									</Alert>
+
+									<Doughnut
+										data={pieChartData(list, pieChartErrors)}
+										options={{
+											
+											elements: {
+												
+												center: {
+													legend: { display: true, position: "right" },
+													text: "Red is 2/3 the total numbers",
+													color: "#FF6384",
+													fontStyle: "Arial", 
+													sidePadding: 20, 
+													minFontSize: 20, 
+													lineHeight: 25 
+												}
+											},
+											
+										}}
+									/>
+								</Stack>
+							</CardContent>
+
+							<CardContent>
+								<Typography variant="body2" color="text.secondary">
+									Errors log the number of errors thrown by a function. It can
+									be used with the Invocations metric to calculate the total
+									percentage of errors.
+								</Typography>
+							</CardContent>
+						</CardActionArea>
+					</Card>
+
 
 					{/* THROTTLES CARD */}
 
@@ -239,49 +283,6 @@ export const AccountTotals = () => {
 						</CardActionArea>
 					</Card>
 
-					{/* ERRORS CARD */}
-
-					<Card sx={{ maxWidth: 345, ml: 2 }}>
-						<CardActionArea>
-							<CardContent>
-								<Stack sx={{ width: "100%" }} spacing={2}>
-
-									<Alert severity="error">
-										<AlertTitle>Errors</AlertTitle>
-										<Typography>{totalErrors}</Typography>
-									</Alert>
-
-									<Doughnut
-										data={pieChartData(list, pieChartErrors)}
-										options={{
-											
-											elements: {
-												
-												center: {
-													legend: { display: true, position: "right" },
-													text: "Red is 2/3 the total numbers",
-													color: "#FF6384",
-													fontStyle: "Arial", 
-													sidePadding: 20, 
-													minFontSize: 20, 
-													lineHeight: 25 
-												}
-											},
-											
-										}}
-									/>
-								</Stack>
-							</CardContent>
-
-							<CardContent>
-								<Typography variant="body2" color="text.secondary">
-									Errors log the number of errors thrown by a function. It can
-									be used with the Invocations metric to calculate the total
-									percentage of errors.
-								</Typography>
-							</CardContent>
-						</CardActionArea>
-					</Card>
 				</Box>
 
 			</Container>
