@@ -85,6 +85,7 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 
 <div align="center">
     <img src="https://im.ezgif.com/tmp/ezgif-1-0d1ab9b810.gif" align="center" alt="Logo" >
+    <br>
 </div>
 
 
