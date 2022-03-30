@@ -117,7 +117,7 @@ export const AccountTotals = () => {
 				alignItems: "center",
 				textAlign: "center",
 				verticalAlign: "middle",
-				borderRadius: "25px",
+				background: "#eeeeee",
   		}}>
 				<h1 style={{color:"#424242"}}>Account Totals</h1>
 			</Paper>
