@@ -27,7 +27,6 @@ function App() {
         Promise.resolve(getCreds())
         .then((data) => {
           dispatch(getBackendCreds(data))
-          console.log(creds)
           return;
         })
         .catch(err => console.log(err))

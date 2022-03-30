@@ -70,6 +70,18 @@ export const TotalsByFunc = () => {
 					</CardContent>
 				</CardActionArea>
 
+				{/* ERRORS CARD */}
+				<CardActionArea>
+					<CardContent>
+						<Stack sx={{ width: "100%" }} spacing={2}>
+							<Alert severity="error">
+								<AlertTitle>Errors</AlertTitle>
+								<Typography>{totalErrors}</Typography>
+							</Alert>
+						</Stack>
+					</CardContent>
+				</CardActionArea>
+
 				{/* THROTTLES CARD */}
 				<CardActionArea>
 					<CardContent>
@@ -82,17 +94,7 @@ export const TotalsByFunc = () => {
 					</CardContent>
 				</CardActionArea>
 
-				{/* ERRORS CARD */}
-				<CardActionArea>
-					<CardContent>
-						<Stack sx={{ width: "100%" }} spacing={2}>
-							<Alert severity="error">
-								<AlertTitle>Errors</AlertTitle>
-								<Typography>{totalErrors}</Typography>
-							</Alert>
-						</Stack>
-					</CardContent>
-				</CardActionArea>
+				
 		</Paper>
 	
 		</ThemeProvider>
