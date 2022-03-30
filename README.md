@@ -37,7 +37,7 @@
 
 ## About Astro
 
-Serverless architecture is becoming increasingly popular in today's tech landscape. It offers cost-effective benefits as serverless functions are billed only when they are invoked. Amazon's Web Services (AWS) is a giant in the serverless space and is widely utilized by various companies. One issue is that navigating through the AWS console can be daunting and frustrating. Specifically, to measure a user's lambda functions, there are too many options and this massive flexibility proves cumbersome when one only needs to visualize specific metrics at a glance.
+Serverless architecture is an exciting mainstay of cloud computing. Amazon's Web Services (AWS) Lambda is a giant in the serverless space and is widely utilized by various companies. Its event-driven paradigm to building distributed, on-demand infrastructure is also cost-effective since Lambda functions are billed only when they are executed. This reduces the physical need for servers, eliminating expensive hosting costs just to keep a server running even if it’s not in use. One issue is that navigating through the AWS console can be daunting and frustrating. Specifically, to measure a user's lambda functions, there are too many options and this massive flexibility proves cumbersome when one only needs to visualize specific metrics at a glance.
 
 As a way to solve this, we built Astro: a free, open-source lambda function monitoring tool that users can connect to their AWS account to securely and easily monitor and track key metrics.
 
