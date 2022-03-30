@@ -120,7 +120,7 @@ export const AccountTotals = () => {
 		}
 	} , [creds, chartData])
 
-
+ 
 
   return (
 
