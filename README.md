@@ -83,6 +83,12 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 
 3. If you are an AWS End User then use the following command to build the application and the necessary .env template file, which you should fill in with your AWS credentials (region, security key id, and access key id).
 
+<div align="center">
+    <img src="https://im.ezgif.com/tmp/ezgif-1-0d1ab9b810.gif" align="center" alt="Logo" >
+    <br><br>
+</div>
+
+
 ```sh
 npm run build
 ```
@@ -102,6 +108,11 @@ npm run dev
 ### Lambda Metrics
 
 The key AWS Lambda function metrics we focused on are: throttles, invocations, and errors. One can see their total metric values in Account Totals. To see metrics by function, click the Functions tab to see a list of your lambda functions and the associated metrics for each function. Within the function tab, users can visualize their metrics over a specific time period using the drop down menu. This will also update the account total metrics in the account total tab.
+
+<div align="center">
+    <img src="https://im.ezgif.com/tmp/ezgif-1-3b3f935f19.gif" align="center" alt="Logo" >
+    <br><br>
+</div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -126,7 +137,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
