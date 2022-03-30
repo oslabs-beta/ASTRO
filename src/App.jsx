@@ -1,51 +1,49 @@
-import React from 'react';
-import Home from './pages/Home.jsx';
-import Login from './pages/Login.jsx';
-import Signup from './pages/Signup.jsx';
-import PageNotFound from './pages/PageNotFound.jsx';
-import Insights from './pages/Insights.jsx';
-import MustBeLoggedIn from './pages/MustBeLoggedIn.jsx';
+import React, { useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Github from './components/Github.jsx';
-import { useEffect } from 'react';
+import { Navigation } from './pages/Navigation'
 import { getCreds } from './utils/getAWSCreds';
 import { getBackendCreds } from './features/slices/credSlice';
 
+//MATERIAL UI//
+import CircularProgress from '@mui/material/CircularProgress';
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
-import { NavBar } from './components/'
+const themeLight = createTheme({
+  palette: {
+    background: {
+      default: "#eeeeee"
+    }
+  }
+});
 
 
 function App() {
 
-  const logged  = useSelector((state)=> state?.user.logged);
   const creds = useSelector((state) => state.creds)
   const dispatch = useDispatch();
-
   
-  useEffect(() => {
-    const result = Promise.resolve(getCreds()).then((data) => {
-      dispatch(getBackendCreds(data))
-    return;
-    })
-  }, [creds])
+  useEffect( () => {
+        Promise.resolve(getCreds())
+        .then((data) => {
+          dispatch(getBackendCreds(data))
+          return;
+        })
+        .catch(err => console.log(err))
+  }, [])
 
-  return (
-    <Router>
-    <NavBar/>
 
-    <Routes>
-  
-      <Route path="/" element={<Home creds={creds} />} />
-      <Route path="/insights" element={<Insights />} />
-      <Route path="/*" element={<PageNotFound />} />
-      
-    </Routes>
+  return ( 
 
-    {/* <footer>footer stuff here!</footer> */}
+    creds.region.length ?
+      <>
+      <ThemeProvider theme={themeLight}>
+      <CssBaseline />
+        <Navigation/>
+      </ThemeProvider>
+      </> :
+      <CircularProgress/>
 
-    </Router>
     )
 }
 

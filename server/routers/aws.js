@@ -3,19 +3,19 @@ const router = express.Router();
 
 //AWS middleware
 const getCreds = require('../controllers/aws/credentials/getCreds');
-const getFunctions = require('../controllers/aws/metrics/getLambdaFuncs');
+const getLambdaFunctions = require('../controllers/aws/metrics/getLambdaFuncs');
 const getMetricsAllFunc = require('../controllers/aws/metrics/getMetricsAllFuncs');
 const getMetricsByFunc = require('../controllers/aws/metrics/getMetricsByFunc');
 const getLogs = require('../controllers/aws/Logs/getLogs');
 const updateLogs = require('../controllers/aws/Logs/updateLogs');
 
+// only used when credentials are inputted into .env file
 router.route('/getCreds').get(getCreds, (req,res) => {
   return res.status(200).json(res.locals.credentials);
 })
 
 // Returning all Lambda funcs for an account
-router.route('/getLambdaFunctions').post(getFunctions, (req, res) => {
-    // console.log(res.locals.functions)
+router.route('/getLambdaFunctions').post(getLambdaFunctions, (req, res) => {
   return res.status(200).json(res.locals.functions);
 });
 
@@ -30,7 +30,7 @@ router
 // Return metric for specified func
 router
   .route('/getMetricsByFunc/:metricName')
-  .post(getFunctions, getMetricsByFunc, (req, res) => {
+  .post(getLambdaFunctions, getMetricsByFunc, (req, res) => {
     return res.status(200).json(res.locals.metricByFuncData);
   });
 

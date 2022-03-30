@@ -1,12 +1,24 @@
 {
 	"presets": [
-	  [
-		"@babel/preset-env",
-		{
-		  "modules": false
-		}
-	  ],
-	  "@babel/preset-react"
+		[
+			"@babel/preset-env",
+			{
+				// need the following code to avoid the import regenerator-runtime/runtime issue
+				"targets": {
+					"node": "current" // the target node version, boolean true, or "current".
+				}
+			}
+		],
+		"@babel/preset-react"
 	],
-	"plugins": ["@babel/plugin-transform-runtime"]
-  }
+	"plugins": [
+		[
+			"@babel/plugin-transform-runtime",
+			{
+				"helpers": true,
+				"regenerator": true
+			}
+		],
+		["@babel/plugin-transform-async-to-generator"]
+	]
+}

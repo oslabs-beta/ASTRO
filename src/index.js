@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import App from './App.jsx';
 import { Provider } from 'react-redux';
 import { store } from './features/store'
-import './styles/styles.css'
+import '../src/pages/styles/styles.css'
+
 
 render(
 //Provider passes down the redux store to our App//

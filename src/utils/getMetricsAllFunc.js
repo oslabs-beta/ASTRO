@@ -12,12 +12,12 @@ export const metricsAllFunc = async (credentials, metric) => {
 					accessKeyId: credentials.credentials.accessKeyId,
 					secretAccessKey: credentials.credentials.secretAccessKey
 				},
-				timePeriod: "7d"
+				timePeriod: "30d"
 			})
 		})
 		// console.log('this is data in metricsAllFunc: ', await data.json())
         const formattedData = await data.json();
-		return formattedData;
+				return formattedData;
 	}
 
 	catch (e) {
