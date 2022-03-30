@@ -107,7 +107,7 @@ npm run dev
 The key AWS Lambda function metrics we focused on are: throttles, invocations, and errors. One can see their total metric values in Account Totals. To see metrics by function, click the Functions tab to see a list of your lambda functions and the associated metrics for each function. Within the function tab, users can visualize their metrics over a specific time period using the drop down menu. This will also update the account total metrics in the account total tab.
 
 <div align="center">
-    <img src="public/account-totals" align="center" alt="Logo" >
+    <img src="public/account-totals.gif" align="center" alt="Logo" >
     <br><br>
 </div>
 
