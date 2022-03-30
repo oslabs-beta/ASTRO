@@ -66,10 +66,10 @@ As a way to solve this, we built Astro: a free, open-source lambda function moni
 
 If you are a developer trying to add/improve functionality, you can skip step 4 and go to step 5. If you are an AWS end user, do not worry about step 5.
 
-1. Clone the repo
+1. Fork and clone the forked repo
 
 ```sh
- git clone https://github.com/oslabs-beta/ASTRO.git
+ git clone <your-forked-repo>
  cd Astro
 ```
 
