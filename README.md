@@ -87,6 +87,10 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 npm run build
 ```
 
+<div align="center">
+    <img src="https://im.ezgif.com/tmp/ezgif-1-0d1ab9b810.gif" align="center" alt="Logo" >
+</div>
+
 4. Afterwards, you can run Astro by using the following command and then navigating to localhost:1111 in your browser
 
 ```sh
