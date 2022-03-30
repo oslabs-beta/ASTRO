@@ -93,10 +93,10 @@ export const LineChart = () => {
         <Chart data={data}>
           <ArgumentAxis />
           <ValueAxis />
-          <LineSeries valueField="y" argumentField="x" />
-          <LineSeries valueField="e" argumentField="x" />
-          <LineSeries valueField="t" argumentField="x" />
-          <Legend position="bottom" rootComponent={Root}labelComponent={Label} />
+          <LineSeries name="Invocations" valueField="y" argumentField="x" />
+          <LineSeries name="Throttles" valueField="e" argumentField="x" />
+          <LineSeries name="Errors" valueField="t" argumentField="x" />
+          <Legend position="bottom" rootComponent={Root} labelComponent={Label} />
         </Chart>
       </Paper>
 
