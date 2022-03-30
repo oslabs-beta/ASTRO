@@ -83,13 +83,13 @@ If you are a developer trying to add/improve functionality, you can skip step 4 
 
 3. If you are an AWS End User then use the following command to build the application and the necessary .env template file, which you should fill in with your AWS credentials (region, security key id, and access key id).
 
+<div align="center">
+    <img src="https://im.ezgif.com/tmp/ezgif-1-0d1ab9b810.gif" align="center" alt="Logo" >
+</div>
+
 ```sh
 npm run build
 ```
-
-<div>
-    <img src="https://im.ezgif.com/tmp/ezgif-1-0d1ab9b810.gif" align="center" alt="Logo" >
-</div>
 
 4. Afterwards, you can run Astro by using the following command and then navigating to localhost:1111 in your browser
 
