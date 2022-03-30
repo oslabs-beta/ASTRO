@@ -42,34 +42,53 @@ export const AccountTotals = () => {
 	}
 
 	/*
-	Helper function to create customized formatted chart.js data based on function metric 
+	Helper function to create customized formatted chart.js pie chart based on function metric 
 	*/
-	const pieChartData = (funcNames, metric) =>{
-		return {
-			labels: [...funcNames],
-			datasets: [
-				{
-					data: metric,
-					backgroundColor: [
-						"#64b5f6",
-						"#9575cd",
-						"#26a69a",
-						"rgb(122,231,125)",
-						"rgb(195,233,151)"
-					],
-					hoverBackgroundColor: ["#1565c0", "#6200ea", "#004d40"]
-				}
-			],
-		
-			plugins: {
-				labels: {
-					render: "percentage",
-					fontColor: ["green", "white", "red"],
-					precision: 2
+	const pieChart = (funcNames, metricData) =>{
+		return (
+		<Doughnut
+			data={{
+				labels: [...funcNames],
+				datasets: [
+					{
+						data: metricData,
+						backgroundColor: [
+							"#64b5f6",
+							"#9575cd",
+							"#26a69a",
+							"rgb(122,231,125)",
+							"rgb(195,233,151)"
+						],
+						hoverBackgroundColor: ["#1565c0", "#6200ea", "#004d40"]
+					}
+				],
+			
+				plugins: {
+					labels: {
+						render: "percentage",
+						fontColor: ["green", "white", "red"],
+						precision: 2
+					},
 				},
-			},
-			text: "23%",
-		};
+				text: "23%",
+			}}
+			options={{
+				
+				elements: {
+					
+					center: {
+						legend: { display: true, position: "right" },
+						text: "Red is 2/3 the total numbers",
+						color: "#FF6384",
+						fontStyle: "Arial",
+						sidePadding: 20,
+						minFontSize: 20,
+						lineHeight: 25 
+					}
+				},
+				
+			}}
+		/>)
 	}
 	
 	useEffect(() => {
@@ -161,25 +180,7 @@ export const AccountTotals = () => {
 										<Typography>{totalInvocations}</Typography>
 									</Alert>
 
-									<Doughnut
-										data={pieChartData(list, pieChartInvocations)}
-										options={{
-											
-											elements: {
-												
-												center: {
-													legend: { display: true, position: "right" },
-													text: "Red is 2/3 the total numbers",
-													color: "#FF6384",
-													fontStyle: "Arial",
-													sidePadding: 20,
-													minFontSize: 20,
-													lineHeight: 25 
-												}
-											},
-											
-										}}
-									/>
+									 {pieChart(list, pieChartInvocations)}
 
 								</Stack>
 							</CardContent>
@@ -206,25 +207,8 @@ export const AccountTotals = () => {
 										<Typography>{totalErrors}</Typography>
 									</Alert>
 
-									<Doughnut
-										data={pieChartData(list, pieChartErrors)}
-										options={{
-											
-											elements: {
-												
-												center: {
-													legend: { display: true, position: "right" },
-													text: "Red is 2/3 the total numbers",
-													color: "#FF6384",
-													fontStyle: "Arial", 
-													sidePadding: 20, 
-													minFontSize: 20, 
-													lineHeight: 25 
-												}
-											},
-											
-										}}
-									/>
+									 {pieChart(list, pieChartErrors)}
+									
 								</Stack>
 							</CardContent>
 
@@ -251,25 +235,8 @@ export const AccountTotals = () => {
 										<Typography>{totalThrottles}</Typography>
 									</Alert>
 
-									<Doughnut
-										data={pieChartData(list, pieChartThrottles)}
-										options={{
-											
-											elements: {
-												
-												center: {
-													legend: { display: true, position: "right" },
-													text: "Red is 2/3 the total numbers",
-													color: "#FF6384",
-													fontStyle: "Arial",
-													sidePadding: 20, 
-													minFontSize: 20, 
-													lineHeight: 25 
-												}
-											},
-											
-										}}
-									/>
+									 {pieChart(list, pieChartThrottles)}
+									
 								</Stack>
 							</CardContent>
 
