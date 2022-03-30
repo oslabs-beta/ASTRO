@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState }  from 'react';
 import { useSelector } from 'react-redux';
 import { metricsAllFunc } from '../utils/getMetricsAllFunc';
-
 
 ///STYLING - MATERIAL UI && CHART.JS///
 import Alert from '@mui/material/Alert';
@@ -13,9 +12,10 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Doughnut } from "react-chartjs-2";
 import 'chart.js/auto';
-
 
 
 export const AccountTotals = () => {
@@ -51,13 +51,13 @@ export const AccountTotals = () => {
 				{
 					data: metric,
 					backgroundColor: [
-						"rgb(242,165,152)",
-						"rgb(255,232,157)",
-						"rgb(236,107,109)",
+						"#64b5f6",
+						"#9575cd",
+						"#26a69a",
 						"rgb(122,231,125)",
 						"rgb(195,233,151)"
 					],
-					hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+					hoverBackgroundColor: ["#1565c0", "#6200ea", "#004d40"]
 				}
 			],
 		
@@ -79,8 +79,7 @@ export const AccountTotals = () => {
 			promise('Throttles', setThrottles);
 			promise('Errors', setErrors);
 		}
-
-		if (chartData.data) {
+		if (chartData.data.invocations && chartData.data.errors && chartData.data.throttles) {
 			const chartInvocations = [];
 			for (let i = 0; i < chartData.data.invocations.length; i++) {
 				chartInvocations.push(chartData.data.invocations[i].total);
@@ -106,10 +105,47 @@ export const AccountTotals = () => {
 
   return (
 
-			<Container maxWidth="lg">
+		chartData ? 
 
-				<h1>Account Totals</h1>
+			<Container
+				maxWidth="lg"
+			>
 
+			<Paper elevation={0} sx={{
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				textAlign: "center",
+				verticalAlign: "middle",
+				borderRadius: "25px",
+  		}}>
+				<h1 style={{color:"#424242"}}>Account Totals</h1>
+			</Paper>
+
+				<Box>
+	
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							bgcolor: "background.paper",
+							borderRadius: 0,
+						}}
+					>
+						
+					</Box>
+
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							bgcolor: "background.paper",
+							borderRadius: 1,
+						}}
+					>
+						
+					</Box>
+				</Box>
 
 				<Box sx={{ display: "flex", mt: 3 }}>
 
@@ -120,7 +156,7 @@ export const AccountTotals = () => {
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
 
-									<Alert severity="success">
+									<Alert color="info">
 										<AlertTitle>Invocations</AlertTitle>
 										<Typography>{totalInvocations}</Typography>
 									</Alert>
@@ -134,10 +170,10 @@ export const AccountTotals = () => {
 												center: {
 													legend: { display: true, position: "right" },
 													text: "Red is 2/3 the total numbers",
-													color: "#FF6384", 
-													fontStyle: "Arial", 
-													sidePadding: 20, 
-													minFontSize: 20,  
+													color: "#FF6384",
+													fontStyle: "Arial",
+													sidePadding: 20,
+													minFontSize: 20,
 													lineHeight: 25 
 												}
 											},
@@ -166,7 +202,7 @@ export const AccountTotals = () => {
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
 
-									<Alert severity="warning">
+									<Alert severity="success">
 										<AlertTitle>Throttles</AlertTitle>
 										<Typography>{totalThrottles}</Typography>
 									</Alert>
@@ -182,9 +218,9 @@ export const AccountTotals = () => {
 													text: "Red is 2/3 the total numbers",
 													color: "#FF6384",
 													fontStyle: "Arial",
-													sidePadding: 20,
-													minFontSize: 20,
-													lineHeight: 25
+													sidePadding: 20, 
+													minFontSize: 20, 
+													lineHeight: 25 
 												}
 											},
 											
@@ -224,11 +260,11 @@ export const AccountTotals = () => {
 												center: {
 													legend: { display: true, position: "right" },
 													text: "Red is 2/3 the total numbers",
-													color: "#FF6384", 
-													fontStyle: "Arial",
-													sidePadding: 20,
-													minFontSize: 20,
-													lineHeight: 25
+													color: "#FF6384",
+													fontStyle: "Arial", 
+													sidePadding: 20, 
+													minFontSize: 20, 
+													lineHeight: 25 
 												}
 											},
 											
@@ -249,6 +285,10 @@ export const AccountTotals = () => {
 				</Box>
 
 			</Container>
+
+			:
+
+			<CircularProgress />
 	
 	);
 }
