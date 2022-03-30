@@ -1,9 +1,10 @@
-import React from 'react';
-import { Insights } from './pages/Insights.jsx';
+import React, { useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { Navigation } from './pages/Navigation'
 import { getCreds } from './utils/getAWSCreds';
 import { getBackendCreds } from './features/slices/credSlice';
+
+//MATERIAL UI//
 import CircularProgress from '@mui/material/CircularProgress';
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -22,8 +23,8 @@ function App() {
   const creds = useSelector((state) => state.creds)
   const dispatch = useDispatch();
   
-  useEffect( async () => {
-      await Promise.resolve(getCreds())
+  useEffect( () => {
+        Promise.resolve(getCreds())
         .then((data) => {
           dispatch(getBackendCreds(data))
           console.log(creds)
@@ -39,7 +40,7 @@ function App() {
       <>
       <ThemeProvider theme={themeLight}>
       <CssBaseline />
-      <Insights/> 
+        <Navigation/>
       </ThemeProvider>
       </> :
       <CircularProgress/>

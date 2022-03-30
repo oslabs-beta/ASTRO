@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AccountTotals } from '../components/AccountTotals.jsx'
-import { toggleChange } from '../features/slices/insightsToggleSlice'
-import { Dashboard } from '../components/Dashboard.jsx'
-import { styled, useTheme } from '@mui/material/styles';
+import { AccountTotals } from '../components/AccountTotals.jsx';
+import { Dashboard } from '../components/Dashboard.jsx';
+
+import { toggleChange } from '../features/slices/insightsToggleSlice';
 import { nameChange } from '../features/slices/chartSlice';
-import { getFuncs } from '../features/slices/funcListSlice'
+import { getFuncs } from '../features/slices/funcListSlice';
 
+////////////////////////////////////
+///////// MUI STYLING //////////////
+////////////////////////////////////
 
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -29,10 +33,6 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import FunctionsTwoToneIcon from '@mui/icons-material/FunctionsTwoTone';
 import AddBoxTwoToneIcon from '@mui/icons-material/AddBoxTwoTone';
 
-
-////////////////////////////////////
-///////// MUI STYLING //////////////
-////////////////////////////////////
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -110,14 +110,13 @@ export const Navigation = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  useEffect(() => {
-    dispatch(toggleChange(componentChange))
-    dispatch(getFuncs(creds))
-  }, [componentChange])
-
   const componentChange = useSelector((state) => state.toggleInsights.toggle);
   const list = useSelector((state) => state.funcList.funcList);
   const creds = useSelector((state) => state.creds);
+
+  useEffect(() => {
+    dispatch(getFuncs(creds))
+  }, [])
 
   const [open, setOpen] = React.useState(false);
   const [dropDown, setDropDown] = React.useState(false);
@@ -131,12 +130,12 @@ export const Navigation = () => {
   };
 
   const handleFunctionToggle = (key) => {
-        dispatch(nameChange(key))
+    dispatch(nameChange(key))
   };
 
-  const handleDDComponentChange = (tab) => {
-    		dispatch(toggleChange(tab))
-        setDropDown(!dropDown);
+  const handleDropDownComponentChange = (tab) => {
+    dispatch(toggleChange(tab))
+    setDropDown(!dropDown);
   };
 
   const handleComponentChange = (tab) => {
@@ -157,6 +156,9 @@ export const Navigation = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+
+      {/* NAVIGATION HEADER */}
+
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -172,7 +174,11 @@ export const Navigation = () => {
             <MenuIcon />
           </IconButton>
 
-              <Button className="navbar-astro">
+              <Button 
+              className="navbar-astro"
+              variant="contained"
+              disableElevation
+              >
                 <a href="http://localhost:1111"> Astro </a>
               </Button>
 
@@ -185,6 +191,8 @@ export const Navigation = () => {
 
         </Toolbar>
       </AppBar>
+
+
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -192,44 +200,51 @@ export const Navigation = () => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        
+        
+        {/* NAVIGATION SIDEBAR */}
 
-      <ListItemButton 
-      onClick={() => handleComponentChange("Account Totals")}
-      >
-        <ListItemIcon>
-          <AddBoxTwoToneIcon color="primary"/>
-        </ListItemIcon>
-        <ListItemText primary="Account Totals" />
-      </ListItemButton >
+      <List>
+
+        <ListItemButton 
+        onClick={() => handleComponentChange("Account Totals")}
+        >
+          <ListItemIcon>
+            <AddBoxTwoToneIcon color="primary"/>
+          </ListItemIcon>
+          <ListItemText primary="Account Totals" />
+        </ListItemButton >
 
 
-      <ListItemButton 
-      onClick={() => {
-        handleDDComponentChange("Functions")
-      }}
-      >
-        <ListItemIcon>
-          <FunctionsTwoToneIcon color="primary"/>
-        </ListItemIcon>
-        <ListItemText primary="Functions" />
-        {dropDown ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={dropDown} timeout="auto" unmountOnExit>
+        <ListItemButton 
+          onClick={() => {handleDropDownComponentChange("Functions")}}
+        >
+          <ListItemIcon>
+            <FunctionsTwoToneIcon color="primary"/>
+          </ListItemIcon>
+          <ListItemText primary="Functions" />
+          {dropDown ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
 
-      <List component="div" disablePadding>
-          {list.map((text, index) => (
-            <ListItemButton sx={{ pl: 4 }} key={index} onClick={() => handleFunctionToggle(index)}>
-              <ListItemText primary={text}/>
-            </ListItemButton>
-          ))}
-        </List> 
- 
-      </Collapse>
+        <Collapse in={dropDown} timeout="auto" unmountOnExit>
+
+          <List component="div" disablePadding>
+            {list.map((text, index) => (
+              <ListItemButton sx={{ pl: 4 }} key={index} onClick={() => handleFunctionToggle(index)}>
+                <ListItemText primary={text}/>
+              </ListItemButton>
+            ))}
+          </List> 
+  
+        </Collapse>
       
-        </List>
-        <Divider />
+      </List>
+
+      <Divider />
       </Drawer>
+
+      {/* COMPONENT RENDERING */}
+      
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
 

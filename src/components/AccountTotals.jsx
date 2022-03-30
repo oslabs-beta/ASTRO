@@ -51,13 +51,13 @@ export const AccountTotals = () => {
 				{
 					data: metric,
 					backgroundColor: [
-						"rgb(242,165,152)",
-						"rgb(255,232,157)",
-						"rgb(236,107,109)",
+						"#64b5f6",
+						"#9575cd",
+						"#26a69a",
 						"rgb(122,231,125)",
 						"rgb(195,233,151)"
 					],
-					hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+					hoverBackgroundColor: ["#1565c0", "#6200ea", "#004d40"]
 				}
 			],
 		
@@ -119,22 +119,11 @@ export const AccountTotals = () => {
 				verticalAlign: "middle",
 				borderRadius: "25px",
   		}}>
-				<h1>Account Totals</h1>
+				<h1 style={{color:"#424242"}}>Account Totals</h1>
 			</Paper>
 
 				<Box>
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "center",
-							mt: 1,
-							pt: 1,
-							bgcolor: "background.paper",
-							borderRadius: 1,
-						}}
-					>
-						
-					</Box>
+	
 					<Box
 						sx={{
 							display: "flex",
@@ -167,7 +156,7 @@ export const AccountTotals = () => {
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
 
-									<Alert severity="success">
+									<Alert color="info">
 										<AlertTitle>Invocations</AlertTitle>
 										<Typography>{totalInvocations}</Typography>
 									</Alert>
@@ -213,7 +202,7 @@ export const AccountTotals = () => {
 							<CardContent>
 								<Stack sx={{ width: "100%" }} spacing={2}>
 
-									<Alert severity="warning">
+									<Alert severity="success">
 										<AlertTitle>Throttles</AlertTitle>
 										<Typography>{totalThrottles}</Typography>
 									</Alert>
