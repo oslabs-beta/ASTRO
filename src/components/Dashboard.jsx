@@ -21,16 +21,16 @@ export const Dashboard = () => {
 
 	useEffect(() => {
 		Promise.resolve(metricsByFunc(creds, 'Invocations', timePeriod))
-		.then((data) => dispatch(invocationsChange(data.series)))
-		.catch((e) => console.log(e));
+			.then((data) => dispatch(invocationsChange(data.series)))
+			.catch((e) => console.log(e));
 
 		Promise.resolve(metricsByFunc(creds, 'Errors', timePeriod))
-		.then((data) => dispatch(errorsChange(data.series)))
-		.catch((e) => console.log(e));
+			.then((data) => dispatch(errorsChange(data.series)))
+			.catch((e) => console.log(e));
 
 		Promise.resolve(metricsByFunc(creds, 'Throttles', timePeriod))
-		.then((data) => dispatch(throttlesChange(data.series)))
-		.catch((e) => console.log(e));
+			.then((data) => dispatch(throttlesChange(data.series)))
+			.catch((e) => console.log(e));
 
 	}, [timePeriod])
 
