@@ -19,7 +19,6 @@ export const metricsByFunc = async (credentials, metric, time) => {
 //  console.log('this is data in metrics by func', data)
  return data.json()
 }
-  
   catch (e) {
     console.log(e)
   }
