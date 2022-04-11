@@ -1,4 +1,4 @@
-export const logs = async (credentials, functionName, time) => {
+export const logs = async (credentials, functionName) => {
 	try {
 		const data = await fetch(`http://localhost:1111/aws/getLogs`, {
 			method: 'POST',
@@ -11,7 +11,7 @@ export const logs = async (credentials, functionName, time) => {
 					accessKeyId: credentials.credentials.accessKeyId,
 					secretAccessKey: credentials.credentials.secretAccessKey,
 				},
-				function: "hw-function",
+				function: functionName,
 			}),
 		});
 		const formattedData = await data.json();
