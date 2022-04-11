@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AccountTotals } from '../components/AccountTotals.jsx';
 import { Dashboard } from '../components/Dashboard.jsx';
-import { DisplayLogs } from '../components/DisplayLogs.jsx';
+import { LogsContainer } from '../components/LogsContainer.jsx';
 import { toggleChange } from '../features/slices/insightsToggleSlice';
 import { nameChange } from '../features/slices/chartSlice';
 import { getFuncs } from '../features/slices/funcListSlice';
@@ -151,7 +151,7 @@ export const Navigation = () => {
       case 'Functions':
         return <Dashboard />
       case 'Logs':
-        return <DisplayLogs />
+        return <LogsContainer />
     }
   }
 
