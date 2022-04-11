@@ -14,16 +14,18 @@ const getFunctions = async (req, res, next) => {
       region: req.body.region,
       credentials: req.body.credentials,
     });
-  
+
+    
     // set FunctionVersion to 'ALL' to include all published/unpublished versions of each function 
     const lamParams = { FunctionVersion: 'ALL' };
-
+    
     try {
       // calling send operation on client with lamParams object as input
       const listOfLambdaFuncs = await client.send(
         // ListFunctionsCommand is a class that returns a list of Lambda functions (50 max) with version-specific configuration of each one
         new ListFunctionsCommand(lamParams)
-      );
+        );
+        // console.log('list is: ', listOfLambdaFuncs);
 
       const funcNames = listOfLambdaFuncs.Functions.map(el => el.FunctionName);
       res.locals.functions = funcNames;
