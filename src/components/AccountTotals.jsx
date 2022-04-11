@@ -1,6 +1,7 @@
 import React, { useEffect, useState }  from 'react';
 import { useSelector } from 'react-redux';
 import { metricsAllFunc } from '../utils/getMetricsAllFunc';
+import { DisplayLogs } from './DisplayLogs';
 
 ///STYLING - MATERIAL UI && CHART.JS///
 import Alert from '@mui/material/Alert';
@@ -123,9 +124,10 @@ export const AccountTotals = () => {
  
 
   return (
-
+		
 		chartData ? 
 
+		<>
 			<Container
 				maxWidth="lg"
 			>
@@ -253,6 +255,7 @@ export const AccountTotals = () => {
 				</Box>
 
 			</Container>
+			</>
 
 			:
 
