@@ -66,10 +66,10 @@ As a way to solve this, we built Astro: a free, open-source lambda function moni
 
 If you are a developer trying to add/improve functionality, you can skip step 4 and go to step 5. If you are an AWS end user, do not worry about step 5.
 
-1. Clone the repo
+1. Fork and clone the forked repo
 
 ```sh
- git clone https://github.com/oslabs-beta/ASTRO.git
+ git clone <your-forked-repo>
  cd Astro
 ```
 
@@ -142,10 +142,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contributors
 
-- Adam White [Github](https://github.com/adam-k-w) | [Linkedin](https://www.linkedin.com/in/adam-white-24ba841b3/)
+- Adam White [Github](https://github.com/adam-k-w) | [Linkedin](https://www.linkedin.com/in/adam-karn-white/)
 - Anthony Piscocama [Github](https://github.com/adavid1696) | [Linkedin](https://www.linkedin.com/in/anthony-piscocama-07858b167/)
 - Michelle Shahid [Github](https://github.com/emshahh) | [Linkedin](https://www.linkedin.com/in/michelleshahid/)
-- Nehreen Anam [Github](https://github.com/Issafeature) | [Linkedin](https://www.linkedin.com/in/)
+- Nehreen Anam [Github](https://github.com/Issafeature) | [Linkedin](https://www.linkedin.com/in/nehreen/)
 - Samuel Carrasco [Github](https://github.com/samhcarrasco) | [Linkedin](https://www.linkedin.com/in/samuelhcarrasco/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>

@@ -123,9 +123,10 @@ export const AccountTotals = () => {
  
 
   return (
-
+		
 		chartData ? 
 
+		<>
 			<Container
 				maxWidth="lg"
 			>
@@ -253,6 +254,7 @@ export const AccountTotals = () => {
 				</Box>
 
 			</Container>
+			</>
 
 			:
 

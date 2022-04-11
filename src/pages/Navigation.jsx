@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AccountTotals } from '../components/AccountTotals.jsx';
 import { Dashboard } from '../components/Dashboard.jsx';
-
+import { LogsContainer } from '../components/LogsContainer.jsx';
 import { toggleChange } from '../features/slices/insightsToggleSlice';
 import { nameChange } from '../features/slices/chartSlice';
 import { getFuncs } from '../features/slices/funcListSlice';
@@ -32,6 +32,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import FunctionsTwoToneIcon from '@mui/icons-material/FunctionsTwoTone';
 import AddBoxTwoToneIcon from '@mui/icons-material/AddBoxTwoTone';
+import AssignmentTwoToneIcon from '@mui/icons-material/AssignmentTwoTone';
 
 const drawerWidth = 240;
 
@@ -149,6 +150,8 @@ export const Navigation = () => {
         return <AccountTotals/>
       case 'Functions':
         return <Dashboard />
+      case 'Logs':
+        return <LogsContainer />
     }
   }
 
@@ -214,6 +217,15 @@ export const Navigation = () => {
           </ListItemIcon>
           <ListItemText primary="Account Totals" />
         </ListItemButton >
+
+        <ListItemButton 
+          onClick={() => {handleComponentChange("Logs")}}
+        >
+          <ListItemIcon>
+            <AssignmentTwoToneIcon color="primary"/>
+          </ListItemIcon>
+          <ListItemText primary="Logs" />
+        </ListItemButton>
 
 
         <ListItemButton 
